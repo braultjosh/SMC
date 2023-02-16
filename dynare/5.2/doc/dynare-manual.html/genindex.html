@@ -1,0 +1,1452 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Index &#8212; Dynare 5.2 documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script async="async" src="_static/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="#" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="index.html">
+    <img class="logo" src="_static/dlogo.svg" alt="Logo" width=143/>
+    
+  </a>
+</p>
+
+
+
+
+
+
+
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script><br style="line-height:16px">
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">1. Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#what-is-dynare">1.1. What is Dynare?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#documentation-sources">1.2. Documentation sources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#citing-dynare-in-your-research">1.3. Citing Dynare in your research</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="installation-and-configuration.html">2. Installation and configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation-and-configuration.html#software-requirements">2.1. Software requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation-and-configuration.html#installation-of-dynare">2.2. Installation of Dynare</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="installation-and-configuration.html#on-windows">2.2.1. On Windows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation-and-configuration.html#on-gnu-linux">2.2.2. On GNU/Linux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation-and-configuration.html#on-macos">2.2.3. On macOS</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="installation-and-configuration.html#with-matlab">2.2.3.1. With MATLAB</a></li>
+<li class="toctree-l4"><a class="reference internal" href="installation-and-configuration.html#with-octave">2.2.3.2. With Octave</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="installation-and-configuration.html#on-freebsd">2.2.4. On FreeBSD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation-and-configuration.html#for-other-systems">2.2.5. For other systems</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="installation-and-configuration.html#compiler-installation">2.3. Compiler installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="installation-and-configuration.html#prerequisites-on-windows">2.3.1. Prerequisites on Windows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation-and-configuration.html#prerequisites-on-gnu-linux">2.3.2. Prerequisites on GNU/Linux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation-and-configuration.html#prerequisites-on-macos">2.3.3. Prerequisites on macOS</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="installation-and-configuration.html#id1">2.3.3.1. With MATLAB</a></li>
+<li class="toctree-l4"><a class="reference internal" href="installation-and-configuration.html#id2">2.3.3.2. With Octave</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="installation-and-configuration.html#configuration">2.4. Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="installation-and-configuration.html#for-matlab">2.4.1. For MATLAB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation-and-configuration.html#for-octave">2.4.2. For Octave</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation-and-configuration.html#some-words-of-warning">2.4.3. Some words of warning</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="running-dynare.html">3. Running Dynare</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="running-dynare.html#dynare-invocation">3.1. Dynare invocation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="running-dynare.html#dynare-hooks">3.2. Dynare hooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="running-dynare.html#understanding-preprocessor-error-messages">3.3. Understanding Preprocessor Error Messages</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="the-model-file.html">4. The model file</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#conventions">4.1. Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#variable-declarations">4.2. Variable declarations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#on-the-fly-model-variable-declaration">4.2.1. On-the-fly Model Variable Declaration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#expressions">4.3. Expressions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#parameters-and-variables">4.3.1. Parameters and variables</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="the-model-file.html#inside-the-model">4.3.1.1. Inside the model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="the-model-file.html#outside-the-model">4.3.1.2. Outside the model</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#operators">4.3.2. Operators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#functions">4.3.3. Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="the-model-file.html#built-in-functions">4.3.3.1. Built-in functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="the-model-file.html#external-functions">4.3.3.2. External functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#a-few-words-of-warning-in-stochastic-context">4.3.4. A few words of warning in stochastic context</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#parameter-initialization">4.4. Parameter initialization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#model-declaration">4.5. Model declaration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#auxiliary-variables">4.6. Auxiliary variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#initial-and-terminal-conditions">4.7. Initial and terminal conditions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#shocks-on-exogenous-variables">4.8. Shocks on exogenous variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#other-general-declarations">4.9. Other general declarations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#steady-state">4.10. Steady state</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#finding-the-steady-state-with-dynare-nonlinear-solver">4.10.1. Finding the steady state with Dynare nonlinear solver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#providing-the-steady-state-to-dynare">4.10.2. Providing the steady state to Dynare</a></li>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#replace-some-equations-during-steady-state-computations">4.10.3. Replace some equations during steady state computations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#getting-information-about-the-model">4.11. Getting information about the model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#deterministic-simulation">4.12. Deterministic simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#stochastic-solution-and-simulation">4.13. Stochastic solution and simulation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#computing-the-stochastic-solution">4.13.1. Computing the stochastic solution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#typology-and-ordering-of-variables">4.13.2. Typology and ordering of variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#first-order-approximation">4.13.3. First-order approximation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#second-order-approximation">4.13.4. Second-order approximation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#third-order-approximation">4.13.5. Third-order approximation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#higher-order-approximation">4.13.6. Higher-order approximation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#occasionally-binding-constraints-occbin">4.14. Occasionally binding constraints (OCCBIN)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#estimation-based-on-likelihood">4.15. Estimation based on likelihood</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#estimation-based-on-moments">4.16. Estimation based on moments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#model-comparison">4.17. Model Comparison</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#shock-decomposition">4.18. Shock Decomposition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#calibrated-smoother">4.19. Calibrated Smoother</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#forecasting">4.20. Forecasting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#optimal-policy">4.21. Optimal policy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#optimal-policy-under-commitment-ramsey">4.21.1. Optimal policy under commitment (Ramsey)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#optimal-policy-under-discretion">4.21.2. Optimal policy under discretion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#optimal-simple-rules-osr">4.21.3. Optimal Simple Rules (OSR)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#sensitivity-and-identification-analysis">4.22. Sensitivity and identification analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#performing-sensitivity-analysis">4.22.1. Performing sensitivity analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#irf-moment-calibration">4.22.2. IRF/Moment calibration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#performing-identification-analysis">4.22.3. Performing identification analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#types-of-analysis-and-output-files">4.22.4. Types of analysis and output files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="the-model-file.html#sampling">4.22.4.1. Sampling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="the-model-file.html#stability-mapping">4.22.4.2. Stability Mapping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="the-model-file.html#irf-moment-restrictions">4.22.4.3. IRF/Moment restrictions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="the-model-file.html#reduced-form-mapping">4.22.4.4. Reduced Form Mapping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="the-model-file.html#rmse">4.22.4.5. RMSE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="the-model-file.html#screening-analysis">4.22.4.6. Screening Analysis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="the-model-file.html#id12">4.22.4.7. Identification Analysis</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#markov-switching-sbvar">4.23. Markov-switching SBVAR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#epilogue-variables">4.24. Epilogue Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#semi-structural-models">4.25. Semi-structural models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#auxiliary-models">4.25.1. Auxiliary models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#var-expectations">4.25.2. VAR expectations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#pac-equation">4.25.3. PAC equation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#estimation-of-a-pac-equation">4.25.4. Estimation of a PAC equation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#displaying-and-saving-results">4.26. Displaying and saving results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#macro-processing-language">4.27. Macro processing language</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#macro-expressions">4.27.1. Macro expressions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#macro-directives">4.27.2. Macro directives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#typical-usages">4.27.3. Typical usages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="the-model-file.html#modularization">4.27.3.1. Modularization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="the-model-file.html#indexed-sums-of-products">4.27.3.2. Indexed sums of products</a></li>
+<li class="toctree-l4"><a class="reference internal" href="the-model-file.html#multi-country-models">4.27.3.3. Multi-country models</a></li>
+<li class="toctree-l4"><a class="reference internal" href="the-model-file.html#endogeneizing-parameters">4.27.3.4. Endogeneizing parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#matlab-octave-loops-versus-macro-processor-loops">4.27.4. MATLAB/Octave loops versus macro processor loops</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#verbatim-inclusion">4.28. Verbatim inclusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#misc-commands">4.29. Misc commands</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="the-configuration-file.html">5. The configuration file</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="the-configuration-file.html#dynare-configuration">5.1. Dynare Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the-configuration-file.html#parallel-configuration">5.2. Parallel Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the-configuration-file.html#windows-step-by-step-guide">5.3. Windows Step-by-Step Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="time-series.html">6. Time Series</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="time-series.html#dates">6.1. Dates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="time-series.html#dates-in-a-mod-file">6.1.1. Dates in a mod file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="time-series.html#the-dates-class">6.1.2. The dates class</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="time-series.html#the-dseries-class">6.2. The dseries class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="time-series.html#x-13-arima-seats-interface">6.3. X-13 ARIMA-SEATS interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="time-series.html#miscellaneous">6.4. Miscellaneous</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="time-series.html#time-aggregation">6.4.1. Time aggregation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="time-series.html#create-time-series-with-a-univariate-model">6.4.2. Create time series with a univariate model</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="reporting.html">7. Reporting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">8. Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dynare-misc-commands.html">9. Dynare misc commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">10. Bibliography</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    <li class="toctree-l1"><a href="#">Index</a></li>
+</ul>
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+
+<h1 id="index">Index</h1>
+
+<div class="genindex-jumpbox">
+ <a href="#A"><strong>A</strong></a>
+ | <a href="#B"><strong>B</strong></a>
+ | <a href="#C"><strong>C</strong></a>
+ | <a href="#D"><strong>D</strong></a>
+ | <a href="#E"><strong>E</strong></a>
+ | <a href="#F"><strong>F</strong></a>
+ | <a href="#G"><strong>G</strong></a>
+ | <a href="#H"><strong>H</strong></a>
+ | <a href="#I"><strong>I</strong></a>
+ | <a href="#L"><strong>L</strong></a>
+ | <a href="#M"><strong>M</strong></a>
+ | <a href="#N"><strong>N</strong></a>
+ | <a href="#O"><strong>O</strong></a>
+ | <a href="#P"><strong>P</strong></a>
+ | <a href="#Q"><strong>Q</strong></a>
+ | <a href="#R"><strong>R</strong></a>
+ | <a href="#S"><strong>S</strong></a>
+ | <a href="#T"><strong>T</strong></a>
+ | <a href="#U"><strong>U</strong></a>
+ | <a href="#V"><strong>V</strong></a>
+ | <a href="#W"><strong>W</strong></a>
+ | <a href="#X"><strong>X</strong></a>
+ | <a href="#Y"><strong>Y</strong></a>
+ 
+</div>
+<h2 id="A">A</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="time-series.html#A = abs">abs (dseries method)</a>
+
+      <ul>
+        <li><a href="the-model-file.html#abs">(function)</a>
+</li>
+      </ul></li>
+      <li><a href="time-series.html#abs_">abs_ (dseries method)</a>
+</li>
+      <li><a href="the-model-file.html#acos">acos (function)</a>
+</li>
+      <li><a href="reporting.html#addGraph">addGraph (reporting method)</a>
+</li>
+      <li><a href="reporting.html#addPage">addPage (reporting method)</a>
+</li>
+      <li><a href="reporting.html#addParagraph">addParagraph (reporting method)</a>
+</li>
+      <li><a href="reporting.html#addSection">addSection (reporting method)</a>
+</li>
+      <li><a href="reporting.html#addSeries">addSeries (reporting method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reporting.html#addTable">addTable (reporting method)</a>
+</li>
+      <li><a href="reporting.html#addVspace">addVspace (reporting method)</a>
+</li>
+      <li><a href="time-series.html#[A, B] = align">align (dseries method)</a>
+</li>
+      <li><a href="time-series.html#align_">align_ (dseries method)</a>
+</li>
+      <li><a href="time-series.html#C = append">append (dates method)</a>
+</li>
+      <li><a href="time-series.html#C = append_">append_ (dates method)</a>
+</li>
+      <li><a href="time-series.html#A = arima">arima (x13 method)</a>
+</li>
+      <li><a href="the-model-file.html#asin">asin (function)</a>
+</li>
+      <li><a href="the-model-file.html#atan">atan (function)</a>
+</li>
+      <li><a href="time-series.html#A = automdl">automdl (x13 method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="B">B</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="time-series.html#C = backcast">backcast (dseries method)</a>
+</li>
+      <li><a href="time-series.html#backcast_">backcast_ (dseries method)</a>
+</li>
+      <li><a href="the-model-file.html#HANDLE = basic_plan">basic_plan (MATLAB command)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="time-series.html#B = baxter_king_filter">baxter_king_filter (dseries method)</a>
+</li>
+      <li><a href="time-series.html#baxter_king_filter_">baxter_king_filter_ (dseries method)</a>
+</li>
+      <li><a href="the-model-file.html#bvar_density">bvar_density (command)</a>
+</li>
+      <li><a href="the-model-file.html#bvar_forecast">bvar_forecast (command)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="C">C</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="the-model-file.html#calib_smoother">calib_smoother (command)</a>
+</li>
+      <li><a href="the-model-file.html#cbrt">cbrt (function)</a>
+</li>
+      <li><a href="time-series.html#B = center">center (dseries method)</a>
+</li>
+      <li><a href="time-series.html#center_">center_ (dseries method)</a>
+</li>
+      <li><a href="time-series.html#C = chain">chain (dseries method)</a>
+</li>
+      <li><a href="time-series.html#chain_">chain_ (dseries method)</a>
+</li>
+      <li><a href="the-model-file.html#change_type">change_type (command)</a>
+</li>
+      <li><a href="time-series.html#B = char">char (dates method)</a>
+</li>
+      <li><a href="the-model-file.html#check">check (command)</a>
+
+      <ul>
+        <li><a href="time-series.html#[error_flag, message ] = check">(dseries method)</a>
+</li>
+        <li><a href="time-series.html#A = check">(x13 method)</a>
+</li>
+      </ul></li>
+      <li><a href="the-configuration-file.html#[cluster]">cluster (config block)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="the-model-file.html#collect_latex_files">collect_latex_files (MATLAB command)</a>
+</li>
+      <li><a href="time-series.html#C = colon">colon (dates method)</a>
+</li>
+      <li><a href="the-model-file.html#compilation_setup">compilation_setup (command)</a>
+</li>
+      <li><a href="reporting.html#compile">compile (reporting method)</a>
+</li>
+      <li><a href="the-model-file.html#conditional_forecast">conditional_forecast (command)</a>
+</li>
+      <li><a href="the-model-file.html#conditional_forecast_paths">conditional_forecast_paths (block)</a>
+</li>
+      <li><a href="time-series.html#B = copy">copy (dates method)</a>
+
+      <ul>
+        <li><a href="time-series.html#B = copy">(dseries method)</a>
+</li>
+      </ul></li>
+      <li><a href="the-model-file.html#cos">cos (function)</a>
+</li>
+      <li><a href="time-series.html#B = cumprod">cumprod (dseries method)</a>
+</li>
+      <li><a href="time-series.html#cumprod_">cumprod_ (dseries method)</a>
+</li>
+      <li><a href="time-series.html#B = cumsum">cumsum (dseries method)</a>, <a href="time-series.html#cumsum">[1]</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="D">D</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="running-dynare.html#dataset_">dataset_ (MATLAB variable)</a>
+</li>
+      <li><a href="time-series.html#dates">dates (class)</a>
+</li>
+      <li><a href="the-model-file.html#@#define">define (macro directive)</a>
+</li>
+      <li><a href="time-series.html#dentrend_">dentrend_ (dseries method)</a>
+</li>
+      <li><a href="the-model-file.html#DSERIES = det_cond_forecast">det_cond_forecast (MATLAB command)</a>
+</li>
+      <li><a href="time-series.html#B = detrend">detrend (dseries method)</a>
+</li>
+      <li><a href="time-series.html#B = dgrowth">dgrowth (dseries method)</a>
+</li>
+      <li><a href="time-series.html#dgrowth_">dgrowth_ (dseries method)</a>
+</li>
+      <li><a href="time-series.html#B = diff">diff (dseries method)</a>
+</li>
+      <li><a href="time-series.html#diff_">diff_ (dseries method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="the-model-file.html#discretionary_policy">discretionary_policy (command)</a>
+</li>
+      <li><a href="time-series.html#disp">disp (dates method)</a>, <a href="time-series.html#disp">[1]</a>
+</li>
+      <li><a href="time-series.html#display">display (dates method)</a>, <a href="time-series.html#display">[1]</a>
+</li>
+      <li><a href="time-series.html#B = double">double (dates method)</a>
+</li>
+      <li><a href="the-model-file.html#dsample">dsample (command)</a>
+</li>
+      <li><a href="time-series.html#dseries">dseries (class)</a>
+</li>
+      <li><a href="running-dynare.html#dynare">dynare (MATLAB command)</a>
+</li>
+      <li><a href="the-model-file.html#dynare_sensitivity">dynare_sensitivity (command)</a>
+</li>
+      <li><a href="the-model-file.html#dynare_version">dynare_version (MATLAB command)</a>
+</li>
+      <li><a href="the-model-file.html#dynasave">dynasave (command)</a>
+</li>
+      <li><a href="the-model-file.html#dynatype">dynatype (command)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="E">E</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="the-model-file.html#@#echo">echo (macro directive)</a>
+</li>
+      <li><a href="the-model-file.html#@#echomacrovars">echomacrovars (macro directive)</a>
+</li>
+      <li><a href="the-model-file.html#@#else">else (macro directive)</a>
+</li>
+      <li><a href="the-model-file.html#@#elseif">elseif (macro directive)</a>
+</li>
+      <li><a href="the-model-file.html#@#endfor">endfor (macro directive)</a>
+</li>
+      <li><a href="the-model-file.html#@#endif">endif (macro directive)</a>
+</li>
+      <li><a href="the-model-file.html#endval">endval (block)</a>
+</li>
+      <li><a href="the-model-file.html#epilogue">epilogue (block)</a>
+</li>
+      <li><a href="time-series.html#C = eq">eq (dates method)</a>
+
+      <ul>
+        <li><a href="time-series.html#C = eq">(dseries method)</a>
+</li>
+      </ul></li>
+      <li><a href="the-model-file.html#erf">erf (function)</a>
+</li>
+      <li><a href="the-model-file.html#@#error">error (macro directive)</a>
+</li>
+      <li><a href="time-series.html#A = estimate">estimate (x13 method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="the-model-file.html#estimated_params">estimated_params (block)</a>, <a href="the-model-file.html#estimated_params">[1]</a>
+</li>
+      <li><a href="the-model-file.html#estimated_params_bounds">estimated_params_bounds (block)</a>, <a href="the-model-file.html#estimated_params_bounds">[1]</a>
+</li>
+      <li><a href="the-model-file.html#estimated_params_init">estimated_params_init (block)</a>, <a href="the-model-file.html#estimated_params_init">[1]</a>
+</li>
+      <li><a href="the-model-file.html#estimation">estimation (command)</a>
+</li>
+      <li><a href="the-model-file.html#evaluate_planner_objective">evaluate_planner_objective (command)</a>
+</li>
+      <li><a href="time-series.html#l = exist">exist (dseries method)</a>
+</li>
+      <li><a href="time-series.html#B = exp">exp (dseries method)</a>
+
+      <ul>
+        <li><a href="the-model-file.html#exp">(function)</a>
+</li>
+      </ul></li>
+      <li><a href="time-series.html#exp_">exp_ (dseries method)</a>
+</li>
+      <li><a href="the-model-file.html#EXPECTATION (INTEGER) (MODEL_EXPRESSION)">EXPECTATION (operator)</a>
+</li>
+      <li><a href="the-model-file.html#extended_path">extended_path (command)</a>
+</li>
+      <li><a href="the-model-file.html#external_function">external_function (command)</a>
+</li>
+      <li><a href="time-series.html#C = extract">extract (dseries method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="F">F</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="the-model-file.html#filter_initial_state">filter_initial_state (block)</a>
+</li>
+      <li><a href="time-series.html#f = firstdate">firstdate (dseries method)</a>
+</li>
+      <li><a href="time-series.html#f = firstobservedperiod">firstobservedperiod (dseries method)</a>
+</li>
+      <li><a href="time-series.html#B = flip">flip (dseries method)</a>
+</li>
+      <li><a href="time-series.html#flip_">flip_ (dseries method)</a>
+</li>
+      <li><a href="the-model-file.html#HANDLE = flip_plan">flip_plan (MATLAB command)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="the-model-file.html#@#for">for (macro directive)</a>
+</li>
+      <li><a href="time-series.html#A = force">force (x13 method)</a>
+</li>
+      <li><a href="the-model-file.html#forecast">forecast (command)</a>
+
+      <ul>
+        <li><a href="time-series.html#A = forecast">(x13 method)</a>
+</li>
+      </ul></li>
+      <li><a href="the-model-file.html#forecasts.instruments">forecasts.instruments (MATLAB variable)</a>
+</li>
+      <li><a href="time-series.html#f = frequency">frequency (dseries method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="G">G</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="time-series.html#C = ge">ge (dates method)</a>
+</li>
+      <li><a href="dynare-misc-commands.html#generate_trace_plots">generate_trace_plots (command)</a>
+</li>
+      <li><a href="the-model-file.html#get_irf">get_irf (MATLAB command)</a>
+</li>
+      <li><a href="the-model-file.html#get_mean">get_mean (MATLAB command)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="the-model-file.html#get_param_by_name">get_param_by_name (MATLAB command)</a>
+</li>
+      <li><a href="the-model-file.html#get_shock_stderr_by_name">get_shock_stderr_by_name (MATLAB command)</a>
+</li>
+      <li><a href="the-model-file.html#get_smooth">get_smooth (MATLAB command)</a>
+</li>
+      <li><a href="the-model-file.html#get_update">get_update (MATLAB command)</a>
+</li>
+      <li><a href="time-series.html#C = gt">gt (dates method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="H">H</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="the-model-file.html#heteroskedastic_shocks">heteroskedastic_shocks (block)</a>
+</li>
+      <li><a href="time-series.html#A = history">history (x13 method)</a>
+</li>
+      <li><a href="the-model-file.html#histval">histval (block)</a>
+</li>
+      <li><a href="the-model-file.html#histval_file">histval_file (command)</a>
+</li>
+      <li><a href="the-model-file.html#homotopy_setup">homotopy_setup (block)</a>
+</li>
+      <li><a href="the-configuration-file.html#[hooks]">hooks (config block)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="time-series.html#D = horzcat">horzcat (dates method)</a>
+
+      <ul>
+        <li><a href="time-series.html#D = horzcat">(dseries method)</a>
+</li>
+      </ul></li>
+      <li><a href="time-series.html#B = hpcycle">hpcycle (dseries method)</a>
+</li>
+      <li><a href="time-series.html#hpcycle_">hpcycle_ (dseries method)</a>
+</li>
+      <li><a href="time-series.html#B = hptrend">hptrend (dseries method)</a>
+</li>
+      <li><a href="time-series.html#hptrend_">hptrend_ (dseries method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="I">I</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="the-model-file.html#identification">identification (command)</a>
+</li>
+      <li><a href="time-series.html#A = identify">identify (x13 method)</a>
+</li>
+      <li><a href="the-model-file.html#@#if">if (macro directive)</a>
+</li>
+      <li><a href="the-model-file.html#@#ifdef">ifdef (macro directive)</a>
+</li>
+      <li><a href="the-model-file.html#@#ifndef">ifndef (macro directive)</a>
+</li>
+      <li><a href="the-model-file.html#@#include">include (macro directive)</a>
+</li>
+      <li><a href="the-model-file.html#@#includepath">includepath (macro directive)</a>
+</li>
+      <li><a href="the-model-file.html#inf">inf (constant)</a>
+</li>
+      <li><a href="the-model-file.html#init2shocks">init2shocks (block)</a>
+</li>
+      <li><a href="the-model-file.html#HANDLE = init_plan">init_plan (MATLAB command)</a>
+</li>
+      <li><a href="the-model-file.html#initial_condition_decomposition">initial_condition_decomposition (command)</a>
+</li>
+      <li><a href="the-model-file.html#initval">initval (block)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="the-model-file.html#initval_file">initval_file (command)</a>
+</li>
+      <li><a href="time-series.html#C = insert">insert (dseries method)</a>
+</li>
+      <li><a href="dynare-misc-commands.html#internals">internals (MATLAB command)</a>
+</li>
+      <li><a href="time-series.html#C = intersect">intersect (dates method)</a>
+</li>
+      <li><a href="the-model-file.html#irf_calibration">irf_calibration (block)</a>
+</li>
+      <li><a href="time-series.html#B = isempty">isempty (dates method)</a>
+
+      <ul>
+        <li><a href="time-series.html#B = isempty">(dseries method)</a>
+</li>
+      </ul></li>
+      <li><a href="time-series.html#C = isequal">isequal (dates method)</a>
+
+      <ul>
+        <li><a href="time-series.html#C = isequal">(dseries method)</a>
+</li>
+      </ul></li>
+      <li><a href="time-series.html#C = isinf">isinf (dseries method)</a>
+</li>
+      <li><a href="time-series.html#C = isnan">isnan (dseries method)</a>
+</li>
+      <li><a href="time-series.html#C = isreal">isreal (dseries method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="L">L</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="time-series.html#B = lag">lag (dseries method)</a>
+</li>
+      <li><a href="time-series.html#lag_">lag_ (dseries method)</a>
+</li>
+      <li><a href="time-series.html#l = lastdate">lastdate (dseries method)</a>
+</li>
+      <li><a href="time-series.html#f = lastobservedperiod">lastobservedperiod (dseries method)</a>
+</li>
+      <li><a href="time-series.html#C = le">le (dates method)</a>
+</li>
+      <li><a href="time-series.html#B = lead">lead (dseries method)</a>
+</li>
+      <li><a href="time-series.html#lead_">lead_ (dseries method)</a>
+</li>
+      <li><a href="time-series.html#B = length">length (dates method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="time-series.html#B = lineartrend">lineartrend (dseries method)</a>
+</li>
+      <li><a href="the-model-file.html#ln">ln (function)</a>
+</li>
+      <li><a href="the-model-file.html#load_params_and_steady_state">load_params_and_steady_state (command)</a>
+</li>
+      <li><a href="time-series.html#B = log">log (dseries method)</a>
+
+      <ul>
+        <li><a href="the-model-file.html#log">(function)</a>
+</li>
+      </ul></li>
+      <li><a href="the-model-file.html#log10">log10 (function)</a>
+</li>
+      <li><a href="time-series.html#log_">log_ (dseries method)</a>
+</li>
+      <li><a href="the-model-file.html#log_trend_var">log_trend_var (command)</a>
+</li>
+      <li><a href="time-series.html#C = lt">lt (dates method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="M">M</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="running-dynare.html#M_">M_ (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#M_.osr.param_bounds">M_.osr.param_bounds (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#M_.osr.param_indices">M_.osr.param_indices (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#M_.osr.param_names">M_.osr.param_names (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#M_.osr.variable_indices">M_.osr.variable_indices (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#M_.osr.variable_weights">M_.osr.variable_weights (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#M_.param_names">M_.param_names (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#M_.params">M_.params (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#M_.state_var">M_.state_var (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#markov_switching">markov_switching (command)</a>
+</li>
+      <li><a href="the-model-file.html#matched_moments">matched_moments (block)</a>
+</li>
+      <li><a href="time-series.html#D = max">max (dates method)</a>
+
+      <ul>
+        <li><a href="the-model-file.html#max">(function)</a>
+</li>
+      </ul></li>
+      <li><a href="time-series.html#B = mdiff">mdiff (dseries method)</a>
+</li>
+      <li><a href="time-series.html#mdiff_">mdiff_ (dseries method)</a>
+</li>
+      <li><a href="time-series.html#B = mean">mean (dseries method)</a>
+</li>
+      <li><a href="time-series.html#C = merge">merge (dseries method)</a>
+</li>
+      <li><a href="time-series.html#A = metadata">metadata (x13 method)</a>
+</li>
+      <li><a href="the-model-file.html#method_of_moments">method_of_moments (command)</a>
+</li>
+      <li><a href="time-series.html#B = mgrowth">mgrowth (dseries method)</a>
+</li>
+      <li><a href="time-series.html#mgrowth_">mgrowth_ (dseries method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="time-series.html#D = min">min (dates method)</a>
+
+      <ul>
+        <li><a href="the-model-file.html#min">(function)</a>
+</li>
+      </ul></li>
+      <li><a href="time-series.html#C = minus">minus (dates method)</a>
+
+      <ul>
+        <li><a href="time-series.html#C = minus">(dseries method)</a>
+</li>
+      </ul></li>
+      <li><a href="the-model-file.html#model">model (block)</a>
+</li>
+      <li><a href="the-model-file.html#model_comparison">model_comparison (command)</a>
+</li>
+      <li><a href="the-model-file.html#model_diagnostics">model_diagnostics (command)</a>
+</li>
+      <li><a href="the-model-file.html#model_info">model_info (command)</a>
+</li>
+      <li><a href="the-model-file.html#model_local_variable">model_local_variable (command)</a>
+</li>
+      <li><a href="the-model-file.html#moment_calibration">moment_calibration (block)</a>
+</li>
+      <li><a href="time-series.html#C = mpower">mpower (dseries method)</a>
+</li>
+      <li><a href="time-series.html#C = mrdivide">mrdivide (dseries method)</a>
+</li>
+      <li><a href="the-model-file.html#ms_compute_mdd">ms_compute_mdd (command)</a>
+</li>
+      <li><a href="the-model-file.html#ms_compute_probabilities">ms_compute_probabilities (command)</a>
+</li>
+      <li><a href="the-model-file.html#ms_estimation">ms_estimation (command)</a>
+</li>
+      <li><a href="the-model-file.html#ms_forecast">ms_forecast (command)</a>
+</li>
+      <li><a href="the-model-file.html#ms_irf">ms_irf (command)</a>
+</li>
+      <li><a href="the-model-file.html#ms_simulation">ms_simulation (command)</a>
+</li>
+      <li><a href="the-model-file.html#ms_variance_decomposition">ms_variance_decomposition (command)</a>
+</li>
+      <li><a href="the-model-file.html#mshocks">mshocks (block)</a>
+</li>
+      <li><a href="time-series.html#C = mtimes">mtimes (dates method)</a>
+
+      <ul>
+        <li><a href="time-series.html#C = mtimes">(dseries method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="N">N</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="the-model-file.html#nan">nan (constant)</a>
+</li>
+      <li><a href="time-series.html#B = nanmean">nanmean (dseries method)</a>
+</li>
+      <li><a href="time-series.html#B = nanstd">nanstd (dseries method)</a>
+</li>
+      <li><a href="time-series.html#C = ne">ne (dates method)</a>
+
+      <ul>
+        <li><a href="time-series.html#C = ne">(dseries method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="time-series.html#B = nobs">nobs (dseries method)</a>
+</li>
+      <li><a href="the-configuration-file.html#[node]">node (config block)</a>
+</li>
+      <li><a href="the-model-file.html#normcdf">normcdf (function)</a>
+</li>
+      <li><a href="the-model-file.html#normpdf">normpdf (function)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="O">O</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="the-model-file.html#observation_trends">observation_trends (block)</a>
+</li>
+      <li><a href="the-model-file.html#occbin_constraints">occbin_constraints (block)</a>
+</li>
+      <li><a href="the-model-file.html#occbin_graph">occbin_graph (command)</a>
+</li>
+      <li><a href="the-model-file.html#occbin_setup">occbin_setup (command)</a>
+</li>
+      <li><a href="the-model-file.html#occbin_solver">occbin_solver (command)</a>
+</li>
+      <li><a href="the-model-file.html#occbin_write_regimes">occbin_write_regimes (command)</a>
+</li>
+      <li><a href="time-series.html#B = onesidedhpcycle">onesidedhpcycle (dseries method)</a>
+</li>
+      <li><a href="time-series.html#onesidedhpcycle_">onesidedhpcycle_ (dseries method)</a>
+</li>
+      <li><a href="time-series.html#B = onesidedhptrend">onesidedhptrend (dseries method)</a>
+</li>
+      <li><a href="time-series.html#onesidedhptrend_">onesidedhptrend_ (dseries method)</a>
+</li>
+      <li><a href="the-model-file.html#oo.dr.state_var">oo.dr.state_var (MATLAB variable)</a>
+</li>
+      <li><a href="running-dynare.html#oo_">oo_ (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.autocorr">oo_.autocorr (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.conditional_forecast.cond">oo_.conditional_forecast.cond (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.conditional_forecast.controlled_exo_variables">oo_.conditional_forecast.controlled_exo_variables (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.conditional_forecast.controlled_variables">oo_.conditional_forecast.controlled_variables (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.conditional_forecast.graphs">oo_.conditional_forecast.graphs (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.conditional_forecast.uncond">oo_.conditional_forecast.uncond (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.conditional_variance_decomposition">oo_.conditional_variance_decomposition (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.conditional_variance_decomposition_ME">oo_.conditional_variance_decomposition_ME (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.contemporaneous_correlation">oo_.contemporaneous_correlation (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.convergence.geweke">oo_.convergence.geweke (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.dr">oo_.dr (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.dr.eigval">oo_.dr.eigval (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.dr.inv_order_var">oo_.dr.inv_order_var (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.dr.order_var">oo_.dr.order_var (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.dsge_var.posterior_mode">oo_.dsge_var.posterior_mode (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.endo_simul">oo_.endo_simul (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.exo_simul">oo_.exo_simul (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.FilterCovariance">oo_.FilterCovariance (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.Filtered_Variables_X_step_ahead">oo_.Filtered_Variables_X_step_ahead (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.FilteredVariables">oo_.FilteredVariables (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.FilteredVariablesKStepAhead">oo_.FilteredVariablesKStepAhead (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.FilteredVariablesKStepAheadVariances">oo_.FilteredVariablesKStepAheadVariances (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.FilteredVariablesShockDecomposition">oo_.FilteredVariablesShockDecomposition (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.forecast">oo_.forecast (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.gamma_y">oo_.gamma_y (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.irfs">oo_.irfs (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.kurtosis">oo_.kurtosis (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.MarginalDensity.LaplaceApproximation">oo_.MarginalDensity.LaplaceApproximation (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.MarginalDensity.ModifiedHarmonicMean">oo_.MarginalDensity.ModifiedHarmonicMean (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.mean">oo_.mean (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.MeanForecast">oo_.MeanForecast (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.Model_Comparison">oo_.Model_Comparison (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.mom.data_moments">oo_.mom.data_moments (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.mom.gmm_stage_*_mode">oo_.mom.gmm_stage_*_mode (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.mom.gmm_stage_*_std_at_mode">oo_.mom.gmm_stage_*_std_at_mode (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.mom.J_test">oo_.mom.J_test (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.mom.m_data">oo_.mom.m_data (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.mom.model_moments">oo_.mom.model_moments (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.mom.model_moments_params_derivs">oo_.mom.model_moments_params_derivs (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.mom.Q">oo_.mom.Q (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.mom.smm_stage_*_mode">oo_.mom.smm_stage_*_mode (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.mom.smm_stage_*_std_at_mode">oo_.mom.smm_stage_*_std_at_mode (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.mom.Sw">oo_.mom.Sw (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.mom.verbose_gmm_stage_*_mode">oo_.mom.verbose_gmm_stage_*_mode (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.mom.verbose_gmm_stage_*_std_at_mode">oo_.mom.verbose_gmm_stage_*_std_at_mode (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.mom.verbose_smm_stage_*_mode">oo_.mom.verbose_smm_stage_*_mode (MATLAB variable)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="the-model-file.html#oo_.mom.verbose_smm_stage_*_std_at_mode">oo_.mom.verbose_smm_stage_*_std_at_mode (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.occbin.simul.linear">oo_.occbin.simul.linear (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.occbin.simul.piecewise">oo_.occbin.simul.piecewise (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.occbin.simul.regime_history">oo_.occbin.simul.regime_history (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.occbin.simul.shocks_sequence">oo_.occbin.simul.shocks_sequence (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.occbin.simul.ys">oo_.occbin.simul.ys (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.osr.objective_function">oo_.osr.objective_function (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.osr.optim_params">oo_.osr.optim_params (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.planner_objective_value.conditional">oo_.planner_objective_value.conditional (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.planner_objective_value.conditional.steady_initial_multiplier">oo_.planner_objective_value.conditional.steady_initial_multiplier (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.planner_objective_value.conditional.zero_initial_multiplier">oo_.planner_objective_value.conditional.zero_initial_multiplier (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.planner_objective_value.unconditional">oo_.planner_objective_value.unconditional (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.PointForecast">oo_.PointForecast (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.posterior.metropolis">oo_.posterior.metropolis (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.posterior.optimization">oo_.posterior.optimization (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.posterior_density">oo_.posterior_density (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.posterior_hpdinf">oo_.posterior_hpdinf (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.posterior_hpdsup">oo_.posterior_hpdsup (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.posterior_mean">oo_.posterior_mean (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.posterior_median">oo_.posterior_median (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.posterior_mode">oo_.posterior_mode (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.posterior_std">oo_.posterior_std (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.posterior_std_at_mode">oo_.posterior_std_at_mode (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.posterior_var">oo_.posterior_var (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.PosteriorIRF.dsge">oo_.PosteriorIRF.dsge (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.PosteriorTheoreticalMoments">oo_.PosteriorTheoreticalMoments (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.realtime_conditional_shock_decomposition">oo_.realtime_conditional_shock_decomposition (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.realtime_forecast_shock_decomposition">oo_.realtime_forecast_shock_decomposition (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.realtime_shock_decomposition">oo_.realtime_shock_decomposition (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.RecursiveForecast">oo_.RecursiveForecast (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.shock_decomposition">oo_.shock_decomposition (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.skewness">oo_.skewness (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.SmoothedMeasurementErrors">oo_.SmoothedMeasurementErrors (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.SmoothedShocks">oo_.SmoothedShocks (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.SmoothedVariables">oo_.SmoothedVariables (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.Smoother.Constant">oo_.Smoother.Constant (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.Smoother.loglinear">oo_.Smoother.loglinear (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.Smoother.State_uncertainty">oo_.Smoother.State_uncertainty (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.Smoother.SteadyState">oo_.Smoother.SteadyState (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.Smoother.Trend">oo_.Smoother.Trend (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.Smoother.TrendCoeffs">oo_.Smoother.TrendCoeffs (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.Smoother.Variance">oo_.Smoother.Variance (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.SpectralDensity">oo_.SpectralDensity (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.steady_state">oo_.steady_state (MATLAB variable)</a>
+</li>
+      <li><a href="running-dynare.html#oo_.time">oo_.time (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.trend_component.MODEL_NAME.CompanionMatrix">oo_.trend_component.MODEL_NAME.CompanionMatrix (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.UpdatedVariables">oo_.UpdatedVariables (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.var">oo_.var (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.var.MODEL_NAME.CompanionMatrix">oo_.var.MODEL_NAME.CompanionMatrix (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.var_list">oo_.var_list (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.variance_decomposition">oo_.variance_decomposition (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#oo_.variance_decomposition_ME">oo_.variance_decomposition_ME (MATLAB variable)</a>
+</li>
+      <li><a href="running-dynare.html#oo_recursive_">oo_recursive_ (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#optim_weights">optim_weights (block)</a>
+</li>
+      <li><a href="running-dynare.html#options_">options_ (MATLAB variable)</a>
+</li>
+      <li><a href="the-model-file.html#osr">osr (command)</a>
+</li>
+      <li><a href="the-model-file.html#osr_params">osr_params (command)</a>
+</li>
+      <li><a href="the-model-file.html#osr_params_bounds">osr_params_bounds (block)</a>
+</li>
+      <li><a href="time-series.html#A = outlier">outlier (x13 method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="P">P</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="the-model-file.html#pac.estimate.iterative_ols">pac.estimate.iterative_ols (MATLAB command)</a>
+</li>
+      <li><a href="the-model-file.html#pac.estimate.nls">pac.estimate.nls (MATLAB command)</a>
+</li>
+      <li><a href="the-model-file.html#pac.initialize">pac.initialize (MATLAB command)</a>
+</li>
+      <li><a href="the-model-file.html#pac.update">pac.update (MATLAB command)</a>
+</li>
+      <li><a href="the-model-file.html#pac_expectation (NAME_OF_PAC_MODEL);">pac_expectation (operator)</a>
+</li>
+      <li><a href="the-model-file.html#pac_model">pac_model (command)</a>
+</li>
+      <li><a href="the-model-file.html#parameters">parameters (command)</a>
+</li>
+      <li><a href="the-configuration-file.html#[paths]">paths (config block)</a>
+</li>
+      <li><a href="the-model-file.html#perfect_foresight_setup">perfect_foresight_setup (command)</a>
+</li>
+      <li><a href="the-model-file.html#perfect_foresight_solver">perfect_foresight_solver (command)</a>
+</li>
+      <li><a href="the-model-file.html#periods">periods (command)</a>
+</li>
+      <li><a href="time-series.html#A = pickmdl">pickmdl (x13 method)</a>
+</li>
+      <li><a href="the-model-file.html#planner_objective">planner_objective (command)</a>
+</li>
+      <li><a href="time-series.html#h = plot">plot (dseries method)</a>
+</li>
+      <li><a href="the-model-file.html#plot_conditional_forecast">plot_conditional_forecast (command)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="the-model-file.html#plot_shock_decomposition">plot_shock_decomposition (command)</a>
+</li>
+      <li><a href="time-series.html#C = plus">plus (dates method)</a>
+
+      <ul>
+        <li><a href="time-series.html#C = plus">(dseries method)</a>
+</li>
+      </ul></li>
+      <li><a href="time-series.html#C = pop">pop (dates method)</a>
+
+      <ul>
+        <li><a href="time-series.html#C = pop">(dseries method)</a>
+</li>
+      </ul></li>
+      <li><a href="time-series.html#C = pop_">pop_ (dates method)</a>
+
+      <ul>
+        <li><a href="time-series.html#pop_">(dseries method)</a>
+</li>
+      </ul></li>
+      <li><a href="dynare-misc-commands.html#posterior_function">posterior_function (command)</a>
+</li>
+      <li><a href="the-model-file.html#predetermined_variables">predetermined_variables (command)</a>
+</li>
+      <li><a href="time-series.html#print">print (x13 method)</a>
+</li>
+      <li><a href="the-model-file.html#print_bytecode_dynamic_model">print_bytecode_dynamic_model (command)</a>
+</li>
+      <li><a href="the-model-file.html#print_bytecode_static_model">print_bytecode_static_model (command)</a>
+</li>
+      <li><a href="dynare-misc-commands.html#prior">prior (MATLAB command)</a>
+</li>
+      <li><a href="dynare-misc-commands.html#prior_function">prior_function (command)</a>
+</li>
+      <li><a href="time-series.html#A = projection">projection (dseries method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="Q">Q</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="time-series.html#B = qdiff">qdiff (dseries method)</a>
+</li>
+      <li><a href="time-series.html#qdiff_">qdiff_ (dseries method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="time-series.html#B = qgrowth">qgrowth (dseries method)</a>
+</li>
+      <li><a href="time-series.html#qgrowth_">qgrowth_ (dseries method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="R">R</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="the-model-file.html#ramsey_constraints">ramsey_constraints (block)</a>
+</li>
+      <li><a href="the-model-file.html#ramsey_model">ramsey_model (command)</a>
+</li>
+      <li><a href="the-model-file.html#ramsey_policy">ramsey_policy (command)</a>
+</li>
+      <li><a href="the-model-file.html#realtime_shock_decomposition">realtime_shock_decomposition (command)</a>
+</li>
+      <li><a href="time-series.html#A = regression">regression (x13 method)</a>
+</li>
+      <li><a href="time-series.html#C = remove">remove (dates method)</a>
+
+      <ul>
+        <li><a href="time-series.html#C = remove">(dseries method)</a>
+</li>
+      </ul></li>
+      <li><a href="time-series.html#C = remove_">remove_ (dates method)</a>
+
+      <ul>
+        <li><a href="time-series.html#remove_">(dseries method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="time-series.html#B = rename">rename (dseries method)</a>, <a href="time-series.html#C = rename">[1]</a>
+</li>
+      <li><a href="time-series.html#rename_">rename_ (dseries method)</a>, <a href="time-series.html#rename_">[1]</a>
+</li>
+      <li><a href="time-series.html#A = resetags">resetags (dseries method)</a>
+</li>
+      <li><a href="time-series.html#A = resetops">resetops (dseries method)</a>
+</li>
+      <li><a href="the-model-file.html#resid">resid (command)</a>
+</li>
+      <li><a href="time-series.html#B = round">round (dseries method)</a>
+</li>
+      <li><a href="time-series.html#round_">round_ (dseries method)</a>
+</li>
+      <li><a href="the-model-file.html#rplot">rplot (command)</a>
+</li>
+      <li><a href="time-series.html#run">run (x13 method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="S">S</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="time-series.html#save">save (dseries method)</a>
+</li>
+      <li><a href="the-model-file.html#save_params_and_steady_state">save_params_and_steady_state (command)</a>
+</li>
+      <li><a href="the-model-file.html#sbvar">sbvar (command)</a>
+</li>
+      <li><a href="time-series.html#A = seats">seats (x13 method)</a>
+</li>
+      <li><a href="the-model-file.html#set_dynare_seed">set_dynare_seed (command)</a>
+</li>
+      <li><a href="time-series.html#B = set_names">set_names (dseries method)</a>
+</li>
+      <li><a href="the-model-file.html#set_param_value">set_param_value (MATLAB command)</a>
+</li>
+      <li><a href="the-model-file.html#set_shock_stderr_value">set_shock_stderr_value (MATLAB command)</a>
+</li>
+      <li><a href="time-series.html#C = setdiff">setdiff (dates method)</a>
+</li>
+      <li><a href="the-model-file.html#shock_decomposition">shock_decomposition (command)</a>
+</li>
+      <li><a href="the-model-file.html#shock_groups">shock_groups (block)</a>
+</li>
+      <li><a href="the-model-file.html#shocks">shocks (block)</a>, <a href="the-model-file.html#shocks">[1]</a>
+</li>
+      <li><a href="the-model-file.html#Sigma_e">Sigma_e (special variable)</a>
+</li>
+      <li><a href="the-model-file.html#sign">sign (function)</a>
+</li>
+      <li><a href="the-model-file.html#simul">simul (command)</a>
+</li>
+      <li><a href="the-model-file.html#sin">sin (function)</a>
+</li>
+      <li><a href="time-series.html#[T, N ] = size">size (dseries method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="time-series.html#A = slidingspans">slidingspans (x13 method)</a>
+</li>
+      <li><a href="the-model-file.html#smoother2histval">smoother2histval (command)</a>
+</li>
+      <li><a href="time-series.html#B = sort">sort (dates method)</a>
+</li>
+      <li><a href="time-series.html#B = sort_">sort_ (dates method)</a>
+</li>
+      <li><a href="time-series.html#A = spectrum">spectrum (x13 method)</a>
+</li>
+      <li><a href="the-model-file.html#sqrt">sqrt (function)</a>
+</li>
+      <li><a href="the-model-file.html#squeeze_shock_decomposition">squeeze_shock_decomposition (command)</a>
+</li>
+      <li><a href="time-series.html#B = std">std (dseries method)</a>
+</li>
+      <li><a href="the-model-file.html#steady">steady (command)</a>
+</li>
+      <li><a href="the-model-file.html#STEADY_STATE (MODEL_EXPRESSION)">STEADY_STATE (operator)</a>
+</li>
+      <li><a href="the-model-file.html#steady_state_model">steady_state_model (block)</a>
+</li>
+      <li><a href="the-model-file.html#stoch_simul">stoch_simul (command)</a>
+</li>
+      <li><a href="time-series.html#B = strings">strings (dates method)</a>
+</li>
+      <li><a href="time-series.html#B = subperiod">subperiod (dates method)</a>
+</li>
+      <li><a href="time-series.html#B = subsample">subsample (dseries method)</a>
+</li>
+      <li><a href="the-model-file.html#svar">svar (command)</a>
+</li>
+      <li><a href="the-model-file.html#svar_identification">svar_identification (block)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="T">T</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="time-series.html#A = tag">tag (dseries method)</a>
+</li>
+      <li><a href="the-model-file.html#tan">tan (function)</a>
+</li>
+      <li><a href="time-series.html#B = tex_rename">tex_rename (dseries method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="time-series.html#tex_rename_">tex_rename_ (dseries method)</a>
+</li>
+      <li><a href="time-series.html#A = transform">transform (x13 method)</a>
+</li>
+      <li><a href="the-model-file.html#trend_component_model">trend_component_model (command)</a>
+</li>
+      <li><a href="the-model-file.html#trend_var">trend_var (command)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="U">U</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="time-series.html#B = uminus">uminus (dates method)</a>
+
+      <ul>
+        <li><a href="time-series.html#B = uminus">(dseries method)</a>
+</li>
+      </ul></li>
+      <li><a href="time-series.html#D = union">union (dates method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="time-series.html#B = unique">unique (dates method)</a>
+</li>
+      <li><a href="time-series.html#B = unique_">unique_ (dates method)</a>
+</li>
+      <li><a href="the-model-file.html#unit_root_vars">unit_root_vars (command)</a>
+</li>
+      <li><a href="time-series.html#B = uplus">uplus (dates method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="V">V</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="the-model-file.html#var">var (command)</a>
+</li>
+      <li><a href="the-model-file.html#var_expectation (NAME_OF_VAR_EXPECTATION_MODEL);">var_expectation (operator)</a>
+</li>
+      <li><a href="the-model-file.html#var_expectation.initialize">var_expectation.initialize (MATLAB command)</a>
+</li>
+      <li><a href="the-model-file.html#var_expectation.update">var_expectation.update (MATLAB command)</a>
+</li>
+      <li><a href="the-model-file.html#var_expectation_model">var_expectation_model (command)</a>
+</li>
+      <li><a href="the-model-file.html#var_model">var_model (command)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="the-model-file.html#varexo">varexo (command)</a>
+</li>
+      <li><a href="the-model-file.html#varexo_det">varexo_det (command)</a>
+</li>
+      <li><a href="the-model-file.html#varobs">varobs (command)</a>, <a href="the-model-file.html#varobs">[1]</a>
+</li>
+      <li><a href="the-model-file.html#verbatim">verbatim (block)</a>
+</li>
+      <li><a href="time-series.html#D = vertcat">vertcat (dates method)</a>
+
+      <ul>
+        <li><a href="time-series.html#D = vertcat">(dseries method)</a>
+</li>
+      </ul></li>
+      <li><a href="time-series.html#B = vobs">vobs (dseries method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="W">W</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reporting.html#write">write (reporting method)</a>
+</li>
+      <li><a href="the-model-file.html#write_latex_definitions">write_latex_definitions (MATLAB command)</a>
+</li>
+      <li><a href="the-model-file.html#write_latex_dynamic_model">write_latex_dynamic_model (command)</a>
+</li>
+      <li><a href="the-model-file.html#write_latex_original_model">write_latex_original_model (command)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="the-model-file.html#write_latex_parameter_table">write_latex_parameter_table (MATLAB command)</a>
+</li>
+      <li><a href="the-model-file.html#write_latex_prior_table">write_latex_prior_table (MATLAB command)</a>
+</li>
+      <li><a href="the-model-file.html#write_latex_static_model">write_latex_static_model (command)</a>
+</li>
+      <li><a href="the-model-file.html#write_latex_steady_state_model">write_latex_steady_state_model (command)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="X">X</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="time-series.html#A = x11">x11 (x13 method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="time-series.html#A = x11regression">x11regression (x13 method)</a>
+</li>
+      <li><a href="time-series.html#x13">x13 (class)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="Y">Y</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="time-series.html#B = ydiff">ydiff (dseries method)</a>
+</li>
+      <li><a href="time-series.html#ydiff_">ydiff_ (dseries method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="time-series.html#B = year">year (dates method)</a>
+</li>
+      <li><a href="time-series.html#B = ygrowth">ygrowth (dseries method)</a>
+</li>
+      <li><a href="time-series.html#ygrowth_">ygrowth_ (dseries method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;1996–2022 Dynare Team.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

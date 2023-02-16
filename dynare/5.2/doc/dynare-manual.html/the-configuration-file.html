@@ -1,0 +1,680 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>5. The configuration file &#8212; Dynare 5.2 documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script async="async" src="_static/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="6. Time Series" href="time-series.html" />
+    <link rel="prev" title="4. The model file" href="the-model-file.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="index.html">
+    <img class="logo" src="_static/dlogo.svg" alt="Logo" width=143/>
+    
+  </a>
+</p>
+
+
+
+
+
+
+
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script><br style="line-height:16px">
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">1. Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#what-is-dynare">1.1. What is Dynare?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#documentation-sources">1.2. Documentation sources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#citing-dynare-in-your-research">1.3. Citing Dynare in your research</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="installation-and-configuration.html">2. Installation and configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation-and-configuration.html#software-requirements">2.1. Software requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation-and-configuration.html#installation-of-dynare">2.2. Installation of Dynare</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="installation-and-configuration.html#on-windows">2.2.1. On Windows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation-and-configuration.html#on-gnu-linux">2.2.2. On GNU/Linux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation-and-configuration.html#on-macos">2.2.3. On macOS</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="installation-and-configuration.html#with-matlab">2.2.3.1. With MATLAB</a></li>
+<li class="toctree-l4"><a class="reference internal" href="installation-and-configuration.html#with-octave">2.2.3.2. With Octave</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="installation-and-configuration.html#on-freebsd">2.2.4. On FreeBSD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation-and-configuration.html#for-other-systems">2.2.5. For other systems</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="installation-and-configuration.html#compiler-installation">2.3. Compiler installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="installation-and-configuration.html#prerequisites-on-windows">2.3.1. Prerequisites on Windows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation-and-configuration.html#prerequisites-on-gnu-linux">2.3.2. Prerequisites on GNU/Linux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation-and-configuration.html#prerequisites-on-macos">2.3.3. Prerequisites on macOS</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="installation-and-configuration.html#id1">2.3.3.1. With MATLAB</a></li>
+<li class="toctree-l4"><a class="reference internal" href="installation-and-configuration.html#id2">2.3.3.2. With Octave</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="installation-and-configuration.html#configuration">2.4. Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="installation-and-configuration.html#for-matlab">2.4.1. For MATLAB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation-and-configuration.html#for-octave">2.4.2. For Octave</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation-and-configuration.html#some-words-of-warning">2.4.3. Some words of warning</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="running-dynare.html">3. Running Dynare</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="running-dynare.html#dynare-invocation">3.1. Dynare invocation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="running-dynare.html#dynare-hooks">3.2. Dynare hooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="running-dynare.html#understanding-preprocessor-error-messages">3.3. Understanding Preprocessor Error Messages</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="the-model-file.html">4. The model file</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#conventions">4.1. Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#variable-declarations">4.2. Variable declarations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#on-the-fly-model-variable-declaration">4.2.1. On-the-fly Model Variable Declaration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#expressions">4.3. Expressions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#parameters-and-variables">4.3.1. Parameters and variables</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="the-model-file.html#inside-the-model">4.3.1.1. Inside the model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="the-model-file.html#outside-the-model">4.3.1.2. Outside the model</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#operators">4.3.2. Operators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#functions">4.3.3. Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="the-model-file.html#built-in-functions">4.3.3.1. Built-in functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="the-model-file.html#external-functions">4.3.3.2. External functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#a-few-words-of-warning-in-stochastic-context">4.3.4. A few words of warning in stochastic context</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#parameter-initialization">4.4. Parameter initialization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#model-declaration">4.5. Model declaration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#auxiliary-variables">4.6. Auxiliary variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#initial-and-terminal-conditions">4.7. Initial and terminal conditions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#shocks-on-exogenous-variables">4.8. Shocks on exogenous variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#other-general-declarations">4.9. Other general declarations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#steady-state">4.10. Steady state</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#finding-the-steady-state-with-dynare-nonlinear-solver">4.10.1. Finding the steady state with Dynare nonlinear solver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#providing-the-steady-state-to-dynare">4.10.2. Providing the steady state to Dynare</a></li>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#replace-some-equations-during-steady-state-computations">4.10.3. Replace some equations during steady state computations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#getting-information-about-the-model">4.11. Getting information about the model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#deterministic-simulation">4.12. Deterministic simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#stochastic-solution-and-simulation">4.13. Stochastic solution and simulation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#computing-the-stochastic-solution">4.13.1. Computing the stochastic solution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#typology-and-ordering-of-variables">4.13.2. Typology and ordering of variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#first-order-approximation">4.13.3. First-order approximation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#second-order-approximation">4.13.4. Second-order approximation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#third-order-approximation">4.13.5. Third-order approximation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#higher-order-approximation">4.13.6. Higher-order approximation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#occasionally-binding-constraints-occbin">4.14. Occasionally binding constraints (OCCBIN)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#estimation-based-on-likelihood">4.15. Estimation based on likelihood</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#estimation-based-on-moments">4.16. Estimation based on moments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#model-comparison">4.17. Model Comparison</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#shock-decomposition">4.18. Shock Decomposition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#calibrated-smoother">4.19. Calibrated Smoother</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#forecasting">4.20. Forecasting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#optimal-policy">4.21. Optimal policy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#optimal-policy-under-commitment-ramsey">4.21.1. Optimal policy under commitment (Ramsey)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#optimal-policy-under-discretion">4.21.2. Optimal policy under discretion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#optimal-simple-rules-osr">4.21.3. Optimal Simple Rules (OSR)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#sensitivity-and-identification-analysis">4.22. Sensitivity and identification analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#performing-sensitivity-analysis">4.22.1. Performing sensitivity analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#irf-moment-calibration">4.22.2. IRF/Moment calibration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#performing-identification-analysis">4.22.3. Performing identification analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#types-of-analysis-and-output-files">4.22.4. Types of analysis and output files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="the-model-file.html#sampling">4.22.4.1. Sampling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="the-model-file.html#stability-mapping">4.22.4.2. Stability Mapping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="the-model-file.html#irf-moment-restrictions">4.22.4.3. IRF/Moment restrictions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="the-model-file.html#reduced-form-mapping">4.22.4.4. Reduced Form Mapping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="the-model-file.html#rmse">4.22.4.5. RMSE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="the-model-file.html#screening-analysis">4.22.4.6. Screening Analysis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="the-model-file.html#id12">4.22.4.7. Identification Analysis</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#markov-switching-sbvar">4.23. Markov-switching SBVAR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#epilogue-variables">4.24. Epilogue Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#semi-structural-models">4.25. Semi-structural models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#auxiliary-models">4.25.1. Auxiliary models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#var-expectations">4.25.2. VAR expectations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#pac-equation">4.25.3. PAC equation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#estimation-of-a-pac-equation">4.25.4. Estimation of a PAC equation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#displaying-and-saving-results">4.26. Displaying and saving results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#macro-processing-language">4.27. Macro processing language</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#macro-expressions">4.27.1. Macro expressions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#macro-directives">4.27.2. Macro directives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#typical-usages">4.27.3. Typical usages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="the-model-file.html#modularization">4.27.3.1. Modularization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="the-model-file.html#indexed-sums-of-products">4.27.3.2. Indexed sums of products</a></li>
+<li class="toctree-l4"><a class="reference internal" href="the-model-file.html#multi-country-models">4.27.3.3. Multi-country models</a></li>
+<li class="toctree-l4"><a class="reference internal" href="the-model-file.html#endogeneizing-parameters">4.27.3.4. Endogeneizing parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="the-model-file.html#matlab-octave-loops-versus-macro-processor-loops">4.27.4. MATLAB/Octave loops versus macro processor loops</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#verbatim-inclusion">4.28. Verbatim inclusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="the-model-file.html#misc-commands">4.29. Misc commands</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">5. The configuration file</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#dynare-configuration">5.1. Dynare Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#parallel-configuration">5.2. Parallel Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#windows-step-by-step-guide">5.3. Windows Step-by-Step Guide</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="time-series.html">6. Time Series</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="time-series.html#dates">6.1. Dates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="time-series.html#dates-in-a-mod-file">6.1.1. Dates in a mod file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="time-series.html#the-dates-class">6.1.2. The dates class</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="time-series.html#the-dseries-class">6.2. The dseries class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="time-series.html#x-13-arima-seats-interface">6.3. X-13 ARIMA-SEATS interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="time-series.html#miscellaneous">6.4. Miscellaneous</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="time-series.html#time-aggregation">6.4.1. Time aggregation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="time-series.html#create-time-series-with-a-univariate-model">6.4.2. Create time series with a univariate model</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="reporting.html">7. Reporting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">8. Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dynare-misc-commands.html">9. Dynare misc commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">10. Bibliography</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    <li class="toctree-l1"><a href="genindex.html">Index</a></li>
+</ul>
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="the-configuration-file">
+<span id="conf-file"></span><h1><span class="section-number">5. </span>The configuration file<a class="headerlink" href="#the-configuration-file" title="Permalink to this headline">¶</a></h1>
+<p>The configuration file is used to provide Dynare with information not
+related to the model (and hence not placed in the model file). At the
+moment, it is only used when using Dynare to run parallel
+computations.</p>
+<p>On Linux and macOS, the default location of the configuration file is
+<code class="docutils literal notranslate"><span class="pre">$HOME/.dynare</span></code>, while on Windows it is <code class="docutils literal notranslate"><span class="pre">%APPDATA%\dynare.ini</span></code>
+(typically <code class="docutils literal notranslate"><span class="pre">c:\Users\USERNAME\AppData\dynare.ini</span></code>). You
+can specify a non standard location using the <code class="docutils literal notranslate"><span class="pre">conffile</span></code> option of
+the <code class="docutils literal notranslate"><span class="pre">dynare</span></code> command (see <a class="reference internal" href="running-dynare.html#dyn-invoc"><span class="std std-ref">Dynare invocation</span></a>).</p>
+<p>The parsing of the configuration file is case-sensitive and it should
+take the following form, with each option/choice pair placed on a
+newline:</p>
+<div class="highlight-dynare notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">command</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">option</span><span class="mi">0 </span><span class="p">= </span><span class="n">choice</span><span class="mi">0</span>
+<span class="n">option</span><span class="mi">1 </span><span class="p">= </span><span class="n">choice</span><span class="mi">1</span>
+
+<span class="p">[</span><span class="n">command</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">option</span><span class="mi">0 </span><span class="p">= </span><span class="n">choice</span><span class="mi">0</span>
+<span class="n">option</span><span class="mi">1 </span><span class="p">= </span><span class="n">choice</span><span class="mi">1</span>
+</pre></div>
+</div>
+<p>The configuration file follows a few conventions (self-explanatory
+conventions such as <code class="docutils literal notranslate"><span class="pre">USER_NAME</span></code> have been excluded for concision):</p>
+<p><code class="docutils literal notranslate"><span class="pre">COMPUTER_NAME</span></code></p>
+<blockquote>
+<div><p>Indicates the valid name of a server (e.g. <code class="docutils literal notranslate"><span class="pre">localhost</span></code>,
+<code class="docutils literal notranslate"><span class="pre">server.cepremap.org</span></code>) or an IP address.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">DRIVE_NAME</span></code></p>
+<blockquote>
+<div><p>Indicates a valid drive name in Windows, without the trailing
+colon (e.g. <code class="docutils literal notranslate"><span class="pre">C</span></code>).</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">PATH</span></code></p>
+<blockquote>
+<div><p>Indicates a valid path in the underlying operating system
+(e.g. <code class="docutils literal notranslate"><span class="pre">/home/user/dynare/matlab/</span></code>).</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">PATH_AND_FILE</span></code></p>
+<blockquote>
+<div><p>Indicates a valid path to a file in the underlying operating
+system (e.g. <code class="docutils literal notranslate"><span class="pre">/usr/local/MATLAB/R2010b/bin/matlab</span></code>).</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">BOOLEAN</span></code></p>
+<blockquote>
+<div><p>Is <code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
+</div></blockquote>
+<div class="section" id="dynare-configuration">
+<h2><span class="section-number">5.1. </span>Dynare Configuration<a class="headerlink" href="#dynare-configuration" title="Permalink to this headline">¶</a></h2>
+<p>This section explains how to configure Dynare for general
+processing. Currently, there is only one option available.</p>
+<dl class="dynare confblock">
+<dt id="[hooks]">
+<em class="property">Configuration block: </em><code class="sig-name descname">[hooks]</code><a class="headerlink" href="#[hooks]" title="Permalink to this definition">¶</a></dt>
+<dd><p><br> This block can be used to specify configuration options that will
+be used when running Dynare.</p>
+<p><em>Options</em></p>
+<dl class="dynare option">
+<dt id="GlobalInitFile = PATH_AND_FILE">
+<code class="sig-name descname">GlobalInitFile = PATH_AND_FILE</code><a class="headerlink" href="#GlobalInitFile = PATH_AND_FILE" title="Permalink to this definition">¶</a></dt>
+<dd><p>The location of the global initialization file to be run at
+the end of <code class="docutils literal notranslate"><span class="pre">global_initialization.m</span></code>.</p>
+</dd></dl>
+
+<p><em>Example</em></p>
+<blockquote>
+<div><div class="highlight-dynare notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="kr">hooks</span><span class="p">]</span>
+<span class="n">GlobalInitFile </span><span class="p">= </span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">usern</span><span class="o">/</span><span class="ni">dynare</span><span class="o">/</span><span class="n">myInitFile</span><span class="p">.</span><span class="n">m</span>
+</pre></div>
+</div>
+</div></blockquote>
+</dd></dl>
+
+<dl class="dynare confblock">
+<dt id="[paths]">
+<em class="property">Configuration block: </em><code class="sig-name descname">[paths]</code><a class="headerlink" href="#[paths]" title="Permalink to this definition">¶</a></dt>
+<dd><p><br> This block can be used to specify paths that will be used
+when running dynare.</p>
+<p><em>Options</em></p>
+<dl class="dynare option">
+<dt id="Include = PATH">
+<code class="sig-name descname">Include = PATH</code><a class="headerlink" href="#Include = PATH" title="Permalink to this definition">¶</a></dt>
+<dd><p>A colon-separated path to use when searching for files to
+include via <code class="docutils literal notranslate"><span class="pre">&#64;#include</span></code>. Paths specified via <a class="reference internal" href="running-dynare.html#-I&lt;&lt;path&gt;&gt;" title="-I&lt;&lt;path&gt;&gt;"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">-I</span></code></a> take priority over paths specified here,
+while these paths take priority over those specified by
+<code class="docutils literal notranslate"><span class="pre">&#64;#includepath</span></code>.</p>
+</dd></dl>
+
+<p><em>Example</em></p>
+<blockquote>
+<div><div class="highlight-dynare notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="kr">paths</span><span class="p">]</span>
+<span class="n">Include </span><span class="p">= </span><span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">folder</span><span class="o">/</span><span class="n">containing</span><span class="o">/</span><span class="n">modfiles</span><span class="p">:</span><span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">another</span><span class="o">/</span><span class="n">folder</span>
+</pre></div>
+</div>
+</div></blockquote>
+</dd></dl>
+
+</div>
+<div class="section" id="parallel-configuration">
+<span id="paral-conf"></span><h2><span class="section-number">5.2. </span>Parallel Configuration<a class="headerlink" href="#parallel-configuration" title="Permalink to this headline">¶</a></h2>
+<p>This section explains how to configure Dynare for parallelizing some
+tasks which require very little inter-process communication.</p>
+<p>The parallelization is done by running several MATLAB or Octave
+processes, either on local or on remote machines. Communication
+between master and slave processes are done through SMB on Windows and
+SSH on UNIX. Input and output data, and also some short status
+messages, are exchanged through network filesystems. Currently the
+system works only with homogenous grids: only Windows or only Unix
+machines.</p>
+<p>The following routines are currently parallelized:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>the posterior sampling algorithms when using multiple chains;</p></li>
+<li><p>the Metropolis-Hastings diagnostics;</p></li>
+<li><p>the posterior IRFs;</p></li>
+<li><p>the prior and posterior statistics;</p></li>
+<li><p>some plotting routines.</p></li>
+</ul>
+</div></blockquote>
+<p>Note that creating the configuration file is not enough in order to
+trigger parallelization of the computations: you also need to specify
+the <code class="docutils literal notranslate"><span class="pre">parallel</span></code> option to the <code class="docutils literal notranslate"><span class="pre">dynare</span></code> command. For more details,
+and for other options related to the parallelization engine, see
+<a class="reference internal" href="running-dynare.html#dyn-invoc"><span class="std std-ref">Dynare invocation</span></a>.</p>
+<p>You also need to verify that the following requirements are met by
+your cluster (which is composed of a master and of one or more
+slaves):</p>
+<p>For a Windows grid:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>a standard Windows network (SMB) must be in place;</p></li>
+<li><p>the <a class="reference external" href="https://technet.microsoft.com/sysinternals/pstools.aspx">PsTools</a> suite must be installed in the path of the
+master Windows machine;</p></li>
+<li><p>the Windows user on the master machine has to be user of any
+other slave machine in the cluster, and that user will be
+used for the remote computations.</p></li>
+<li><p>detailed step-by-step setup instructions can be found in
+<a class="reference internal" href="#win-ssg"><span class="std std-ref">Windows Step-by-Step Guide</span></a>.</p></li>
+</ul>
+</div></blockquote>
+<p>For a UNIX grid:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>SSH must be installed on the master and on the slave machines;</p></li>
+<li><p>SSH keys must be installed so that the SSH connection from
+the master to the slaves can be done without passwords, or
+using an SSH agent.</p></li>
+</ul>
+</div></blockquote>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Compatibility considerations between master and slave</p>
+<p>It is highly recommended to use the same version of Dynare on both the
+master and all slaves. Different versions regularly cause problems like
+zero acceptance rates during estimation. When upgrading to a newer Dynare
+version do not forget to adjust the <code class="docutils literal notranslate"><span class="pre">DynarePath</span></code>.</p>
+</div>
+<p>We now turn to the description of the configuration directives. Note
+that comments in the configuration file can be provided by separate
+lines starting with a hashtag (#).</p>
+<dl class="dynare confblock">
+<dt id="[cluster]">
+<em class="property">Configuration block: </em><code class="sig-name descname">[cluster]</code><a class="headerlink" href="#[cluster]" title="Permalink to this definition">¶</a></dt>
+<dd><p><br> When working in parallel, <code class="docutils literal notranslate"><span class="pre">[cluster]</span></code> is required to specify the
+group of computers that will be used. It is required even if you
+are only invoking multiple processes on one computer.</p>
+<p><em>Options</em></p>
+<dl class="dynare option">
+<dt id="Name = CLUSTER_NAME">
+<code class="sig-name descname">Name = CLUSTER_NAME</code><a class="headerlink" href="#Name = CLUSTER_NAME" title="Permalink to this definition">¶</a></dt>
+<dd><p>The reference name of this cluster.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt id="Members = NODE_NAME[(WEIGHT)] NODE_NAME[(WEIGHT)] ...">
+<code class="sig-name descname">Members = NODE_NAME[(WEIGHT)] NODE_NAME[(WEIGHT)] ...</code><a class="headerlink" href="#Members = NODE_NAME[(WEIGHT)] NODE_NAME[(WEIGHT)] ..." title="Permalink to this definition">¶</a></dt>
+<dd><p>A list of nodes that comprise the cluster with an optional
+computing weight specified for that node. The computing weight
+indicates how much more powerful one node is with respect to
+the others (e.g. <code class="docutils literal notranslate"><span class="pre">n1(2)</span> <span class="pre">n2(1)</span> <span class="pre">n3(3)</span></code> means that <code class="docutils literal notranslate"><span class="pre">n1</span></code> is
+two times more powerful than <code class="docutils literal notranslate"><span class="pre">n2</span></code> whereas <code class="docutils literal notranslate"><span class="pre">n3</span></code> is three
+times more powerful than <code class="docutils literal notranslate"><span class="pre">n2</span></code>). Each node is separated by at
+least one space and the weights are in parenthesis with no
+spaces separating them from their node.</p>
+</dd></dl>
+
+<p><em>Example</em></p>
+<blockquote>
+<div><div class="highlight-dynare notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="kr">cluster</span><span class="p">]</span>
+<span class="n">Name </span><span class="p">= </span><span class="n">c</span><span class="mi">1</span>
+<span class="n">Members </span><span class="p">= </span><span class="n">n</span><span class="mi">1 </span><span class="n">n</span><span class="mi">2 </span><span class="n">n</span><span class="mi">3</span>
+
+<span class="p">[</span><span class="kr">cluster</span><span class="p">]</span>
+<span class="n">Name </span><span class="p">= </span><span class="n">c</span><span class="mi">2</span>
+<span class="n">Members </span><span class="p">= </span><span class="n">n</span><span class="mi">1</span><span class="p">(</span><span class="mi">4</span><span class="p">) </span><span class="n">n</span><span class="mi">2 </span><span class="n">n</span><span class="mi">3</span>
+</pre></div>
+</div>
+</div></blockquote>
+</dd></dl>
+
+<dl class="dynare confblock">
+<dt id="[node]">
+<em class="property">Configuration block: </em><code class="sig-name descname">[node]</code><a class="headerlink" href="#[node]" title="Permalink to this definition">¶</a></dt>
+<dd><p><br> When working in parallel, <code class="docutils literal notranslate"><span class="pre">[node]</span></code> is required for every
+computer that will be used. The options that are required differ,
+depending on the underlying operating system and whether you are
+working locally or remotely.</p>
+<p><em>Options</em></p>
+<dl class="dynare option">
+<dt id="Name = NODE_NAME">
+<code class="sig-name descname">Name = NODE_NAME</code><a class="headerlink" href="#Name = NODE_NAME" title="Permalink to this definition">¶</a></dt>
+<dd><p>The reference name of this node.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt id="CPUnbr = INTEGER | [INTEGER:INTEGER]">
+<code class="sig-name descname">CPUnbr = INTEGER | [INTEGER:INTEGER]</code><a class="headerlink" href="#CPUnbr = INTEGER | [INTEGER:INTEGER]" title="Permalink to this definition">¶</a></dt>
+<dd><p>If just one integer is passed, the number of processors to
+use. If a range of integers is passed, the specific processors
+to use (processor counting is defined to begin at one as
+opposed to zero). Note that using specific processors is only
+possible under Windows; under Linux and macOS, if a range is
+passed the same number of processors will be used but the
+range will be adjusted to begin at one.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt id="ComputerName = COMPUTER_NAME">
+<code class="sig-name descname">ComputerName = COMPUTER_NAME</code><a class="headerlink" href="#ComputerName = COMPUTER_NAME" title="Permalink to this definition">¶</a></dt>
+<dd><p>The name or IP address of the node. If you want to run
+locally, use <code class="docutils literal notranslate"><span class="pre">localhost</span></code> (case-sensitive).</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt id="Port = INTEGER">
+<code class="sig-name descname">Port = INTEGER</code><a class="headerlink" href="#Port = INTEGER" title="Permalink to this definition">¶</a></dt>
+<dd><p>The port number to connect to on the node. The default is
+empty, meaning that the connection will be made to the default
+SSH port (22).</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt id="UserName = USER_NAME">
+<code class="sig-name descname">UserName = USER_NAME</code><a class="headerlink" href="#UserName = USER_NAME" title="Permalink to this definition">¶</a></dt>
+<dd><p>The username used to log into a remote system. Required for
+remote runs on all platforms.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt id="Password = PASSWORD">
+<code class="sig-name descname">Password = PASSWORD</code><a class="headerlink" href="#Password = PASSWORD" title="Permalink to this definition">¶</a></dt>
+<dd><p>The password used to log into the remote system. Required for
+remote runs originating from Windows.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt id="RemoteDrive = DRIVE_NAME">
+<code class="sig-name descname">RemoteDrive = DRIVE_NAME</code><a class="headerlink" href="#RemoteDrive = DRIVE_NAME" title="Permalink to this definition">¶</a></dt>
+<dd><p>The drive to be used for remote computation. Required for
+remote runs originating from Windows.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt id="RemoteDirectory = PATH">
+<code class="sig-name descname">RemoteDirectory = PATH</code><a class="headerlink" href="#RemoteDirectory = PATH" title="Permalink to this definition">¶</a></dt>
+<dd><p>The directory to be used for remote computation. Required for
+remote runs on all platforms.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt id="DynarePath = PATH">
+<code class="sig-name descname">DynarePath = PATH</code><a class="headerlink" href="#DynarePath = PATH" title="Permalink to this definition">¶</a></dt>
+<dd><p>The path to the matlab subdirectory within the Dynare
+installation directory. The default is the empty string.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt id="MatlabOctavePath = PATH_AND_FILE">
+<code class="sig-name descname">MatlabOctavePath = PATH_AND_FILE</code><a class="headerlink" href="#MatlabOctavePath = PATH_AND_FILE" title="Permalink to this definition">¶</a></dt>
+<dd><p>The path to the MATLAB or Octave executable. The default value
+is <code class="docutils literal notranslate"><span class="pre">matlab</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt id="NumberOfThreadsPerJob = INTEGER">
+<code class="sig-name descname">NumberOfThreadsPerJob = INTEGER</code><a class="headerlink" href="#NumberOfThreadsPerJob = INTEGER" title="Permalink to this definition">¶</a></dt>
+<dd><p>For Windows nodes, sets the number of threads assigned to each
+remote MATLAB/Octave run. The default value is 1.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt id="SingleCompThread = BOOLEAN">
+<code class="sig-name descname">SingleCompThread = BOOLEAN</code><a class="headerlink" href="#SingleCompThread = BOOLEAN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether or not to disable MATLAB’s native multithreading. The
+default value is <code class="docutils literal notranslate"><span class="pre">false</span></code>. Option meaningless under Octave.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt id="OperatingSystem = OPERATING_SYSTEM">
+<code class="sig-name descname">OperatingSystem = OPERATING_SYSTEM</code><a class="headerlink" href="#OperatingSystem = OPERATING_SYSTEM" title="Permalink to this definition">¶</a></dt>
+<dd><p>The operating system associated with a node. Only necessary
+when creating a cluster with nodes from different operating
+systems. Possible values are <code class="docutils literal notranslate"><span class="pre">unix</span></code> or <code class="docutils literal notranslate"><span class="pre">windows</span></code>. There is
+no default value.</p>
+</dd></dl>
+
+<p><em>Example</em></p>
+<blockquote>
+<div><div class="highlight-dynare notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="kr">node</span><span class="p">]</span>
+<span class="n">Name </span><span class="p">= </span><span class="n">n</span><span class="mi">1</span>
+<span class="n">ComputerName </span><span class="p">= </span><span class="n">localhost</span>
+<span class="n">CPUnbr </span><span class="p">= </span><span class="mi">1</span>
+
+<span class="p">[</span><span class="kr">node</span><span class="p">]</span>
+<span class="n">Name </span><span class="p">= </span><span class="n">n</span><span class="mi">2</span>
+<span class="n">ComputerName </span><span class="p">= </span><span class="n">dynserv</span><span class="p">.</span><span class="n">cepremap</span><span class="p">.</span><span class="n">org</span>
+<span class="n">CPUnbr </span><span class="p">= </span><span class="mi">5</span>
+<span class="n">UserName </span><span class="p">= </span><span class="n">usern</span>
+<span class="n">RemoteDirectory </span><span class="p">= </span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">usern</span><span class="o">/</span><span class="n">Remote</span>
+<span class="n">DynarePath </span><span class="p">= </span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">usern</span><span class="o">/</span><span class="ni">dynare</span><span class="o">/</span><span class="n">matlab</span>
+<span class="n">MatlabOctavePath </span><span class="p">= </span><span class="n">matlab</span>
+
+<span class="p">[</span><span class="kr">node</span><span class="p">]</span>
+<span class="n">Name </span><span class="p">= </span><span class="n">n</span><span class="mi">3</span>
+<span class="n">ComputerName </span><span class="p">= </span><span class="n">dynserv</span><span class="p">.</span><span class="ni">dynare</span><span class="p">.</span><span class="n">org</span>
+<span class="n">Port </span><span class="p">= </span><span class="mi">3333</span>
+<span class="n">CPUnbr </span><span class="p">= [</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
+<span class="n">UserName </span><span class="p">= </span><span class="n">usern</span>
+<span class="n">RemoteDirectory </span><span class="p">= </span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">usern</span><span class="o">/</span><span class="n">Remote</span>
+<span class="n">DynarePath </span><span class="p">= </span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">usern</span><span class="o">/</span><span class="ni">dynare</span><span class="o">/</span><span class="n">matlab</span>
+<span class="n">MatlabOctavePath </span><span class="p">= </span><span class="n">matlab</span>
+</pre></div>
+</div>
+</div></blockquote>
+</dd></dl>
+
+</div>
+<div class="section" id="windows-step-by-step-guide">
+<span id="win-ssg"></span><h2><span class="section-number">5.3. </span>Windows Step-by-Step Guide<a class="headerlink" href="#windows-step-by-step-guide" title="Permalink to this headline">¶</a></h2>
+<p>This section outlines the steps necessary on most Windows systems to
+set up Dynare for parallel execution.</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p>Write a configuration file containing the options you want. A
+mimimum working example setting up a cluster consisting of two
+local CPU cores that allows for e.g. running two Monte Carlo
+Markov Chains in parallel is shown below.</p></li>
+<li><p>Save the configuration file somwhere. The name and file ending
+do not matter if you are providing it with the <code class="docutils literal notranslate"><span class="pre">conffile</span></code>
+command line option. The only restrictions are that the path
+must be a valid filename, not contain non-alpha-numeric
+characters, and not contain any whitespaces. For the
+configuration file to be accessible without providing an
+explicit path at the command line, you must save it under the
+name <code class="docutils literal notranslate"><span class="pre">dynare.ini</span></code> into your user account’s <code class="docutils literal notranslate"><span class="pre">Application</span>
+<span class="pre">Data</span></code> folder.</p></li>
+<li><p>Install <a class="reference external" href="https://technet.microsoft.com/sysinternals/pstools.aspx">PSTools</a> to your system, e.g. into <code class="docutils literal notranslate"><span class="pre">C:\PSTools.</span></code></p></li>
+<li><p>Set the Windows System Path to the <code class="docutils literal notranslate"><span class="pre">PSTools</span></code> folder
+(e.g. using something along the line of pressing Windows
+Key+Pause to open the System Configuration, then go to Advanced
+-&gt; Environment Variables -&gt; Path).</p></li>
+<li><p>Restart your computer to make the path change effective.</p></li>
+<li><p>Open MATLAB and type into the command window:</p>
+<div class="highlight-dynare notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="n">psexec</span>
+</pre></div>
+</div>
+<p>This executes the <code class="docutils literal notranslate"><span class="pre">psexec.exe</span></code> from PSTools on your system
+and shows whether Dynare will be able to locate it. If MATLAB
+complains at this stage, you did not correctly set your Windows
+system path for the <code class="docutils literal notranslate"><span class="pre">PSTools</span></code> folder.</p>
+</li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">psexec.exe</span></code> was located in the previous step, a popup
+will show up, asking for confirmation of the license
+agreement. Confirm this copyright notice of <code class="docutils literal notranslate"><span class="pre">psexec</span></code> (this
+needs to be done only once). After this, Dynare should be ready
+for parallel execution.</p></li>
+<li><p>Call Dynare on your mod-file invoking the <code class="docutils literal notranslate"><span class="pre">parallel</span></code> option
+and providing the path to your configuration file with the
+<code class="docutils literal notranslate"><span class="pre">conffile</span></code> option (if you did not save it as
+<code class="docutils literal notranslate"><span class="pre">%APPDATA%\dynare.ini</span></code> in step 2 where it should be detected
+automatically):</p>
+<div class="highlight-dynare notranslate"><div class="highlight"><pre><span></span><span class="ni">dynare </span><span class="n">ls</span><span class="mi">2003 </span><span class="n">parallel conffile</span><span class="p">=</span><span class="s">&#39;C:\Users\Dynare~1\parallel\conf_file.ini&#39;</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>Please keep in mind that no white spaces or names longer than 8
+characters are allowed in the <code class="docutils literal notranslate"><span class="pre">conffile</span></code> path. The 8-character
+restriction can be circumvented by using the tilde Windows path
+notation as in the above example.</p>
+</div></blockquote>
+<p><em>Example</em>:</p>
+<div class="highlight-dynare notranslate"><div class="highlight"><pre><span></span><span class="p">#</span><span class="kr">cluster </span><span class="n">needs to always be defined first</span>
+<span class="p">[</span><span class="kr">cluster</span><span class="p">]</span>
+<span class="p">#</span><span class="n">Provide a name for the </span><span class="kr">cluster</span>
+<span class="n">Name</span><span class="p">=</span><span class="n">Local</span>
+<span class="p">#</span><span class="n">declare the nodes being member of the </span><span class="kr">cluster</span>
+<span class="n">Members</span><span class="p">=</span><span class="n">n</span><span class="mi">1</span>
+
+<span class="p">#</span><span class="n">declare nodes </span><span class="p">(</span><span class="n">they need not all be part of a </span><span class="kr">cluster</span><span class="p">)</span>
+<span class="p">[</span><span class="kr">node</span><span class="p">]</span>
+<span class="p">#</span><span class="n">name of the </span><span class="kr">node</span>
+<span class="n">Name</span><span class="p">=</span><span class="n">n</span><span class="mi">1</span>
+<span class="p">#</span><span class="n">name of the computer </span><span class="p">(</span><span class="n">localhost for the current machine</span><span class="p">)</span>
+<span class="n">ComputerName</span><span class="p">=</span><span class="n">localhost</span>
+<span class="p">#</span><span class="n">cores to be included from this </span><span class="kr">node</span>
+<span class="n">CPUnbr</span><span class="p">=[</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+<span class="p">#</span><span class="n">path to matlab</span><span class="p">.</span><span class="n">exe</span><span class="p">; </span><span class="n">on Windows</span><span class="p">, </span><span class="n">the MATLAB bin folder is in the system path</span>
+<span class="p">#</span><span class="n">so we only need to provide the name of the exe file</span>
+<span class="n">MatlabOctavePath</span><span class="p">=</span><span class="n">matlab</span>
+<span class="p">#</span><span class="n">Dynare path you are using</span>
+<span class="n">DynarePath</span><span class="p">=</span><span class="n">C</span><span class="p">:</span><span class="o">/</span><span class="ni">dynare</span><span class="o">/</span><span class="mf">4.7.0</span><span class="o">/</span><span class="n">matlab</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;1996–2022 Dynare Team.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/the-configuration-file.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
