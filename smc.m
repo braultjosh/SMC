@@ -13,7 +13,7 @@ dynare Smets_Wouters_2007_45
 fcn = @evaluate_likelihood2;
 
 % General
-tune.npara = length(bayestopt_.pshape);;       % # of parameters
+tune.npara = length(bayestopt_.pshape);       % # of parameters
 tune.npart = 10000;   % # of particles
 tune.nphi  = 400;      % # of stages
 tune.lam   = 2;     % # bending coeff, lam = 1 means linear cooling schedule
