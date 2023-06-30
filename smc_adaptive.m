@@ -14,7 +14,7 @@ fcn = @evaluate_likelihood2;
 
 % General
 tune.npara = length(bayestopt_.pshape);;       % # of parameters
-tune.npart = 100;   % # of particles
+tune.npart = 1000;   % # of particles
 tune.nphi  = 400;      % # of stages
 tune.lam   = 2;     % # bending coeff, lam = 1 means linear cooling schedule
 hpdpercent = 0.95;   % pecentage WITHIN bands
@@ -62,6 +62,8 @@ end
 
 wtsim(:, 1)    = 1/tune.npart;                          % initial weight is equal weights
 zhat(1)        = sum(wtsim(:,1));                       % initial normalizing constant equals 1
+ESS = 1/sum(wtsim(:, 1).^2); % Effective sample size, (5.16)
+
 
 % ------------------------------------------------------------------------
 % Recursion: For n=2,...,N_{\phi}
@@ -70,7 +72,26 @@ smctime   = tic;
 totaltime = 0;
 disp('SMC recursion starts ... ');
 
-for i=2:1:tune.nphi
+%for i=2:1:tune.nphi
+i=2;
+while tune.phi(i-1)<1
+
+    myFunc = @(x) findnphi(x, tune.phi(i-1), wtsim(:,i-1), loglh, ESS);
+    % Call the optimization function
+    options = optimoptions('fminunc', 'Display', 'iter');
+    x0 = 0.0001;
+    [xOpt, fval] = fminunc(myFunc, x0, options);
+    if xOpt<1
+        tune.phi(i)  = xOpt;
+    elseif xOpt>1
+        tune.phi(i) = 1;
+    end
+
+    %findnphi(0.01, tune.phi(i-1), wtsim(:,i-1), loglh, ESS)
+
+
+    fzero(myFunc, 0.0001)
+
 
     %-----------------------------------
     % Step 1: Correction
@@ -231,7 +252,7 @@ for i=2:1:tune.nphi
     end
 
 
-
+i = i+1;
 
 end
 
