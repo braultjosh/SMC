@@ -1,0 +1,1220 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>7. Reporting &#8212; Dynare 6.4 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script async="async" src="_static/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="8. Examples" href="examples.html" />
+    <link rel="prev" title="6. Time Series" href="time-series.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="index.html">
+    <img class="logo" src="_static/dlogo.svg" alt="Logo" width=143/>
+    
+  </a>
+</p>
+
+
+
+
+
+
+
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script><br style="line-height:16px">
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation-and-configuration.html">2. Installation and configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running-dynare.html">3. Running Dynare</a></li>
+<li class="toctree-l1"><a class="reference internal" href="the-model-file.html">4. The model file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="the-configuration-file.html">5. The configuration file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="time-series.html">6. Time Series</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">7. Reporting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">8. Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dynare-misc-commands.html">9. Dynare misc commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">10. Bibliography</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    <li class="toctree-l1"><a href="genindex.html">Index</a></li>
+</ul>
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="reporting">
+<h1><span class="section-number">7. </span>Reporting<a class="headerlink" href="#reporting" title="Permalink to this heading">¶</a></h1>
+<p>Dynare provides a simple interface for creating <span class="math notranslate nohighlight">\(\text{\LaTeX}\)</span>
+reports, comprised of <span class="math notranslate nohighlight">\(\text{\LaTeX}\)</span> tables and <code class="docutils literal notranslate"><span class="pre">PGFPLOTS/TikZ</span>
+<span class="pre">graphs</span></code>. You can use the report as created through Dynare or pick out
+the pieces (tables and graphs) you want for inclusion in your own
+paper. Though Dynare provides a subset of options available through
+<code class="docutils literal notranslate"><span class="pre">PGFPLOTS/TikZ</span></code>, you can easily modify the graphs created by Dynare
+using the options available in the <code class="docutils literal notranslate"><span class="pre">PGFPLOTS/TikZ</span></code> manual. You can
+either do this manually or by passing the options to
+<a class="reference internal" href="#miscTikzAxisOptions, STRING" title="miscTikzAxisOptions, STRING"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">miscTikzAxisOptions</span></code></a> or
+<a class="reference internal" href="#graphMiscTikzAddPlotOptions, STRING" title="graphMiscTikzAddPlotOptions, STRING"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">graphMiscTikzAddPlotOptions</span></code></a>.</p>
+<p>Reports are created and modified by calling methods on class
+objects. The objects are hierarchical, with the following order (from
+highest to lowest): <code class="docutils literal notranslate"><span class="pre">Report</span></code>, <code class="docutils literal notranslate"><span class="pre">Page</span></code>, <code class="docutils literal notranslate"><span class="pre">Section</span></code>,
+<code class="docutils literal notranslate"><span class="pre">Graph/Table/Vspace</span></code>, <code class="docutils literal notranslate"><span class="pre">Series</span></code>. For simplicity of syntax, we
+abstract away from these classes, allowing you to operate directly on
+a <code class="docutils literal notranslate"><span class="pre">Report</span></code> object, while maintaining the names of these classes in
+the <code class="docutils literal notranslate"><span class="pre">Report</span></code> class methods you will use.</p>
+<p>The report is created sequentially, command by command, hence the
+order of the commands matters. When an object of a certain hierarchy
+is inserted, all methods will function on that object until an object
+of equal or greater hierarchy is added. Hence, once you add a <code class="docutils literal notranslate"><span class="pre">Page</span></code>
+to the report, every time you add a <code class="docutils literal notranslate"><span class="pre">Section</span></code> object, it will be
+added to this <code class="docutils literal notranslate"><span class="pre">Page</span></code> until another <code class="docutils literal notranslate"><span class="pre">Page</span></code> is added to the report
+(via <a class="reference internal" href="#addPage" title="addPage"><code class="xref dynare dynare-repmeth docutils literal notranslate"><span class="pre">addPage</span></code></a>). This will become more clear with the example
+at the end of the section.</p>
+<p>Options to methods are passed differently than those to Dynare
+commands. They take the form of named options to MATLAB functions
+where the arguments come in pairs
+(e.g. <code class="docutils literal notranslate"><span class="pre">function_name(`option_1_name',</span> <span class="pre">`option_1_value',</span>
+<span class="pre">`option_2_name',</span> <span class="pre">`option_2_value',</span> <span class="pre">...)</span></code>, where <code class="docutils literal notranslate"><span class="pre">option_X_name</span></code> is
+the name of the option while <code class="docutils literal notranslate"><span class="pre">option_X_value</span></code> is the value assigned
+to that option). The ordering of the option pairs matters only in the
+unusual case when an option is provided twice (probably
+erroneously). In this case, the last value passed is the one that is
+used.</p>
+<p>Below, you will see a list of methods available for the Report class
+and a clarifying example.</p>
+<dl class="dynare construct">
+<dt class="sig sig-object dynare" id="report">
+<em class="property"><span class="pre">Constructor:</span> </em><span class="sig-name descname"><span class="pre">report</span></span><a class="headerlink" href="#report" title="Permalink to this definition">¶</a></dt>
+<dd><p><br> Instantiates a <code class="docutils literal notranslate"><span class="pre">Report</span></code> object.</p>
+<p><em>Options</em></p>
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="compiler, FILENAME">
+<span class="sig-name descname"><span class="pre">compiler,</span> <span class="pre">FILENAME</span></span><a class="headerlink" href="#compiler, FILENAME" title="Permalink to this definition">¶</a></dt>
+<dd><p>The full path to the <span class="math notranslate nohighlight">\(\text{\LaTeX}\)</span> compiler on your
+system. If this option is not provided, Dynare will try to
+find the appropriate program to compile <span class="math notranslate nohighlight">\(\text{\LaTeX}\)</span> on your
+system. Default is system dependent:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Windows: the result of findtexmf <code class="docutils literal notranslate"><span class="pre">--file-type=exe</span> <span class="pre">pdflatex</span></code>.</p></li>
+<li><p>macOS and Linux: the result of <code class="docutils literal notranslate"><span class="pre">which</span> <span class="pre">pdflatex</span></code>.</p></li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="directory, FILENAME">
+<span class="sig-name descname"><span class="pre">directory,</span> <span class="pre">FILENAME</span></span><a class="headerlink" href="#directory, FILENAME" title="Permalink to this definition">¶</a></dt>
+<dd><p>The path to the directory you want the report created in. Default:
+current directory.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="showDate, BOOLEAN">
+<span class="sig-name descname"><span class="pre">showDate,</span> <span class="pre">BOOLEAN</span></span><a class="headerlink" href="#showDate, BOOLEAN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display the date and time when the report was
+compiled. Default: <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="fileName, FILENAME">
+<span class="sig-name descname"><span class="pre">fileName,</span> <span class="pre">FILENAME</span></span><a class="headerlink" href="#fileName, FILENAME" title="Permalink to this definition">¶</a></dt>
+<dd><p>The file name to use when saving this report. Default: <code class="docutils literal notranslate"><span class="pre">report.tex</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="header, STRING">
+<span class="sig-name descname"><span class="pre">header,</span> <span class="pre">STRING</span></span><a class="headerlink" href="#header, STRING" title="Permalink to this definition">¶</a></dt>
+<dd><p>The valid <span class="math notranslate nohighlight">\(\text{\LaTeX}\)</span> code to be included in the report before
+<code class="docutils literal notranslate"><span class="pre">\begin{document}</span></code>. Default: <code class="docutils literal notranslate"><span class="pre">empty</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="maketoc, BOOLEAN">
+<span class="sig-name descname"><span class="pre">maketoc,</span> <span class="pre">BOOLEAN</span></span><a class="headerlink" href="#maketoc, BOOLEAN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether or not to make the table of contents. One entry is made per
+page containing a title. Default: <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="margin, DOUBLE">
+<span class="sig-name descname"><span class="pre">margin,</span> <span class="pre">DOUBLE</span></span><a class="headerlink" href="#margin, DOUBLE" title="Permalink to this definition">¶</a></dt>
+<dd><p>The margin size. Default: <code class="docutils literal notranslate"><span class="pre">2.5</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="marginUnit, `cm' | `in'">
+<span class="sig-name descname"><span class="pre">marginUnit,</span> <span class="pre">`cm'</span> <span class="pre">|</span> <span class="pre">`in'</span></span><a class="headerlink" href="#marginUnit, `cm' | `in'" title="Permalink to this definition">¶</a></dt>
+<dd><p>Units associated with the margin. Default: <code class="docutils literal notranslate"><span class="pre">`cm'</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="orientation, `landscape' | `portrait'">
+<span class="sig-name descname"><span class="pre">orientation,</span> <span class="pre">`landscape'</span> <span class="pre">|</span> <span class="pre">`portrait'</span></span><a class="headerlink" href="#orientation, `landscape' | `portrait'" title="Permalink to this definition">¶</a></dt>
+<dd><p>Paper orientation: Default: <code class="docutils literal notranslate"><span class="pre">`portrait'</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="paper, `a4' | `letter'">
+<span class="sig-name descname"><span class="pre">paper,</span> <span class="pre">`a4'</span> <span class="pre">|</span> <span class="pre">`letter'</span></span><a class="headerlink" href="#paper, `a4' | `letter'" title="Permalink to this definition">¶</a></dt>
+<dd><p>Paper size. Default: <code class="docutils literal notranslate"><span class="pre">`a4'</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="reportDirName, FILENAME">
+<span class="sig-name descname"><span class="pre">reportDirName,</span> <span class="pre">FILENAME</span></span><a class="headerlink" href="#reportDirName, FILENAME" title="Permalink to this definition">¶</a></dt>
+<dd><p>The name of the folder in which to store the component parts of the
+report (preamble, document, end). Default: <code class="docutils literal notranslate"><span class="pre">tmpRepDir</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare">
+<span class="sig-name descname"><span class="pre">showDate,</span> <span class="pre">BOOLEAN</span></span></dt>
+<dd><p>Display the date and time when the report was compiled. Default: true.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="showOutput, BOOLEAN">
+<span class="sig-name descname"><span class="pre">showOutput,</span> <span class="pre">BOOLEAN</span></span><a class="headerlink" href="#showOutput, BOOLEAN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print report creation progress to screen. Shows you the page
+number as it is created and as it is written. This is useful
+to see where a potential error occurs in report
+creation. Default: <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="title, STRING">
+<span class="sig-name descname"><span class="pre">title,</span> <span class="pre">STRING</span></span><a class="headerlink" href="#title, STRING" title="Permalink to this definition">¶</a></dt>
+<dd><p>Report Title. Default: <code class="docutils literal notranslate"><span class="pre">none</span></code>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="dynare reportingmethod">
+<dt class="sig sig-object dynare" id="addPage">
+<em class="property"><span class="pre">Method:</span> </em><span class="sig-name descname"><span class="pre">addPage</span></span><a class="headerlink" href="#addPage" title="Permalink to this definition">¶</a></dt>
+<dd><p><br> Adds a Page to the Report.</p>
+<p><em>Options</em></p>
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="footnote, STRING">
+<span class="sig-name descname"><span class="pre">footnote,</span> <span class="pre">STRING</span></span><a class="headerlink" href="#footnote, STRING" title="Permalink to this definition">¶</a></dt>
+<dd><p>A footnote to be included at the bottom of this page. Default: <code class="docutils literal notranslate"><span class="pre">none</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="latex, STRING">
+<span class="sig-name descname"><span class="pre">latex,</span> <span class="pre">STRING</span></span><a class="headerlink" href="#latex, STRING" title="Permalink to this definition">¶</a></dt>
+<dd><p>The valid <span class="math notranslate nohighlight">\(\text{\LaTeX}\)</span> code to be used for this
+page. Alows the user to create a page to be included in the
+report by passing <span class="math notranslate nohighlight">\(\text{\LaTeX}\)</span> code directly. If this option is
+passed, the page itself will be saved in the <a class="reference internal" href="#pageDirName, FILENAME" title="pageDirName, FILENAME"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">pageDirName</span></code></a> directory in the form <code class="docutils literal notranslate"><span class="pre">page_X.tex</span></code>
+where X refers to the page number. Default: <code class="docutils literal notranslate"><span class="pre">empty</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare">
+<span class="sig-name descname"><span class="pre">orientation,</span> <span class="pre">`landscape'</span> <span class="pre">|</span> <span class="pre">`portrait'</span></span></dt>
+<dd><p>See <a class="reference internal" href="#orientation, `landscape' | `portrait'" title="orientation, `landscape' | `portrait'"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">orientation</span></code></a>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="pageDirName, FILENAME">
+<span class="sig-name descname"><span class="pre">pageDirName,</span> <span class="pre">FILENAME</span></span><a class="headerlink" href="#pageDirName, FILENAME" title="Permalink to this definition">¶</a></dt>
+<dd><p>The name of the folder in which to store this page. Directory given is
+relative to the <cite>directory</cite> option of the report class. Only used when
+the <a class="reference internal" href="#latex, STRING" title="latex, STRING"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">latex</span></code></a> command is passed. Default:
+<code class="docutils literal notranslate"><span class="pre">tmpRepDir</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare">
+<span class="sig-name descname"><span class="pre">paper,</span> <span class="pre">`a4'</span> <span class="pre">|</span> <span class="pre">`letter'</span></span></dt>
+<dd><p>See <a class="reference internal" href="#paper, `a4' | `letter'" title="paper, `a4' | `letter'"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">paper</span></code></a>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="title, STRING | CELL_ARRAY_STRINGS">
+<span class="sig-name descname"><span class="pre">title,</span> <span class="pre">STRING</span> <span class="pre">|</span> <span class="pre">CELL_ARRAY_STRINGS</span></span><a class="headerlink" href="#title, STRING | CELL_ARRAY_STRINGS" title="Permalink to this definition">¶</a></dt>
+<dd><p>With one entry (a STRING), the title of the page. With more
+than one entry (a CELL_ARRAY_STRINGS), the title and
+subtitle(s) of the page. Values passed must be valid
+<span class="math notranslate nohighlight">\(\text{\LaTeX}\)</span> code (e.g., <code class="docutils literal notranslate"><span class="pre">%</span></code> must be
+<code class="docutils literal notranslate"><span class="pre">\%</span></code>). Default: <code class="docutils literal notranslate"><span class="pre">none</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="titleFormat, STRING | CELL_ARRAY_STRINGS">
+<span class="sig-name descname"><span class="pre">titleFormat,</span> <span class="pre">STRING</span> <span class="pre">|</span> <span class="pre">CELL_ARRAY_STRINGS</span></span><a class="headerlink" href="#titleFormat, STRING | CELL_ARRAY_STRINGS" title="Permalink to this definition">¶</a></dt>
+<dd><p>A string representing the valid <span class="math notranslate nohighlight">\(\text{\LaTeX}\)</span> markup to use on
+<code class="docutils literal notranslate"><span class="pre">title</span></code>. The number of cell array entries must be equal to
+that of the <code class="docutils literal notranslate"><span class="pre">title</span></code> option if you do not want to use the
+default value for the title (and subtitles). Default:
+<code class="docutils literal notranslate"><span class="pre">\large\bfseries</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="titleTruncate, INTEGER">
+<span class="sig-name descname"><span class="pre">titleTruncate,</span> <span class="pre">INTEGER</span></span><a class="headerlink" href="#titleTruncate, INTEGER" title="Permalink to this definition">¶</a></dt>
+<dd><p>Useful when automatically generating page titles that may
+become too long, <code class="docutils literal notranslate"><span class="pre">titleTruncate</span></code> can be used to truncate a
+title (and subsequent subtitles) when they pass the specified
+number of characters. Default: <code class="docutils literal notranslate"><span class="pre">.off</span></code>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="dynare reportingmethod">
+<dt class="sig sig-object dynare" id="addSection">
+<em class="property"><span class="pre">Method:</span> </em><span class="sig-name descname"><span class="pre">addSection</span></span><a class="headerlink" href="#addSection" title="Permalink to this definition">¶</a></dt>
+<dd><p><br> Adds a <code class="docutils literal notranslate"><span class="pre">Section</span></code> to a <code class="docutils literal notranslate"><span class="pre">Page</span></code>.</p>
+<p><em>Options</em></p>
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="cols, INTEGER">
+<span class="sig-name descname"><span class="pre">cols,</span> <span class="pre">INTEGER</span></span><a class="headerlink" href="#cols, INTEGER" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of columns in the section. Default: <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="height, STRING">
+<span class="sig-name descname"><span class="pre">height,</span> <span class="pre">STRING</span></span><a class="headerlink" href="#height, STRING" title="Permalink to this definition">¶</a></dt>
+<dd><p>A string to be used with the <code class="docutils literal notranslate"><span class="pre">\sectionheight</span></code> <span class="math notranslate nohighlight">\(\text{\LaTeX}\)</span>
+command. Default: <code class="docutils literal notranslate"><span class="pre">'!'</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="dynare reportingmethod">
+<dt class="sig sig-object dynare" id="addGraph">
+<em class="property"><span class="pre">Method:</span> </em><span class="sig-name descname"><span class="pre">addGraph</span></span><a class="headerlink" href="#addGraph" title="Permalink to this definition">¶</a></dt>
+<dd><p><br> Adds a <code class="docutils literal notranslate"><span class="pre">Graph</span></code> to a <code class="docutils literal notranslate"><span class="pre">Section</span></code>.</p>
+<p><em>Options</em></p>
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="data, dseries">
+<span class="sig-name descname"><span class="pre">data,</span> <span class="pre">dseries</span></span><a class="headerlink" href="#data, dseries" title="Permalink to this definition">¶</a></dt>
+<dd><p>The <code class="docutils literal notranslate"><span class="pre">dseries</span></code> that provides the data for the graph. Default: <code class="docutils literal notranslate"><span class="pre">none</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="axisShape, `box' | `L'">
+<span class="sig-name descname"><span class="pre">axisShape,</span> <span class="pre">`box'</span> <span class="pre">|</span> <span class="pre">`L'</span></span><a class="headerlink" href="#axisShape, `box' | `L'" title="Permalink to this definition">¶</a></dt>
+<dd><p>The shape the axis should have. <code class="docutils literal notranslate"><span class="pre">`box'</span></code> means that there is
+an axis line to the left, right, bottom, and top of the
+graphed line(s). ‘L’`` means that there is an axis to the left
+and bottom of the graphed line(s). Default: <code class="docutils literal notranslate"><span class="pre">`box'</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="graphDirName, FILENAME">
+<span class="sig-name descname"><span class="pre">graphDirName,</span> <span class="pre">FILENAME</span></span><a class="headerlink" href="#graphDirName, FILENAME" title="Permalink to this definition">¶</a></dt>
+<dd><p>The name of the folder in which to store this figure. Directory given
+is relative to the <cite>directory</cite> option of the report class. Default:
+<code class="docutils literal notranslate"><span class="pre">tmpRepDir</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="graphName, STRING">
+<span class="sig-name descname"><span class="pre">graphName,</span> <span class="pre">STRING</span></span><a class="headerlink" href="#graphName, STRING" title="Permalink to this definition">¶</a></dt>
+<dd><p>The name to use when saving this figure. Default: something of
+the form <code class="docutils literal notranslate"><span class="pre">graph_pg1_sec2_row1_col3.tex</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="height, DOUBLE">
+<span class="sig-name descname"><span class="pre">height,</span> <span class="pre">DOUBLE</span></span><a class="headerlink" href="#height, DOUBLE" title="Permalink to this definition">¶</a></dt>
+<dd><p>The height of the graph, in inches. Default: <code class="docutils literal notranslate"><span class="pre">4.5</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="showGrid, BOOLEAN">
+<span class="sig-name descname"><span class="pre">showGrid,</span> <span class="pre">BOOLEAN</span></span><a class="headerlink" href="#showGrid, BOOLEAN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether or not to display the major grid on the
+graph. Default: <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="showLegend, BOOLEAN">
+<span class="sig-name descname"><span class="pre">showLegend,</span> <span class="pre">BOOLEAN</span></span><a class="headerlink" href="#showLegend, BOOLEAN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether or not to display the legend.</p>
+<p>Unless you use the <a class="reference internal" href="#graphLegendName, STRING" title="graphLegendName, STRING"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">graphLegendName</span></code></a>
+option, the name displayed in the legend is the tex
+name associated with the <code class="docutils literal notranslate"><span class="pre">dseries</span></code>. You can modify this tex
+name by using <a class="reference internal" href="time-series.html#B = tex_rename" title="B = tex_rename"><code class="xref dynare dynare-dsermeth docutils literal notranslate"><span class="pre">tex_rename</span></code></a>.
+Default: <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="legendAt, NUMERICAL_VECTOR">
+<span class="sig-name descname"><span class="pre">legendAt,</span> <span class="pre">NUMERICAL_VECTOR</span></span><a class="headerlink" href="#legendAt, NUMERICAL_VECTOR" title="Permalink to this definition">¶</a></dt>
+<dd><p>The coordinates for the legend location. If this option is
+passed, it overrides the <a class="reference internal" href="#legendLocation, OPTION" title="legendLocation, OPTION"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">legendLocation</span></code></a> option. Must be of size <code class="docutils literal notranslate"><span class="pre">2</span></code>.
+Default: <code class="docutils literal notranslate"><span class="pre">empty</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="showLegendBox, BOOLEAN">
+<span class="sig-name descname"><span class="pre">showLegendBox,</span> <span class="pre">BOOLEAN</span></span><a class="headerlink" href="#showLegendBox, BOOLEAN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether or not to display a box around the legend. Default: <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="legendLocation, OPTION">
+<span class="sig-name descname"><span class="pre">legendLocation,</span> <span class="pre">OPTION</span></span><a class="headerlink" href="#legendLocation, OPTION" title="Permalink to this definition">¶</a></dt>
+<dd><p>Where to place the legend in the graph. Possible values for OPTION are:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span>`<span class="n">south</span><span class="w"> </span><span class="n">west</span><span class="o">&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>`<span class="n">south</span><span class="w"> </span><span class="n">east</span><span class="o">&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>`<span class="n">north</span><span class="w"> </span><span class="n">west</span><span class="o">&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>`<span class="n">north</span><span class="w"> </span><span class="n">east</span><span class="o">&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>`<span class="n">outer</span><span class="w"> </span><span class="n">north</span><span class="w"> </span><span class="n">east</span><span class="o">&#39;</span>
+</pre></div>
+</div>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">`south</span> <span class="pre">east'</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="legendOrientation, `vertical' | `horizontal'">
+<span class="sig-name descname"><span class="pre">legendOrientation,</span> <span class="pre">`vertical'</span> <span class="pre">|</span> <span class="pre">`horizontal'</span></span><a class="headerlink" href="#legendOrientation, `vertical' | `horizontal'" title="Permalink to this definition">¶</a></dt>
+<dd><p>Orientation of the legend. Default: <code class="docutils literal notranslate"><span class="pre">`horizontal'</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="legendFontSize, OPTION">
+<span class="sig-name descname"><span class="pre">legendFontSize,</span> <span class="pre">OPTION</span></span><a class="headerlink" href="#legendFontSize, OPTION" title="Permalink to this definition">¶</a></dt>
+<dd><p>The font size for legend entries. Possible values for OPTION are:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span>`<span class="n">tiny</span><span class="o">&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>`<span class="n">scriptsize</span><span class="o">&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>`<span class="n">footnotesize</span><span class="o">&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>`<span class="n">small</span><span class="o">&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>`<span class="n">normalsize</span><span class="o">&#39;</span><span class="w"> </span><span class="o">|</span>
+`<span class="n">large</span><span class="o">&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>`<span class="n">Large</span><span class="o">&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>`<span class="n">LARGE</span><span class="o">&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>`<span class="n">huge</span><span class="o">&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>`<span class="n">Huge</span><span class="o">&#39;</span>
+</pre></div>
+</div>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">tiny</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="miscTikzAxisOptions, STRING">
+<span class="sig-name descname"><span class="pre">miscTikzAxisOptions,</span> <span class="pre">STRING</span></span><a class="headerlink" href="#miscTikzAxisOptions, STRING" title="Permalink to this definition">¶</a></dt>
+<dd><p>If you are comfortable with <code class="docutils literal notranslate"><span class="pre">PGFPLOTS/TikZ</span></code>, you can use
+this option to pass arguments directly to the
+<code class="docutils literal notranslate"><span class="pre">PGFPLOTS/TikZ</span></code> axis environment command. Specifically to be
+used for desired <code class="docutils literal notranslate"><span class="pre">PGFPLOTS/TikZ</span></code> options that have not been
+incorporated into Dynare Reporting. Default: <code class="docutils literal notranslate"><span class="pre">empty</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="miscTikzPictureOptions, STRING">
+<span class="sig-name descname"><span class="pre">miscTikzPictureOptions,</span> <span class="pre">STRING</span></span><a class="headerlink" href="#miscTikzPictureOptions, STRING" title="Permalink to this definition">¶</a></dt>
+<dd><p>If you are comfortable with <code class="docutils literal notranslate"><span class="pre">PGFPLOTS/TikZ</span></code>, you can use
+this option to pass arguments directly to the
+<code class="docutils literal notranslate"><span class="pre">PGFPLOTS/TikZ</span></code> <code class="docutils literal notranslate"><span class="pre">tikzpicture</span></code> environment command. (e.g.,
+to scale the graph in the x and y dimensions, you can pass
+following to this option: ‘xscale=2.5,
+yscale=0.5’<code class="docutils literal notranslate"><span class="pre">).</span> <span class="pre">Specifically</span> <span class="pre">to</span> <span class="pre">be</span> <span class="pre">used</span> <span class="pre">for</span> <span class="pre">desired</span>
+<span class="pre">``PGFPLOTS/TikZ</span></code> options that have not been incorporated into
+Dynare Reporting. Default: <code class="docutils literal notranslate"><span class="pre">empty</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="seriesToUse, CELL_ARRAY_STRINGS">
+<span class="sig-name descname"><span class="pre">seriesToUse,</span> <span class="pre">CELL_ARRAY_STRINGS</span></span><a class="headerlink" href="#seriesToUse, CELL_ARRAY_STRINGS" title="Permalink to this definition">¶</a></dt>
+<dd><p>The names of the series contained in the <code class="docutils literal notranslate"><span class="pre">dseries</span></code> provided
+to the <a class="reference internal" href="#data, dseries" title="data, dseries"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">data</span></code></a> option. If empty, use all
+series provided to <code class="docutils literal notranslate"><span class="pre">data</span></code> option. Default: <code class="docutils literal notranslate"><span class="pre">empty</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="shade, dates">
+<span class="sig-name descname"><span class="pre">shade,</span> <span class="pre">dates</span></span><a class="headerlink" href="#shade, dates" title="Permalink to this definition">¶</a></dt>
+<dd><p>The date range showing the portion of the graph that should be
+shaded. Default: <code class="docutils literal notranslate"><span class="pre">none</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="shadeColor, STRING">
+<span class="sig-name descname"><span class="pre">shadeColor,</span> <span class="pre">STRING</span></span><a class="headerlink" href="#shadeColor, STRING" title="Permalink to this definition">¶</a></dt>
+<dd><p>The color to use in the shaded portion of the graph. All valid
+color strings defined for use by <code class="docutils literal notranslate"><span class="pre">PGFPLOTS/TikZ</span></code> are
+valid. A list of defined colors is:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="s">&#39;red&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;green&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;blue&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;cyan&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;magenta&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;yellow&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;black&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;gray&#39;</span><span class="p">,</span>
+<span class="s">&#39;white&#39;</span><span class="p">,</span><span class="s">&#39;darkgray&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;lightgray&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;brown&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;lime&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;olive&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;orange&#39;</span><span class="p">,</span>
+<span class="s">&#39;pink&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;purple&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;teal&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;violet&#39;</span><span class="p">.</span>
+</pre></div>
+</div>
+<p>Furthermore, You can use combinations of these colors. For
+example, if you wanted a color that is 20% green and 80%
+purple, you could pass the string <code class="docutils literal notranslate"><span class="pre">'green!20!purple'</span></code>. You
+can also use RGB colors, following the syntax:
+<code class="docutils literal notranslate"><span class="pre">`rgb,255:red,231;green,84;blue,121'</span></code> which corresponds to
+the RGB color <code class="docutils literal notranslate"><span class="pre">(231;84;121)</span></code>. More examples are available in
+the section 4.7.5 of the <code class="docutils literal notranslate"><span class="pre">PGFPLOTS/TikZ</span></code> manual, revision
+1.10. Default: <code class="docutils literal notranslate"><span class="pre">`green'</span></code></p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="shadeOpacity, DOUBLE">
+<span class="sig-name descname"><span class="pre">shadeOpacity,</span> <span class="pre">DOUBLE</span></span><a class="headerlink" href="#shadeOpacity, DOUBLE" title="Permalink to this definition">¶</a></dt>
+<dd><p>The opacity of the shaded area, must be in <code class="docutils literal notranslate"><span class="pre">[0,100]</span></code>. Default: <code class="docutils literal notranslate"><span class="pre">20</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="tickFontSize, OPTION">
+<span class="sig-name descname"><span class="pre">tickFontSize,</span> <span class="pre">OPTION</span></span><a class="headerlink" href="#tickFontSize, OPTION" title="Permalink to this definition">¶</a></dt>
+<dd><p>The font size for x- and y-axis tick labels. Possible values
+for OPTION are:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span>`<span class="n">tiny</span><span class="o">&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>`<span class="n">scriptsize</span><span class="o">&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>`<span class="n">footnotesize</span><span class="o">&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>`<span class="n">small</span><span class="o">&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>`<span class="n">normalsize</span><span class="o">&#39;</span><span class="w"> </span><span class="o">|</span>
+`<span class="n">large</span><span class="o">&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>`<span class="n">Large</span><span class="o">&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>`<span class="n">LARGE</span><span class="o">&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>`<span class="n">huge</span><span class="o">&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>`<span class="n">Huge</span><span class="o">&#39;</span>
+</pre></div>
+</div>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">normalsize</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare">
+<span class="sig-name descname"><span class="pre">title,</span> <span class="pre">STRING</span> <span class="pre">|</span> <span class="pre">CELL_ARRAY_STRINGS</span></span></dt>
+<dd><p>Same as <a class="reference internal" href="#title, STRING | CELL_ARRAY_STRINGS" title="title, STRING | CELL_ARRAY_STRINGS"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">title</span></code></a>,
+just for graphs.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="titleFontSize, OPTION">
+<span class="sig-name descname"><span class="pre">titleFontSize,</span> <span class="pre">OPTION</span></span><a class="headerlink" href="#titleFontSize, OPTION" title="Permalink to this definition">¶</a></dt>
+<dd><p>The font size for title. Possible values for OPTION are:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span>`<span class="n">tiny</span><span class="o">&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>`<span class="n">scriptsize</span><span class="o">&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>`<span class="n">footnotesize</span><span class="o">&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>`<span class="n">small</span><span class="o">&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>`<span class="n">normalsize</span><span class="o">&#39;</span><span class="w"> </span><span class="o">|</span>
+`<span class="n">large</span><span class="o">&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>`<span class="n">Large</span><span class="o">&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>`<span class="n">LARGE</span><span class="o">&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>`<span class="n">huge</span><span class="o">&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>`<span class="n">Huge</span><span class="o">&#39;</span>
+</pre></div>
+</div>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">normalsize</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="titleFormat, STRING">
+<span class="sig-name descname"><span class="pre">titleFormat,</span> <span class="pre">STRING</span></span><a class="headerlink" href="#titleFormat, STRING" title="Permalink to this definition">¶</a></dt>
+<dd><p>The format to use for the graph title. Unlike
+<a class="reference internal" href="#titleFormat, STRING | CELL_ARRAY_STRINGS" title="titleFormat, STRING | CELL_ARRAY_STRINGS"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">titleFormat</span></code></a>,
+due to a constraint of <code class="docutils literal notranslate"><span class="pre">TikZ</span></code>, this format applies to the
+title and subtitles. Default: <code class="docutils literal notranslate"><span class="pre">TikZ</span></code> default.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="width, DOUBLE">
+<span class="sig-name descname"><span class="pre">width,</span> <span class="pre">DOUBLE</span></span><a class="headerlink" href="#width, DOUBLE" title="Permalink to this definition">¶</a></dt>
+<dd><p>The width of the graph, in inches. Default: <code class="docutils literal notranslate"><span class="pre">6.0</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="writeCSV, BOOLEAN">
+<span class="sig-name descname"><span class="pre">writeCSV,</span> <span class="pre">BOOLEAN</span></span><a class="headerlink" href="#writeCSV, BOOLEAN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether or not to write a CSV file with only the plotted
+data. The file will be saved in the directory specified by
+<a class="reference internal" href="#graphDirName, FILENAME" title="graphDirName, FILENAME"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">graphDirName</span></code></a> with the same base
+name as specified by <a class="reference internal" href="#graphName, STRING" title="graphName, STRING"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">graphName</span></code></a> with
+the ending <code class="docutils literal notranslate"><span class="pre">.csv</span></code>. Default: <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="xlabel, STRING">
+<span class="sig-name descname"><span class="pre">xlabel,</span> <span class="pre">STRING</span></span><a class="headerlink" href="#xlabel, STRING" title="Permalink to this definition">¶</a></dt>
+<dd><p>The x-axis label. Default: <code class="docutils literal notranslate"><span class="pre">none</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="ylabel, STRING">
+<span class="sig-name descname"><span class="pre">ylabel,</span> <span class="pre">STRING</span></span><a class="headerlink" href="#ylabel, STRING" title="Permalink to this definition">¶</a></dt>
+<dd><p>The y-axis label. Default: <code class="docutils literal notranslate"><span class="pre">none</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="xAxisTight, BOOLEAN">
+<span class="sig-name descname"><span class="pre">xAxisTight,</span> <span class="pre">BOOLEAN</span></span><a class="headerlink" href="#xAxisTight, BOOLEAN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use a tight x axis. If false, uses <code class="docutils literal notranslate"><span class="pre">PGFPLOTS/TikZ</span></code> <code class="docutils literal notranslate"><span class="pre">enlarge</span>
+<span class="pre">x</span> <span class="pre">limits</span></code> to choose appropriate axis size. Default: <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="xrange, dates">
+<span class="sig-name descname"><span class="pre">xrange,</span> <span class="pre">dates</span></span><a class="headerlink" href="#xrange, dates" title="Permalink to this definition">¶</a></dt>
+<dd><p>The boundary on the x-axis to display in the graph. Default: <code class="docutils literal notranslate"><span class="pre">all</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="xTicks, NUMERICAL_VECTOR">
+<span class="sig-name descname"><span class="pre">xTicks,</span> <span class="pre">NUMERICAL_VECTOR</span></span><a class="headerlink" href="#xTicks, NUMERICAL_VECTOR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used only in conjunction with <a class="reference internal" href="#xTickLabels, CELL_ARRAY_STRINGS | `ALL'" title="xTickLabels, CELL_ARRAY_STRINGS | `ALL'"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">xTickLabels</span></code></a>, this option denotes the
+numerical position of the label along the x-axis. The
+positions begin at <code class="docutils literal notranslate"><span class="pre">1</span></code>. Default: the indices associated with
+the first and last dates of the <code class="docutils literal notranslate"><span class="pre">dseries</span></code> and, if passed,
+the index associated with the first date of the <a class="reference internal" href="#shade, dates" title="shade, dates"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">shade</span></code></a> option.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="xTickLabels, CELL_ARRAY_STRINGS | `ALL'">
+<span class="sig-name descname"><span class="pre">xTickLabels,</span> <span class="pre">CELL_ARRAY_STRINGS</span> <span class="pre">|</span> <span class="pre">`ALL'</span></span><a class="headerlink" href="#xTickLabels, CELL_ARRAY_STRINGS | `ALL'" title="Permalink to this definition">¶</a></dt>
+<dd><p>The labels to be mapped to the ticks provided by
+<code class="docutils literal notranslate"><span class="pre">xTicks</span></code>. Default: the first and last dates of the
+<code class="docutils literal notranslate"><span class="pre">dseries</span></code> and, if passed, the date first date of the
+<a class="reference internal" href="#shade, dates" title="shade, dates"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">shade</span></code></a> option.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="xTickLabelAnchor, STRING">
+<span class="sig-name descname"><span class="pre">xTickLabelAnchor,</span> <span class="pre">STRING</span></span><a class="headerlink" href="#xTickLabelAnchor, STRING" title="Permalink to this definition">¶</a></dt>
+<dd><p>Where to anchor the x tick label. Default: <code class="docutils literal notranslate"><span class="pre">`east'</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="xTickLabelRotation, DOUBLE">
+<span class="sig-name descname"><span class="pre">xTickLabelRotation,</span> <span class="pre">DOUBLE</span></span><a class="headerlink" href="#xTickLabelRotation, DOUBLE" title="Permalink to this definition">¶</a></dt>
+<dd><p>The amount to rotate the x tick labels by. Default: <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="yAxisTight, BOOLEAN">
+<span class="sig-name descname"><span class="pre">yAxisTight,</span> <span class="pre">BOOLEAN</span></span><a class="headerlink" href="#yAxisTight, BOOLEAN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use a tight y axis. If false, uses <code class="docutils literal notranslate"><span class="pre">PGFPLOTS/TikZ</span></code> <code class="docutils literal notranslate"><span class="pre">enlarge</span>
+<span class="pre">y</span> <span class="pre">limits</span></code> to choose appropriate axis size. Default:
+<code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="yrange, NUMERICAL_VECTOR">
+<span class="sig-name descname"><span class="pre">yrange,</span> <span class="pre">NUMERICAL_VECTOR</span></span><a class="headerlink" href="#yrange, NUMERICAL_VECTOR" title="Permalink to this definition">¶</a></dt>
+<dd><p>The boundary on the y-axis to display in the graph,
+represented as a <code class="docutils literal notranslate"><span class="pre">NUMERICAL_VECTOR</span></code> of size <code class="docutils literal notranslate"><span class="pre">2</span></code>, with the
+first entry less than the second entry. Default: <code class="docutils literal notranslate"><span class="pre">all</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="yTickLabelFixed, BOOLEAN">
+<span class="sig-name descname"><span class="pre">yTickLabelFixed,</span> <span class="pre">BOOLEAN</span></span><a class="headerlink" href="#yTickLabelFixed, BOOLEAN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Round the y tick labels to a fixed number of decimal places,
+given by <code class="docutils literal notranslate"><span class="pre">yTickLabelPrecision</span></code>. Default: <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="yTickLabelPrecision, INTEGER">
+<span class="sig-name descname"><span class="pre">yTickLabelPrecision,</span> <span class="pre">INTEGER</span></span><a class="headerlink" href="#yTickLabelPrecision, INTEGER" title="Permalink to this definition">¶</a></dt>
+<dd><p>The precision with which to report the <code class="docutils literal notranslate"><span class="pre">yTickLabel</span></code>. Default: <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="yTickLabelScaled, BOOLEAN">
+<span class="sig-name descname"><span class="pre">yTickLabelScaled,</span> <span class="pre">BOOLEAN</span></span><a class="headerlink" href="#yTickLabelScaled, BOOLEAN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determines whether or not there is a common scaling factor for
+the y axis. Default: <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="yTickLabelZeroFill, BOOLEAN">
+<span class="sig-name descname"><span class="pre">yTickLabelZeroFill,</span> <span class="pre">BOOLEAN</span></span><a class="headerlink" href="#yTickLabelZeroFill, BOOLEAN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether or not to fill missing precision spots with
+zeros. Default: <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="showZeroline, BOOLEAN">
+<span class="sig-name descname"><span class="pre">showZeroline,</span> <span class="pre">BOOLEAN</span></span><a class="headerlink" href="#showZeroline, BOOLEAN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display a solid black line at <span class="math notranslate nohighlight">\(y = 0\)</span>. Default: <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="zeroLineColor, STRING">
+<span class="sig-name descname"><span class="pre">zeroLineColor,</span> <span class="pre">STRING</span></span><a class="headerlink" href="#zeroLineColor, STRING" title="Permalink to this definition">¶</a></dt>
+<dd><p>The color to use for the zero line. Only used if
+<a class="reference internal" href="#showZeroline, BOOLEAN" title="showZeroline, BOOLEAN"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">showZeroLine</span></code></a> is true. See the
+explanation in <a class="reference internal" href="#shadeColor, STRING" title="shadeColor, STRING"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">shadeColor</span></code></a> for how
+to use colors with reports. Default: <code class="docutils literal notranslate"><span class="pre">`black'</span></code>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="dynare reportingmethod">
+<dt class="sig sig-object dynare" id="addTable">
+<em class="property"><span class="pre">Method:</span> </em><span class="sig-name descname"><span class="pre">addTable</span></span><a class="headerlink" href="#addTable" title="Permalink to this definition">¶</a></dt>
+<dd><p><br> Adds a <code class="docutils literal notranslate"><span class="pre">Table</span></code> to a <code class="docutils literal notranslate"><span class="pre">Section</span></code>.</p>
+<p><em>Options</em></p>
+<dl class="dynare option">
+<dt class="sig sig-object dynare">
+<span class="sig-name descname"><span class="pre">data,</span> <span class="pre">dseries</span></span></dt>
+<dd><p>See <a class="reference internal" href="#data, dseries" title="data, dseries"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">data</span></code></a>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="highlightRows, CELL_ARRAY_STRINGS">
+<span class="sig-name descname"><span class="pre">highlightRows,</span> <span class="pre">CELL_ARRAY_STRINGS</span></span><a class="headerlink" href="#highlightRows, CELL_ARRAY_STRINGS" title="Permalink to this definition">¶</a></dt>
+<dd><p>A cell array containing the colors to use for row
+highlighting. See <a class="reference internal" href="#shadeColor, STRING" title="shadeColor, STRING"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">shadeColor</span></code></a> for
+how to use colors with reports. Highlighting for a specific
+row can be overridden by using the <a class="reference internal" href="#tableRowColor, STRING" title="tableRowColor, STRING"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">tableRowColor</span></code></a> option to
+<a class="reference internal" href="#addSeries" title="addSeries"><code class="xref dynare dynare-repmeth docutils literal notranslate"><span class="pre">addSeries</span></code></a>. Default: <code class="docutils literal notranslate"><span class="pre">empty</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="showHlines, BOOLEAN">
+<span class="sig-name descname"><span class="pre">showHlines,</span> <span class="pre">BOOLEAN</span></span><a class="headerlink" href="#showHlines, BOOLEAN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether or not to show horizontal lines separating the
+rows. Default: <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="precision, INTEGER">
+<span class="sig-name descname"><span class="pre">precision,</span> <span class="pre">INTEGER</span></span><a class="headerlink" href="#precision, INTEGER" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of decimal places to report in the table data
+(rounding done via the <em>round half away from zero</em>
+method). Default: <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="range, dates">
+<span class="sig-name descname"><span class="pre">range,</span> <span class="pre">dates</span></span><a class="headerlink" href="#range, dates" title="Permalink to this definition">¶</a></dt>
+<dd><p>The date range of the data to be displayed. Default: <code class="docutils literal notranslate"><span class="pre">all</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare">
+<span class="sig-name descname"><span class="pre">seriesToUse,</span> <span class="pre">CELL_ARRAY_STRINGS</span></span></dt>
+<dd><p>See <a class="reference internal" href="#seriesToUse, CELL_ARRAY_STRINGS" title="seriesToUse, CELL_ARRAY_STRINGS"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">seriesToUse</span></code></a>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="tableDirName, FILENAME">
+<span class="sig-name descname"><span class="pre">tableDirName,</span> <span class="pre">FILENAME</span></span><a class="headerlink" href="#tableDirName, FILENAME" title="Permalink to this definition">¶</a></dt>
+<dd><p>The name of the folder in which to store this table. Directory given is
+relative to the <cite>directory</cite> option of the report class. Default:
+<code class="docutils literal notranslate"><span class="pre">tmpRepDir</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="tableName, STRING">
+<span class="sig-name descname"><span class="pre">tableName,</span> <span class="pre">STRING</span></span><a class="headerlink" href="#tableName, STRING" title="Permalink to this definition">¶</a></dt>
+<dd><p>The name to use when saving this table. Default: something of
+the form <code class="docutils literal notranslate"><span class="pre">table_pg1_sec2_row1_col3.tex</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare">
+<span class="sig-name descname"><span class="pre">title,</span> <span class="pre">STRING</span></span></dt>
+<dd><p>Same as <a class="reference internal" href="#title, STRING" title="title, STRING"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">title</span></code></a>, just for tables.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare">
+<span class="sig-name descname"><span class="pre">titleFormat,</span> <span class="pre">STRING</span></span></dt>
+<dd><p>Same as <a class="reference internal" href="#titleFormat, STRING | CELL_ARRAY_STRINGS" title="titleFormat, STRING | CELL_ARRAY_STRINGS"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">titleFormat</span></code></a>,
+just for tables. Default: <code class="docutils literal notranslate"><span class="pre">\large</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="vlineAfter, dates | CELL_ARRAY_DATES">
+<span class="sig-name descname"><span class="pre">vlineAfter,</span> <span class="pre">dates</span> <span class="pre">|</span> <span class="pre">CELL_ARRAY_DATES</span></span><a class="headerlink" href="#vlineAfter, dates | CELL_ARRAY_DATES" title="Permalink to this definition">¶</a></dt>
+<dd><p>Show a vertical line after the specified date (or dates if a
+cell array of dates is passed). Default: <code class="docutils literal notranslate"><span class="pre">empty</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="vlineAfterEndOfPeriod, BOOLEAN">
+<span class="sig-name descname"><span class="pre">vlineAfterEndOfPeriod,</span> <span class="pre">BOOLEAN</span></span><a class="headerlink" href="#vlineAfterEndOfPeriod, BOOLEAN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Show a vertical line after the end of every period (i.e. after
+every year, after the fourth quarter, etc.). Default:
+<code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="showVlines, BOOLEAN">
+<span class="sig-name descname"><span class="pre">showVlines,</span> <span class="pre">BOOLEAN</span></span><a class="headerlink" href="#showVlines, BOOLEAN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether or not to show vertical lines separating the
+columns. Default: <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare">
+<span class="sig-name descname"><span class="pre">writeCSV,</span> <span class="pre">BOOLEAN</span></span></dt>
+<dd><p>Whether or not to write a CSV file containing the data
+displayed in the table. The file will be saved in the
+directory specified by <a class="reference internal" href="#tableDirName, FILENAME" title="tableDirName, FILENAME"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">tableDirName</span></code></a> with the same base name as
+specified by
+<a class="reference internal" href="#tableName, STRING" title="tableName, STRING"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">tableName</span></code></a> with the ending
+<code class="docutils literal notranslate"><span class="pre">.csv</span></code>. Default: <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="dynare reportingmethod">
+<dt class="sig sig-object dynare" id="addSeries">
+<em class="property"><span class="pre">Method:</span> </em><span class="sig-name descname"><span class="pre">addSeries</span></span><a class="headerlink" href="#addSeries" title="Permalink to this definition">¶</a></dt>
+<dd><p><br> Adds a <code class="docutils literal notranslate"><span class="pre">Series</span></code> to a <code class="docutils literal notranslate"><span class="pre">Graph</span></code> or a <code class="docutils literal notranslate"><span class="pre">Table</span></code>.</p>
+<p>Options specific to graphs begin with <code class="docutils literal notranslate"><span class="pre">`graph'</span></code> while options
+specific to tables begin with <code class="docutils literal notranslate"><span class="pre">`table'</span></code>.</p>
+<p><em>Options</em></p>
+<dl class="dynare option">
+<dt class="sig sig-object dynare">
+<span class="sig-name descname"><span class="pre">data,</span> <span class="pre">dseries</span></span></dt>
+<dd><p>See <a class="reference internal" href="#data, dseries" title="data, dseries"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">data</span></code></a>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="graphBar, BOOLEAN">
+<span class="sig-name descname"><span class="pre">graphBar,</span> <span class="pre">BOOLEAN</span></span><a class="headerlink" href="#graphBar, BOOLEAN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether or not to display this series as a bar graph as oppsed
+to the default of displaying it as a line graph. Default:
+<code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="graphFanShadeColor, STRING">
+<span class="sig-name descname"><span class="pre">graphFanShadeColor,</span> <span class="pre">STRING</span></span><a class="headerlink" href="#graphFanShadeColor, STRING" title="Permalink to this definition">¶</a></dt>
+<dd><p>The shading color to use between a series and the
+previously-added series in a graph. Useful for making fan
+charts. Default: <code class="docutils literal notranslate"><span class="pre">empty</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="graphFanShadeOpacity, INTEGER">
+<span class="sig-name descname"><span class="pre">graphFanShadeOpacity,</span> <span class="pre">INTEGER</span></span><a class="headerlink" href="#graphFanShadeOpacity, INTEGER" title="Permalink to this definition">¶</a></dt>
+<dd><p>The opacity of the color passed in <a class="reference internal" href="#graphFanShadeColor, STRING" title="graphFanShadeColor, STRING"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">graphFanShadeColor</span></code></a>. Default: <code class="docutils literal notranslate"><span class="pre">50</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="graphBarColor, STRING">
+<span class="sig-name descname"><span class="pre">graphBarColor,</span> <span class="pre">STRING</span></span><a class="headerlink" href="#graphBarColor, STRING" title="Permalink to this definition">¶</a></dt>
+<dd><p>The outline color of each bar in the bar graph. Only active if
+<a class="reference internal" href="#graphBar, BOOLEAN" title="graphBar, BOOLEAN"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">graphBar</span></code></a> is passed. Default:
+<code class="docutils literal notranslate"><span class="pre">`black'</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="graphBarFillColor, STRING">
+<span class="sig-name descname"><span class="pre">graphBarFillColor,</span> <span class="pre">STRING</span></span><a class="headerlink" href="#graphBarFillColor, STRING" title="Permalink to this definition">¶</a></dt>
+<dd><p>The fill color of each bar in the bar graph. Only active if
+<a class="reference internal" href="#graphBar, BOOLEAN" title="graphBar, BOOLEAN"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">graphBar</span></code></a> is passed. Default:
+<code class="docutils literal notranslate"><span class="pre">`black'</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="graphBarWidth, DOUBLE">
+<span class="sig-name descname"><span class="pre">graphBarWidth,</span> <span class="pre">DOUBLE</span></span><a class="headerlink" href="#graphBarWidth, DOUBLE" title="Permalink to this definition">¶</a></dt>
+<dd><p>The width of each bar in the bar graph. Only active if
+<a class="reference internal" href="#graphBar, BOOLEAN" title="graphBar, BOOLEAN"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">graphBar</span></code></a> is passed. Default: <code class="docutils literal notranslate"><span class="pre">2</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="graphHline, DOUBLE">
+<span class="sig-name descname"><span class="pre">graphHline,</span> <span class="pre">DOUBLE</span></span><a class="headerlink" href="#graphHline, DOUBLE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this option to draw a horizontal line at the given
+value. Default: <code class="docutils literal notranslate"><span class="pre">empty</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="graphLegendName, STRING">
+<span class="sig-name descname"><span class="pre">graphLegendName,</span> <span class="pre">STRING</span></span><a class="headerlink" href="#graphLegendName, STRING" title="Permalink to this definition">¶</a></dt>
+<dd><p>The name to display in the legend for this series, passed as
+valid <span class="math notranslate nohighlight">\(\text{\LaTeX}\)</span> (e.g., <code class="docutils literal notranslate"><span class="pre">GDP_{US},</span> <span class="pre">$\alpha$,</span>
+<span class="pre">\color{red}GDP\color{black}</span></code>). Will be displayed only if the
+<code class="docutils literal notranslate"><span class="pre">data</span></code> and <a class="reference internal" href="#showLegend, BOOLEAN" title="showLegend, BOOLEAN"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">showLegend</span></code></a> options
+have been passed. Default: the tex name of the series.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="graphLineColor, STRING">
+<span class="sig-name descname"><span class="pre">graphLineColor,</span> <span class="pre">STRING</span></span><a class="headerlink" href="#graphLineColor, STRING" title="Permalink to this definition">¶</a></dt>
+<dd><p>Color to use for the series in a graph. See the explanation in
+<a class="reference internal" href="#shadeColor, STRING" title="shadeColor, STRING"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">shadeColor</span></code></a> for how to use colors
+with reports. Default: <code class="docutils literal notranslate"><span class="pre">`black'</span></code></p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="graphLineStyle, OPTION">
+<span class="sig-name descname"><span class="pre">graphLineStyle,</span> <span class="pre">OPTION</span></span><a class="headerlink" href="#graphLineStyle, OPTION" title="Permalink to this definition">¶</a></dt>
+<dd><p>Line style for this series in a graph. Possible values for OPTION are:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span>`<span class="n">none</span><span class="o">&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>`<span class="n">solid</span><span class="o">&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>`<span class="n">dotted</span><span class="o">&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>`<span class="n">densely</span><span class="w"> </span><span class="n">dotted</span><span class="o">&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>`<span class="n">loosely</span><span class="w"> </span><span class="n">dotted</span><span class="o">&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>`<span class="n">dashed</span><span class="o">&#39;</span><span class="w"> </span><span class="o">|</span>
+`<span class="n">densely</span><span class="w"> </span><span class="n">dashed</span><span class="o">&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>`<span class="n">loosely</span><span class="w"> </span><span class="n">dashed</span><span class="o">&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>`<span class="n">dashdotted</span><span class="o">&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>`<span class="n">densely</span><span class="w"> </span><span class="n">dashdotted</span><span class="o">&#39;</span><span class="w"> </span><span class="o">|</span>
+`<span class="n">loosely</span><span class="w"> </span><span class="n">dashdotted</span><span class="o">&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>`<span class="n">dashdotdotted</span><span class="o">&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>`<span class="n">densely</span><span class="w"> </span><span class="n">dashdotdotted</span><span class="o">&#39;</span><span class="w"> </span><span class="o">|</span>
+`<span class="n">loosely</span><span class="w"> </span><span class="n">dashdotdotted</span><span class="o">&#39;</span>
+</pre></div>
+</div>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">`solid'</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="graphLineWidth DOUBLE">
+<span class="sig-name descname"><span class="pre">graphLineWidth</span> <span class="pre">DOUBLE</span></span><a class="headerlink" href="#graphLineWidth DOUBLE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Line width for this series in a graph. Default: <code class="docutils literal notranslate"><span class="pre">0.5</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="graphMarker, OPTION">
+<span class="sig-name descname"><span class="pre">graphMarker,</span> <span class="pre">OPTION</span></span><a class="headerlink" href="#graphMarker, OPTION" title="Permalink to this definition">¶</a></dt>
+<dd><p>The Marker to use on this series in a graph. Possible values
+for OPTION are:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span>`<span class="n">x</span><span class="o">&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>`<span class="o">+</span><span class="s">&#39; | `-&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>`<span class="o">|</span><span class="s">&#39; | `o&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>`<span class="n">asterisk</span><span class="o">&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>`<span class="n">star</span><span class="o">&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>`<span class="mi">10</span><span class="o">-</span><span class="n">pointed</span><span class="w"> </span><span class="n">star</span><span class="o">&#39;</span><span class="w"> </span><span class="o">|</span>
+`<span class="n">oplus</span><span class="o">&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>`<span class="n">oplus</span><span class="o">*</span><span class="s">&#39; | `otimes&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>`<span class="n">otimes</span><span class="o">*</span><span class="s">&#39; | `square&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>`<span class="n">square</span><span class="o">*</span><span class="s">&#39; |</span>
+<span class="s">`triangle&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>`<span class="n">triangle</span><span class="o">*</span><span class="s">&#39; | `diamond&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>`<span class="n">diamond</span><span class="o">*</span><span class="s">&#39; | `halfdiamond*&#39;</span><span class="w"> </span><span class="o">|</span>
+`<span class="n">halfsquare</span><span class="o">*</span><span class="s">&#39; |     `halfsquare right*&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>`<span class="n">halfsquare</span><span class="w"> </span><span class="n">left</span><span class="o">*</span><span class="s">&#39; | `Mercedes star&#39;</span><span class="w"> </span><span class="o">|</span>
+`<span class="n">Mercedes</span><span class="w"> </span><span class="n">star</span><span class="w"> </span><span class="n">flipped</span><span class="o">&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>`<span class="n">halfcircle</span><span class="o">&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span>`<span class="n">halfcircle</span><span class="o">*</span><span class="s">&#39; | `pentagon&#39;</span><span class="w"> </span><span class="o">|</span>
+`<span class="n">pentagon</span><span class="w"> </span><span class="n">star</span><span class="o">&#39;</span>
+</pre></div>
+</div>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">none</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="graphMarkerEdgeColor, STRING">
+<span class="sig-name descname"><span class="pre">graphMarkerEdgeColor,</span> <span class="pre">STRING</span></span><a class="headerlink" href="#graphMarkerEdgeColor, STRING" title="Permalink to this definition">¶</a></dt>
+<dd><p>The edge color of the graph marker. See the explanation in
+<a class="reference internal" href="#shadeColor, STRING" title="shadeColor, STRING"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">shadeColor</span></code></a> for how to use colors
+with reports. Default: <code class="docutils literal notranslate"><span class="pre">graphLineColor</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="graphMarkerFaceColor, STRING">
+<span class="sig-name descname"><span class="pre">graphMarkerFaceColor,</span> <span class="pre">STRING</span></span><a class="headerlink" href="#graphMarkerFaceColor, STRING" title="Permalink to this definition">¶</a></dt>
+<dd><p>The face color of the graph marker. See the explanation in
+<a class="reference internal" href="#shadeColor, STRING" title="shadeColor, STRING"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">shadeColor</span></code></a> for how to use colors
+with reports. Default: <code class="docutils literal notranslate"><span class="pre">graphLineColor</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="graphMarkerSize, DOUBLE">
+<span class="sig-name descname"><span class="pre">graphMarkerSize,</span> <span class="pre">DOUBLE</span></span><a class="headerlink" href="#graphMarkerSize, DOUBLE" title="Permalink to this definition">¶</a></dt>
+<dd><p>The size of the graph marker. Default: <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="graphMiscTikzAddPlotOptions, STRING">
+<span class="sig-name descname"><span class="pre">graphMiscTikzAddPlotOptions,</span> <span class="pre">STRING</span></span><a class="headerlink" href="#graphMiscTikzAddPlotOptions, STRING" title="Permalink to this definition">¶</a></dt>
+<dd><p>If you are comfortable with <code class="docutils literal notranslate"><span class="pre">PGFPLOTS/TikZ</span></code>, you can use
+this option to pass arguments directly to the
+<code class="docutils literal notranslate"><span class="pre">PGFPLOTS/TikZ</span></code> <code class="docutils literal notranslate"><span class="pre">addPlots</span></code> command. (e.g., Instead of
+passing the marker options above, you can pass a string such
+as the following to this option: <code class="docutils literal notranslate"><span class="pre">`mark=halfcircle*,mark</span>
+<span class="pre">options={rotate=90,scale=3}'</span></code>). Specifically to be used for
+desired <code class="docutils literal notranslate"><span class="pre">PGFPLOTS/TikZ</span></code> options that have not been
+incorporated into Dynare Reproting. Default: <code class="docutils literal notranslate"><span class="pre">empty</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="graphShowInLegend, BOOLEAN">
+<span class="sig-name descname"><span class="pre">graphShowInLegend,</span> <span class="pre">BOOLEAN</span></span><a class="headerlink" href="#graphShowInLegend, BOOLEAN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether or not to show this series in the legend, given that
+the <a class="reference internal" href="#showLegend, BOOLEAN" title="showLegend, BOOLEAN"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">showLegend</span></code></a> option was passed
+to <a class="reference internal" href="#addGraph" title="addGraph"><code class="xref dynare dynare-repmeth docutils literal notranslate"><span class="pre">addGraph</span></code></a>. Default: <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="graphVline, dates">
+<span class="sig-name descname"><span class="pre">graphVline,</span> <span class="pre">dates</span></span><a class="headerlink" href="#graphVline, dates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this option to draw a vertical line at a given
+date. Default: <code class="docutils literal notranslate"><span class="pre">empty</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="tableDataRhs, dseries">
+<span class="sig-name descname"><span class="pre">tableDataRhs,</span> <span class="pre">dseries</span></span><a class="headerlink" href="#tableDataRhs, dseries" title="Permalink to this definition">¶</a></dt>
+<dd><p>A series to be added to the right of the current
+series. Usefull for displaying aggregate data for a
+series. e.g if the series is quarterly <code class="docutils literal notranslate"><span class="pre">tableDataRhs</span></code> could
+point to the yearly averages of the quarterly series. This
+would cause quarterly data to be displayed followed by annual
+data. Default: <code class="docutils literal notranslate"><span class="pre">empty</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="tableRowColor, STRING">
+<span class="sig-name descname"><span class="pre">tableRowColor,</span> <span class="pre">STRING</span></span><a class="headerlink" href="#tableRowColor, STRING" title="Permalink to this definition">¶</a></dt>
+<dd><p>The color that you want the row to be. Predefined values
+include <code class="docutils literal notranslate"><span class="pre">LightCyan</span></code> and <code class="docutils literal notranslate"><span class="pre">Gray</span></code>. Default: <code class="docutils literal notranslate"><span class="pre">white</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="tableRowIndent, INTEGER">
+<span class="sig-name descname"><span class="pre">tableRowIndent,</span> <span class="pre">INTEGER</span></span><a class="headerlink" href="#tableRowIndent, INTEGER" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of times to indent the name of the series in the
+table. Used to create subgroups of series. Default: <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="tableShowMarkers, BOOLEAN">
+<span class="sig-name descname"><span class="pre">tableShowMarkers,</span> <span class="pre">BOOLEAN</span></span><a class="headerlink" href="#tableShowMarkers, BOOLEAN" title="Permalink to this definition">¶</a></dt>
+<dd><p>In a Table, if <code class="docutils literal notranslate"><span class="pre">true</span></code>, surround each cell with brackets and
+color it according to <a class="reference internal" href="#tableNegColor, LATEX_COLOR" title="tableNegColor, LATEX_COLOR"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">tableNegColor</span></code></a> and <a class="reference internal" href="#tablePosColor, LATEX_COLOR" title="tablePosColor, LATEX_COLOR"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">tablePosColor</span></code></a>. No effect for graphs.
+Default: <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="tableAlignRight, BOOLEAN">
+<span class="sig-name descname"><span class="pre">tableAlignRight,</span> <span class="pre">BOOLEAN</span></span><a class="headerlink" href="#tableAlignRight, BOOLEAN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether or not to align the series name to the right of the
+cell. Default: <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="tableMarkerLimit, DOUBLE">
+<span class="sig-name descname"><span class="pre">tableMarkerLimit,</span> <span class="pre">DOUBLE</span></span><a class="headerlink" href="#tableMarkerLimit, DOUBLE" title="Permalink to this definition">¶</a></dt>
+<dd><p>For values less than <span class="math notranslate nohighlight">\(-1*\texttt{tableMarkerLimit}\)</span>,
+mark the cell with the color denoted by tableNegColor. For
+those greater than <code class="docutils literal notranslate"><span class="pre">tableMarkerLimit</span></code>, mark the cell with
+the color denoted by tablePosColor. Default: <code class="docutils literal notranslate"><span class="pre">1e-4</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="tableNaNSymb, STRING">
+<span class="sig-name descname"><span class="pre">tableNaNSymb,</span> <span class="pre">STRING</span></span><a class="headerlink" href="#tableNaNSymb, STRING" title="Permalink to this definition">¶</a></dt>
+<dd><p>Replace <code class="docutils literal notranslate"><span class="pre">NaN</span></code> values with the text in this option. Default: <code class="docutils literal notranslate"><span class="pre">NaN</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="tableNegColor, LATEX_COLOR">
+<span class="sig-name descname"><span class="pre">tableNegColor,</span> <span class="pre">LATEX_COLOR</span></span><a class="headerlink" href="#tableNegColor, LATEX_COLOR" title="Permalink to this definition">¶</a></dt>
+<dd><p>The color to use when marking Table data that is less than
+zero. Default: <code class="docutils literal notranslate"><span class="pre">`red'</span></code></p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="tablePrecision, INTEGER">
+<span class="sig-name descname"><span class="pre">tablePrecision,</span> <span class="pre">INTEGER</span></span><a class="headerlink" href="#tablePrecision, INTEGER" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of decimal places to report in the table
+data. Default: the value set by <a class="reference internal" href="#precision, INTEGER" title="precision, INTEGER"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">precision</span></code></a>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="tablePosColor, LATEX_COLOR">
+<span class="sig-name descname"><span class="pre">tablePosColor,</span> <span class="pre">LATEX_COLOR</span></span><a class="headerlink" href="#tablePosColor, LATEX_COLOR" title="Permalink to this definition">¶</a></dt>
+<dd><p>The color to use when marking Table data that is greater than
+zero. Default: <code class="docutils literal notranslate"><span class="pre">`blue'</span></code></p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="tableSubSectionHeader, STRING">
+<span class="sig-name descname"><span class="pre">tableSubSectionHeader,</span> <span class="pre">STRING</span></span><a class="headerlink" href="#tableSubSectionHeader, STRING" title="Permalink to this definition">¶</a></dt>
+<dd><p>A header for a subsection of the table. No data will be
+associated with it. It is equivalent to adding an empty series
+with a name. Default: <code class="docutils literal notranslate"><span class="pre">''</span></code></p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="zeroTol, DOUBLE">
+<span class="sig-name descname"><span class="pre">zeroTol,</span> <span class="pre">DOUBLE</span></span><a class="headerlink" href="#zeroTol, DOUBLE" title="Permalink to this definition">¶</a></dt>
+<dd><p>The zero tolerance. Anything smaller than <code class="docutils literal notranslate"><span class="pre">zeroTol</span></code> and
+larger than <code class="docutils literal notranslate"><span class="pre">-zeroTol</span></code> will be set to zero before being
+graphed or written to the table. Default: <code class="docutils literal notranslate"><span class="pre">1e-6</span></code>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="dynare reportingmethod">
+<dt class="sig sig-object dynare" id="addParagraph">
+<em class="property"><span class="pre">Method:</span> </em><span class="sig-name descname"><span class="pre">addParagraph</span></span><a class="headerlink" href="#addParagraph" title="Permalink to this definition">¶</a></dt>
+<dd><p><br> Adds a <code class="docutils literal notranslate"><span class="pre">Paragraph</span></code> to a <code class="docutils literal notranslate"><span class="pre">Section</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Section</span></code> can only be comprised of <code class="docutils literal notranslate"><span class="pre">Paragraphs</span></code> and must
+only have 1 column.</p>
+<p><em>Options</em></p>
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="balancedCols, BOOLEAN">
+<span class="sig-name descname"><span class="pre">balancedCols,</span> <span class="pre">BOOLEAN</span></span><a class="headerlink" href="#balancedCols, BOOLEAN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determines whether the text is spread out evenly across the
+columns when the <code class="docutils literal notranslate"><span class="pre">Paragraph</span></code> has more than one
+column. Default: <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare">
+<span class="sig-name descname"><span class="pre">cols,</span> <span class="pre">INTEGER</span></span></dt>
+<dd><p>The number of columns for the <code class="docutils literal notranslate"><span class="pre">Paragraph</span></code>. Default: <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="heading, STRING">
+<span class="sig-name descname"><span class="pre">heading,</span> <span class="pre">STRING</span></span><a class="headerlink" href="#heading, STRING" title="Permalink to this definition">¶</a></dt>
+<dd><p>The heading for the <code class="docutils literal notranslate"><span class="pre">Paragraph</span></code> (like a section
+heading). The string must be valid <span class="math notranslate nohighlight">\(\text{\LaTeX}\)</span> code. Default:
+<code class="docutils literal notranslate"><span class="pre">empty</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="indent, BOOLEAN">
+<span class="sig-name descname"><span class="pre">indent,</span> <span class="pre">BOOLEAN</span></span><a class="headerlink" href="#indent, BOOLEAN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether or not to indent the paragraph. Default: <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="text, STRING">
+<span class="sig-name descname"><span class="pre">text,</span> <span class="pre">STRING</span></span><a class="headerlink" href="#text, STRING" title="Permalink to this definition">¶</a></dt>
+<dd><p>The paragraph itself. The string must be valid <span class="math notranslate nohighlight">\(\text{\LaTeX}\)</span>
+code. Default: <code class="docutils literal notranslate"><span class="pre">empty</span></code>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="dynare reportingmethod">
+<dt class="sig sig-object dynare" id="addVspace">
+<em class="property"><span class="pre">Method:</span> </em><span class="sig-name descname"><span class="pre">addVspace</span></span><a class="headerlink" href="#addVspace" title="Permalink to this definition">¶</a></dt>
+<dd><p><br> Adds a <code class="docutils literal notranslate"><span class="pre">Vspace</span></code> (vertical space) to a <code class="docutils literal notranslate"><span class="pre">Section</span></code>.</p>
+<p><em>Options</em></p>
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="hline, INTEGER">
+<span class="sig-name descname"><span class="pre">hline,</span> <span class="pre">INTEGER</span></span><a class="headerlink" href="#hline, INTEGER" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of horizontal lines to be inserted. Default: <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="number, INTEGER">
+<span class="sig-name descname"><span class="pre">number,</span> <span class="pre">INTEGER</span></span><a class="headerlink" href="#number, INTEGER" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of new lines to be inserted. Default: <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="dynare reportingmethod">
+<dt class="sig sig-object dynare" id="write">
+<em class="property"><span class="pre">Method:</span> </em><span class="sig-name descname"><span class="pre">write</span></span><a class="headerlink" href="#write" title="Permalink to this definition">¶</a></dt>
+<dd><p><br> Writes the <span class="math notranslate nohighlight">\(\text{\LaTeX}\)</span> representation of this
+<code class="docutils literal notranslate"><span class="pre">Report</span></code>, saving it to the file specified by <a class="reference internal" href="#fileName, FILENAME" title="fileName, FILENAME"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">filename</span></code></a>.</p>
+</dd></dl>
+
+<dl class="dynare reportingmethod">
+<dt class="sig sig-object dynare" id="compile">
+<em class="property"><span class="pre">Method:</span> </em><span class="sig-name descname"><span class="pre">compile</span></span><a class="headerlink" href="#compile" title="Permalink to this definition">¶</a></dt>
+<dd><p><br> Compiles the report written by <code class="docutils literal notranslate"><span class="pre">write</span></code> into a <code class="docutils literal notranslate"><span class="pre">pdf</span></code>
+file. If the report has not already been written (determined by
+the existence of the file specified by <a class="reference internal" href="#fileName, FILENAME" title="fileName, FILENAME"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">filename</span></code></a>, <code class="docutils literal notranslate"><span class="pre">write</span></code> is called.</p>
+<p><em>Options</em></p>
+<dl class="dynare option">
+<dt class="sig sig-object dynare">
+<span class="sig-name descname"><span class="pre">compiler,</span> <span class="pre">FILENAME</span></span></dt>
+<dd><p>Like <a class="reference internal" href="#compiler, FILENAME" title="compiler, FILENAME"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">compiler</span></code></a>, except will not
+overwrite the value of <code class="docutils literal notranslate"><span class="pre">compiler</span></code> contained in the report
+object. Hence, passing the value here is useful for using
+different <span class="math notranslate nohighlight">\(\text{\LaTeX}\)</span> compilers or just for passing
+the value at the last minute.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare">
+<span class="sig-name descname"><span class="pre">showOutput,</span> <span class="pre">BOOLEAN</span></span></dt>
+<dd><p>Print the compiler output to the screen. Useful for debugging
+your code as the <span class="math notranslate nohighlight">\(\text{\LaTeX}\)</span> compiler hangs if there is a
+problem. Default: the value of <a class="reference internal" href="#showOutput, BOOLEAN" title="showOutput, BOOLEAN"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">showOutput</span></code></a>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="showReport, BOOLEAN">
+<span class="sig-name descname"><span class="pre">showReport,</span> <span class="pre">BOOLEAN</span></span><a class="headerlink" href="#showReport, BOOLEAN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Open the compiled report (works on Windows and macOS on
+MATLAB). Default: <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<p><em>Example</em></p>
+<p>The following code creates a one page report. The first part of the
+page contains two graphs displayed across two columns and one row. The
+bottom of the page displays a centered table:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">%% Create dseries</span>
+<span class="n">dsq</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">dseries</span><span class="p">(</span>`<span class="n">quarterly</span><span class="p">.</span><span class="n">csv</span><span class="o">&#39;</span><span class="p">);</span>
+<span class="n">dsa</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">dseries</span><span class="p">(</span>`<span class="n">annual</span><span class="p">.</span><span class="n">csv</span><span class="o">&#39;</span><span class="p">);</span>
+<span class="n">dsca</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">dseries</span><span class="p">(</span>`<span class="n">annual_control</span><span class="p">.</span><span class="n">csv</span><span class="o">&#39;</span><span class="p">);</span>
+
+<span class="c">%% Report</span>
+<span class="n">rep</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">report</span><span class="p">();</span>
+
+<span class="c">%% Page 1</span>
+<span class="n">rep</span><span class="p">.</span><span class="n">addPage</span><span class="p">(</span><span class="s">&#39;title&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s">&#39;My Page Title&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;My Page Subtitle&#39;</span><span class="p">},</span><span class="w"> </span><span class="k">...</span>
+<span class="w">            </span><span class="s">&#39;titleFormat&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s">&#39;\large\bfseries&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;\large&#39;</span><span class="p">});</span>
+
+<span class="c">% Section 1</span>
+<span class="n">rep</span><span class="p">.</span><span class="n">addSection</span><span class="p">(</span><span class="s">&#39;cols&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+
+<span class="n">rep</span><span class="p">.</span><span class="n">addGraph</span><span class="p">(</span><span class="s">&#39;title&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;Graph Column 1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;showLegend&#39;</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">            </span><span class="s">&#39;xrange&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">dates</span><span class="p">(</span><span class="s">&#39;2007q1&#39;</span><span class="p">):</span><span class="n">dates</span><span class="p">(</span><span class="s">&#39;2013q4&#39;</span><span class="p">),</span><span class="w"> </span><span class="k">...</span>
+<span class="w">            </span><span class="s">&#39;shade&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">dates</span><span class="p">(</span><span class="s">&#39;2012q2&#39;</span><span class="p">):</span><span class="n">dates</span><span class="p">(</span><span class="s">&#39;2013q4&#39;</span><span class="p">));</span>
+<span class="n">rep</span><span class="p">.</span><span class="n">addSeries</span><span class="p">(</span><span class="s">&#39;data&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">dsq</span><span class="p">{</span><span class="s">&#39;GROWTH_US&#39;</span><span class="p">},</span><span class="w"> </span><span class="s">&#39;graphLineColor&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;blue&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">            </span><span class="s">&#39;graphLineStyle&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;loosely dashed&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;graphLineWidth&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="n">rep</span><span class="p">.</span><span class="n">addSeries</span><span class="p">(</span><span class="s">&#39;data&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">dsq</span><span class="p">{</span><span class="s">&#39;GROWTH_EU&#39;</span><span class="p">},</span><span class="w"> </span><span class="s">&#39;graphLineColor&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;green&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">            </span><span class="s">&#39;graphLineWidth&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">1.5</span><span class="p">);</span>
+
+<span class="n">rep</span><span class="p">.</span><span class="n">addGraph</span><span class="p">(</span><span class="s">&#39;title&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;Graph Column 2&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;showLegend&#39;</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">            </span><span class="s">&#39;xrange&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">dates</span><span class="p">(</span><span class="s">&#39;2007q1&#39;</span><span class="p">):</span><span class="n">dates</span><span class="p">(</span><span class="s">&#39;2013q4&#39;</span><span class="p">),</span><span class="w"> </span><span class="k">...</span>
+<span class="w">            </span><span class="s">&#39;shade&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">dates</span><span class="p">(</span><span class="s">&#39;2012q2&#39;</span><span class="p">):</span><span class="n">dates</span><span class="p">(</span><span class="s">&#39;2013q4&#39;</span><span class="p">));</span>
+<span class="n">rep</span><span class="p">.</span><span class="n">addSeries</span><span class="p">(</span><span class="s">&#39;data&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">dsq</span><span class="p">{</span><span class="s">&#39;GROWTH_JA&#39;</span><span class="p">},</span><span class="w"> </span><span class="s">&#39;graphLineColor&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;blue&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">            </span><span class="s">&#39;graphLineWidth&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="n">rep</span><span class="p">.</span><span class="n">addSeries</span><span class="p">(</span><span class="s">&#39;data&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">dsq</span><span class="p">{</span><span class="s">&#39;GROWTH_RC6&#39;</span><span class="p">},</span><span class="w"> </span><span class="s">&#39;graphLineColor&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;green&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">            </span><span class="s">&#39;graphLineStyle&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;dashdotdotted&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;graphLineWidth&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">1.5</span><span class="p">);</span>
+
+<span class="c">% Section 2</span>
+<span class="n">rep</span><span class="p">.</span><span class="n">addVspace</span><span class="p">(</span><span class="s">&#39;number&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">);</span>
+<span class="n">rep</span><span class="p">.</span><span class="n">addSection</span><span class="p">();</span>
+<span class="n">rep</span><span class="p">.</span><span class="n">addTable</span><span class="p">(</span><span class="s">&#39;title&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;Table 1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;range&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">dates</span><span class="p">(</span><span class="s">&#39;2012Y&#39;</span><span class="p">):</span><span class="n">dates</span><span class="p">(</span><span class="s">&#39;2014Y&#39;</span><span class="p">));</span>
+<span class="n">shortNames</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="s">&#39;US&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;EU&#39;</span><span class="p">};</span>
+<span class="n">longNames</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="s">&#39;United States&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;Euro Area&#39;</span><span class="p">};</span>
+<span class="k">for</span><span class="w"> </span><span class="nb">i</span><span class="p">=</span><span class="mi">1</span><span class="p">:</span><span class="nb">length</span><span class="p">(</span><span class="n">shortNames</span><span class="p">)</span>
+<span class="w">    </span><span class="n">rep</span><span class="p">.</span><span class="n">addSeries</span><span class="p">(</span><span class="s">&#39;data&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">dsa</span><span class="p">{[</span><span class="s">&#39;GROWTH_&#39;</span><span class="w"> </span><span class="n">shortNames</span><span class="p">{</span><span class="nb">i</span><span class="p">}]});</span>
+<span class="w">    </span><span class="n">delta</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">dsa</span><span class="p">{[</span><span class="s">&#39;GROWTH_&#39;</span><span class="w"> </span><span class="n">shortNames</span><span class="p">{</span><span class="nb">i</span><span class="p">}]}</span><span class="o">-</span><span class="n">dsca</span><span class="p">{[</span><span class="s">&#39;GROWTH_&#39;</span><span class="w"> </span><span class="n">shortNames</span><span class="p">{</span><span class="nb">i</span><span class="p">}]};</span>
+<span class="w">    </span><span class="n">delta</span><span class="p">.</span><span class="n">tex_rename_</span><span class="p">(</span><span class="s">&#39;$\Delta$&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">rep</span><span class="p">.</span><span class="n">addSeries</span><span class="p">(</span><span class="s">&#39;data&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">delta</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">                </span><span class="s">&#39;tableShowMarkers&#39;</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;tableAlignRight&#39;</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span>
+<span class="k">end</span>
+
+<span class="c">%% Write &amp; Compile Report</span>
+<span class="n">rep</span><span class="p">.</span><span class="n">write</span><span class="p">();</span>
+<span class="n">rep</span><span class="p">.</span><span class="n">compile</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Once compiled, the report looks like:</p>
+<img alt="_images/report.png" src="_images/report.png" />
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;1996–2025 Dynare Team.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/reporting.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

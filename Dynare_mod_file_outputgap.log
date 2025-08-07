@@ -1,0 +1,17 @@
+Starting Dynare (version 5.2).
+Calling Dynare with arguments: none
+Starting preprocessing of the model file ...
+Substitution of Expectation operator: added 1 auxiliary variables and equations.
+Substitution of endo lags >= 2: added 1 auxiliary variables and equations.
+Found 65 equation(s).
+Evaluating expressions...done
+Computing static model derivatives (order 1).
+Computing dynamic model derivatives (order 2).
+Processing outputs ...
+done
+Preprocessing completed.
+
+
+You did not declare endogenous variables after the estimation/calib_smoother command.
+Initial value of the log posterior (or likelihood): -599649.0501
+Total computing time : 0h00m00s

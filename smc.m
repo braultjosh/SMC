@@ -8,22 +8,22 @@ addpath('./Functions');
 addpath('./dynare/5.2/matlab');
 
 
-dynare Smets_Wouters_2007_45
+dynare Dynare_mod_file_outputgap
 [dataset_, dataset_info, ~, ~, M_, options_, oo_, estim_params_,bayestopt_, bounds] = dynare_estimation_init({}, M_.dname, 0, M_, options_, oo_, estim_params_, bayestopt_);
 fcn = @evaluate_likelihood2;
 
 % General
 tune.npara = length(bayestopt_.pshape);;       % # of parameters
-tune.npart = 100;   % # of particles
+tune.npart = 25000;   % # of particles
 tune.nphi  = 400;      % # of stages
-tune.lam   = 2;     % # bending coeff, lam = 1 means linear cooling schedule
+tune.lam   = 2.5;     % # bending coeff, lam = 1 means linear cooling schedule
 hpdpercent = 0.95;   % pecentage WITHIN bands
 
 % Tuning for MH algorithms
 tune.c      = 0.5;                  % initial scale cov
 tune.acpt   = 0.25;                 % initial acpt rate
 tune.trgt   = 0.25;                 % target acpt rate
-tune.alp    = 0.9;                    % Mixture weight for mixture proposal, 1 = only use RWMH
+tune.alp    = 1;                    % Mixture weight for mixture proposal, 1 = only use RWMH
 
 % Create the tempering schedule
 tune.phi = (1:1:tune.nphi)';
@@ -59,6 +59,13 @@ parfor j = 1:tune.npart
             end
         end
 end
+alphaBN_loc = find(strcmp(bayestopt_.name, 'alphaBN')==1);
+prior_params = squeeze(parasim(1, :, :));
+fprintf('-----------------------------------------------\n')
+fprintf(' Probability of determinacy = %5.4f\n', sum(parasim(1,:,alphaBN_loc)>1)/tune.npart);
+fprintf('-----------------------------------------------\n')
+
+
 
 wtsim(:, 1)    = 1/tune.npart;                          % initial weight is equal weights
 zhat(1)        = sum(wtsim(:,1));                       % initial normalizing constant equals 1

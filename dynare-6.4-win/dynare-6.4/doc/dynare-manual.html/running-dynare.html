@@ -1,0 +1,859 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>3. Running Dynare &#8212; Dynare 6.4 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="4. The model file" href="the-model-file.html" />
+    <link rel="prev" title="2. Installation and configuration" href="installation-and-configuration.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="index.html">
+    <img class="logo" src="_static/dlogo.svg" alt="Logo" width=143/>
+    
+  </a>
+</p>
+
+
+
+
+
+
+
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script><br style="line-height:16px">
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation-and-configuration.html">2. Installation and configuration</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">3. Running Dynare</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#dynare-invocation">3.1. Dynare invocation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dynare-hooks">3.2. Dynare hooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#understanding-preprocessor-error-messages">3.3. Understanding Preprocessor Error Messages</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="the-model-file.html">4. The model file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="the-configuration-file.html">5. The configuration file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="time-series.html">6. Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reporting.html">7. Reporting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">8. Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dynare-misc-commands.html">9. Dynare misc commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">10. Bibliography</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    <li class="toctree-l1"><a href="genindex.html">Index</a></li>
+</ul>
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="running-dynare">
+<h1><span class="section-number">3. </span>Running Dynare<a class="headerlink" href="#running-dynare" title="Permalink to this heading">¶</a></h1>
+<p>In order to give instructions to Dynare, the user has to write a
+<em>model file</em> whose filename extension must be <code class="docutils literal notranslate"><span class="pre">.mod</span></code> or
+<code class="docutils literal notranslate"><span class="pre">.dyn</span></code>. This file contains the description of the model and the
+computing tasks required by the user. Its contents are described in
+<a class="reference internal" href="the-model-file.html#model-file"><span class="std std-ref">The model file</span></a>.</p>
+<section id="dynare-invocation">
+<span id="dyn-invoc"></span><h2><span class="section-number">3.1. </span>Dynare invocation<a class="headerlink" href="#dynare-invocation" title="Permalink to this heading">¶</a></h2>
+<p>Once the model file is written, Dynare is invoked using the <code class="docutils literal notranslate"><span class="pre">dynare</span></code>
+command at the MATLAB or Octave prompt (with the filename of the
+<code class="docutils literal notranslate"><span class="pre">.mod</span></code> given as argument).</p>
+<p>In practice, the handling of the model file is done in two steps: in
+the first one, the model and the processing instructions written by
+the user in a <em>model file</em> are interpreted and the proper MATLAB or
+Octave instructions are generated; in the second step, the program
+actually runs the computations. Both steps are triggered automatically
+by the <code class="docutils literal notranslate"><span class="pre">dynare</span></code> command.</p>
+<blockquote>
+<div><dl class="dynare matcomm">
+<dt class="sig sig-object dynare" id="dynare">
+<em class="property"><span class="pre">MATLAB/Octave</span> <span class="pre">command:</span> </em><span class="sig-name descname"><span class="pre">dynare</span></span><span class="sig-prename descclassname"> <span class="pre">FILENAME[.mod]</span> <span class="pre">[OPTIONS…]</span></span><a class="headerlink" href="#dynare" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>This command launches Dynare and executes the instructions
+included in <code class="docutils literal notranslate"><span class="pre">FILENAME.mod</span></code>. This user-supplied file contains the
+model and the processing instructions, as described in
+<a class="reference internal" href="the-model-file.html#model-file"><span class="std std-ref">The model file</span></a>. The options, listed below, can be passed on the
+command line, following the name of the <code class="docutils literal notranslate"><span class="pre">.mod</span></code> file or in the
+first line of the <code class="docutils literal notranslate"><span class="pre">.mod</span></code> file itself (see below).</p>
+<p>dynare begins by launching the preprocessor on the <code class="docutils literal notranslate"><span class="pre">.mod</span>
+<span class="pre">file</span></code>. By default (unless the <a class="reference internal" href="the-model-file.html#use_dll" title="use_dll"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">use_dll</span></code></a> option has been given to
+<code class="docutils literal notranslate"><span class="pre">model</span></code>), the preprocessor creates three intermediary files:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">+FILENAME/driver.m</span></code></p>
+<blockquote>
+<div><p>Contains variable declarations, and computing tasks.</p>
+</div></blockquote>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">+FILENAME/dynamic.m</span></code></p>
+<blockquote>
+<div><p>Contains the dynamic model equations. Note that Dynare might
+introduce auxiliary equations and variables (see
+<a class="reference internal" href="the-model-file.html#aux-variables"><span class="std std-ref">Auxiliary variables</span></a>). Outputs are the residuals of the
+dynamic model equations in the order the equations were
+declared and the Jacobian of the dynamic model equations. For
+higher order approximations also the Hessian and the
+third-order derivatives are provided. When computing the
+Jacobian of the dynamic model, the order of the endogenous
+variables in the columns is stored in
+<code class="docutils literal notranslate"><span class="pre">M_.lead_lag_incidence</span></code>. The rows of this matrix represent
+time periods: the first row denotes a lagged (time t-1)
+variable, the second row a contemporaneous (time t) variable,
+and the third row a leaded (time t+1) variable. The columns of
+the matrix represent the endogenous variables in their order
+of declaration. A zero in the matrix means that this
+endogenous does not appear in the model in this time
+period. The value in the <code class="docutils literal notranslate"><span class="pre">M_.lead_lag_incidence</span></code> matrix
+corresponds to the column of that variable in the Jacobian of
+the dynamic model. Example: Let the second declared variable
+be <code class="docutils literal notranslate"><span class="pre">c</span></code> and the <code class="docutils literal notranslate"><span class="pre">(3,2)</span></code> entry of <code class="docutils literal notranslate"><span class="pre">M_.lead_lag_incidence</span></code>
+be 15. Then the 15th column of the Jacobian is the derivative
+with respect to <code class="docutils literal notranslate"><span class="pre">c(+1)</span></code>.</p>
+</div></blockquote>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">+FILENAME/static.m</span></code></p>
+<blockquote>
+<div><p>Contains the long run static model equations. Note that Dynare
+might introduce auxiliary equations and variables (see
+<a class="reference internal" href="the-model-file.html#aux-variables"><span class="std std-ref">Auxiliary variables</span></a>). Outputs are the residuals of the static
+model equations in the order the equations were declared and
+the Jacobian of the static equations. Entry <code class="docutils literal notranslate"><span class="pre">(i,j)</span></code> of the
+Jacobian represents the derivative of the ith static model
+equation with respect to the jth model variable in declaration
+order.</p>
+</div></blockquote>
+</li>
+</ul>
+<p>These files may be looked at to understand errors reported at the
+simulation stage.</p>
+<p><code class="docutils literal notranslate"><span class="pre">dynare</span></code> will then run the computing tasks by executing
+<code class="docutils literal notranslate"><span class="pre">+FILENAME/driver.m</span></code>. If a user needs to rerun the computing
+tasks without calling the preprocessor (or without calling the
+<a class="reference internal" href="#dynare" title="dynare"><code class="xref dynare dynare-mcomm docutils literal notranslate"><span class="pre">dynare</span></code></a> command), for
+instance because he has modified the script, he just have to type
+the following on the command line:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">FILENAME</span><span class="p">.</span><span class="n">driver</span>
+</pre></div>
+</div>
+<p>A few words of warning are warranted here: under Octave the
+filename of the <code class="docutils literal notranslate"><span class="pre">.mod</span></code> file should be chosen in such a way that
+the generated <code class="docutils literal notranslate"><span class="pre">.m</span></code> files described above do not conflict with
+<code class="docutils literal notranslate"><span class="pre">.m</span></code> files provided by Octave or by Dynare. Not
+respecting this rule could cause crashes or unexpected
+behaviour. In particular, it means that the <code class="docutils literal notranslate"><span class="pre">.mod</span></code> file cannot
+be given the name of an Octave or Dynare command. For instance, under
+Octave, it also means that the <code class="docutils literal notranslate"><span class="pre">.mod</span></code> file cannot be named
+<code class="docutils literal notranslate"><span class="pre">test.mod</span></code> or <code class="docutils literal notranslate"><span class="pre">example.mod</span></code>.</p>
+<div class="admonition note" id="quote-note">
+<p class="admonition-title">Note</p>
+<p>Note on Quotes</p>
+<p>When passing command line options that contains a space (or, under
+Octave, a double quote), you must surround the entire option (keyword
+and argument) with single quotes, as in the following example.</p>
+<p><em>Example</em></p>
+<p>Call Dynare with options containing spaces</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">dynare</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="n">modfile</span><span class="p">.</span><span class="n">mod</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="s">&#39;-DA=[ i in [1,2,3] when i &gt; 1 ]&#39;</span><span class="w"> </span><span class="s">&#39;conffile=C:\User\My Documents\config.txt&#39;</span>
+</pre></div>
+</div>
+</div>
+<p><em>Options</em></p>
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="noclearall">
+<span class="sig-name descname"><span class="pre">noclearall</span></span><a class="headerlink" href="#noclearall" title="Permalink to this definition">¶</a></dt>
+<dd><p>By default, <code class="docutils literal notranslate"><span class="pre">dynare</span></code> deletes all the global variables and the
+functions using persistent variables, in order to benefit from the JIT
+(just-in-time) compilation. This option instructs <code class="docutils literal notranslate"><span class="pre">dynare</span></code> not to
+clear those.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="onlyclearglobals">
+<span class="sig-name descname"><span class="pre">onlyclearglobals</span></span><a class="headerlink" href="#onlyclearglobals" title="Permalink to this definition">¶</a></dt>
+<dd><p>By default, <code class="docutils literal notranslate"><span class="pre">dynare</span></code> deletes all the global variables and the
+functions using persistent variables, in order to benefit from the JIT
+(just-in-time) compilation. This option instructs <code class="docutils literal notranslate"><span class="pre">dynare</span></code> to clear
+only its own global variables (<em>i.e.</em> <code class="docutils literal notranslate"><span class="pre">M_,</span> <span class="pre">options_,</span> <span class="pre">oo_,</span>
+<span class="pre">estim_params_,</span> <span class="pre">bayestopt_</span></code>, <code class="docutils literal notranslate"><span class="pre">dataset_</span></code>, <code class="docutils literal notranslate"><span class="pre">dataset_info</span></code> and
+<code class="docutils literal notranslate"><span class="pre">estimation_info</span></code>), leaving the other variables in the workspace, and
+not clearing functions using persistent variables.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="debug">
+<span class="sig-name descname"><span class="pre">debug</span></span><a class="headerlink" href="#debug" title="Permalink to this definition">¶</a></dt>
+<dd><p>Instructs the preprocessor to write some debugging information
+about the scanning and parsing of the <code class="docutils literal notranslate"><span class="pre">.mod</span></code> file.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="notmpterms">
+<span class="sig-name descname"><span class="pre">notmpterms</span></span><a class="headerlink" href="#notmpterms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Instructs the preprocessor to omit temporary terms in the
+static and dynamic files; this generally decreases
+performance, but is used for debugging purposes since it makes
+the static and dynamic files more readable.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="savemacro[=FILENAME]">
+<span class="sig-name descname"><span class="pre">savemacro[=FILENAME]</span></span><a class="headerlink" href="#savemacro[=FILENAME]" title="Permalink to this definition">¶</a></dt>
+<dd><p>Instructs <code class="docutils literal notranslate"><span class="pre">dynare</span></code> to save the intermediary file which is obtained
+after macro processing (see <a class="reference internal" href="the-model-file.html#macro-proc-lang"><span class="std std-ref">Macro processing language</span></a>); the saved output
+will go in the file specified, or if no file is specified in
+<code class="docutils literal notranslate"><span class="pre">FILENAME-macroexp.mod</span></code>. See the <a class="reference internal" href="#quote-note"><span class="std std-ref">note on quotes</span></a>
+for info on passing a <code class="docutils literal notranslate"><span class="pre">FILENAME</span></code> argument containing spaces.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="onlymacro">
+<span class="sig-name descname"><span class="pre">onlymacro</span></span><a class="headerlink" href="#onlymacro" title="Permalink to this definition">¶</a></dt>
+<dd><p>Instructs the preprocessor to only perform the
+macro processing step, and stop just after. Useful for
+debugging purposes or for using the macro processor
+independently of the rest of Dynare toolbox.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="linemacro">
+<span class="sig-name descname"><span class="pre">linemacro</span></span><a class="headerlink" href="#linemacro" title="Permalink to this definition">¶</a></dt>
+<dd><p>Instructs the macro preprocessor include <code class="docutils literal notranslate"><span class="pre">&#64;#line</span></code> directives
+specifying the line on which macro directives were encountered and
+expanded from. Only useful in conjunction with <a class="reference internal" href="#savemacro[=FILENAME]" title="savemacro[=FILENAME]"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">savemacro</span></code></a>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="onlymodel">
+<span class="sig-name descname"><span class="pre">onlymodel</span></span><a class="headerlink" href="#onlymodel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Instructs the preprocessor to print only information about the
+model in the driver file; no Dynare commands (other than the
+shocks statement and parameter initializations) are printed
+and hence no computational tasks performed. The same
+ancillary files are created as would otherwise be created
+(dynamic, static files, etc.).</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="nolog">
+<span class="sig-name descname"><span class="pre">nolog</span></span><a class="headerlink" href="#nolog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Instructs Dynare to no create a logfile of this run in
+<code class="docutils literal notranslate"><span class="pre">FILENAME.log.</span></code> The default is to create the logfile.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="output=second|third">
+<span class="sig-name descname"><span class="pre">output=second|third</span></span><a class="headerlink" href="#output=second|third" title="Permalink to this definition">¶</a></dt>
+<dd><p>Instructs the preprocessor to output derivatives of the dynamic model at
+least up to the given order.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="language=matlab|julia">
+<span class="sig-name descname"><span class="pre">language=matlab|julia</span></span><a class="headerlink" href="#language=matlab|julia" title="Permalink to this definition">¶</a></dt>
+<dd><p>Instructs the preprocessor to write output for MATLAB or Julia. Default:
+MATLAB</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="params_derivs_order=0|1|2">
+<span class="sig-name descname"><span class="pre">params_derivs_order=0|1|2</span></span><a class="headerlink" href="#params_derivs_order=0|1|2" title="Permalink to this definition">¶</a></dt>
+<dd><p>When <a class="reference internal" href="the-model-file.html#identification" title="identification"><code class="xref dynare dynare-comm docutils literal notranslate"><span class="pre">identification</span></code></a>, <a class="reference internal" href="the-model-file.html#dynare_sensitivity" title="dynare_sensitivity"><code class="xref dynare dynare-comm docutils literal notranslate"><span class="pre">dynare_sensitivity</span></code></a> (with
+identification), or <a class="reference internal" href="the-model-file.html#estim-comm"><span class="std std-ref">estimation</span></a> are
+present, this option is used to limit the order of the
+derivatives with respect to the parameters that are calculated
+by the preprocessor. 0 means no derivatives, 1 means first
+derivatives, and 2 means second derivatives. Default: 2</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="nowarn">
+<span class="sig-name descname"><span class="pre">nowarn</span></span><a class="headerlink" href="#nowarn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Suppresses all warnings.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="notime">
+<span class="sig-name descname"><span class="pre">notime</span></span><a class="headerlink" href="#notime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Do not print the total computing time at the end of the driver, and do
+not save that total computing time to <code class="docutils literal notranslate"><span class="pre">oo_.time</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="transform_unary_ops">
+<span class="sig-name descname"><span class="pre">transform_unary_ops</span></span><a class="headerlink" href="#transform_unary_ops" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform the following operators in the model block into auxiliary
+variables: <code class="docutils literal notranslate"><span class="pre">exp</span></code>, <code class="docutils literal notranslate"><span class="pre">log</span></code>, <code class="docutils literal notranslate"><span class="pre">log10</span></code>, <code class="docutils literal notranslate"><span class="pre">cos</span></code>, <code class="docutils literal notranslate"><span class="pre">sin</span></code>, <code class="docutils literal notranslate"><span class="pre">tan</span></code>,
+<code class="docutils literal notranslate"><span class="pre">acos</span></code>, <code class="docutils literal notranslate"><span class="pre">asin</span></code>, <code class="docutils literal notranslate"><span class="pre">atan</span></code>, <code class="docutils literal notranslate"><span class="pre">cosh</span></code>, <code class="docutils literal notranslate"><span class="pre">sinh</span></code>, <code class="docutils literal notranslate"><span class="pre">tanh</span></code>, <code class="docutils literal notranslate"><span class="pre">acosh</span></code>,
+<code class="docutils literal notranslate"><span class="pre">asinh</span></code>, <code class="docutils literal notranslate"><span class="pre">atanh</span></code>, <code class="docutils literal notranslate"><span class="pre">sqrt</span></code>, <code class="docutils literal notranslate"><span class="pre">cbrt</span></code>, <code class="docutils literal notranslate"><span class="pre">abs</span></code>, <code class="docutils literal notranslate"><span class="pre">sign</span></code>,
+<code class="docutils literal notranslate"><span class="pre">erf</span></code>. Default: no obligatory transformation</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="json = parse|check|transform|compute">
+<span class="sig-name descname"><span class="pre">json</span> <span class="pre">=</span> <span class="pre">parse|check|transform|compute</span></span><a class="headerlink" href="#json = parse|check|transform|compute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Causes the preprocessor to output a version of the <code class="docutils literal notranslate"><span class="pre">.mod</span></code> file in
+JSON format to <code class="docutils literal notranslate"><span class="pre">&lt;&lt;M_.fname&gt;&gt;/model/json/</span></code>.
+When the JSON output is created depends on the value
+passed. These values represent various steps of processing in the
+preprocessor.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">parse</span></code> is passed, the output will be written after the parsing of
+the <code class="docutils literal notranslate"><span class="pre">.mod</span></code> file to a file called <code class="docutils literal notranslate"><span class="pre">FILENAME.json</span></code> but before file
+has been checked (e.g. if there are unused exogenous in the model
+block, the JSON output will be created before the preprocessor exits).</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">check</span></code> is passed, the output will be written to a file called
+<code class="docutils literal notranslate"><span class="pre">FILENAME.json</span></code> after the model has been checked.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">transform</span></code> is passed, the JSON output of the transformed
+model (maximum lead of 1, minimum lag of -1, expectation
+operators substituted, etc.) will be written to a file called
+<code class="docutils literal notranslate"><span class="pre">FILENAME.json</span></code> and the original, untransformed model will
+be written in <code class="docutils literal notranslate"><span class="pre">FILENAME_original.json</span></code>.</p>
+<p>And if <code class="docutils literal notranslate"><span class="pre">compute</span></code> is passed, the output is written after the
+computing pass. In this case, the transformed model is written
+to <code class="docutils literal notranslate"><span class="pre">FILENAME.json</span></code>, the original model is written to
+<code class="docutils literal notranslate"><span class="pre">FILENAME_original.json</span></code>, and the dynamic and static files
+are written to <code class="docutils literal notranslate"><span class="pre">FILENAME_dynamic.json</span></code> and
+<code class="docutils literal notranslate"><span class="pre">FILENAME_static.json</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="jsonstdout">
+<span class="sig-name descname"><span class="pre">jsonstdout</span></span><a class="headerlink" href="#jsonstdout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Instead of writing output requested by <code class="docutils literal notranslate"><span class="pre">json</span></code> to files,
+write to standard out, i.e. to the MATLAB/Octave command window
+(and the log-file).</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="onlyjson">
+<span class="sig-name descname"><span class="pre">onlyjson</span></span><a class="headerlink" href="#onlyjson" title="Permalink to this definition">¶</a></dt>
+<dd><p>Quit processing once the output requested by <code class="docutils literal notranslate"><span class="pre">json</span></code> has been
+written.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="jsonderivsimple">
+<span class="sig-name descname"><span class="pre">jsonderivsimple</span></span><a class="headerlink" href="#jsonderivsimple" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print a simplified version (excluding variable name(s) and lag
+information) of the static and dynamic files in
+<code class="docutils literal notranslate"><span class="pre">FILENAME_static.json</span></code> and <code class="docutils literal notranslate"><span class="pre">FILENAME_dynamic.</span></code>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="warn_uninit">
+<span class="sig-name descname"><span class="pre">warn_uninit</span></span><a class="headerlink" href="#warn_uninit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display a warning for each variable or parameter which is not
+initialized. See <a class="reference internal" href="the-model-file.html#param-init"><span class="std std-ref">Parameter initialization</span></a>, or
+<a class="reference internal" href="the-model-file.html#load_params_and_steady_state" title="load_params_and_steady_state"><code class="xref dynare dynare-comm docutils literal notranslate"><span class="pre">load_params_and_steady_state</span></code></a> for initialization of
+parameters. See <a class="reference internal" href="the-model-file.html#init-term-cond"><span class="std std-ref">Initial and terminal conditions</span></a>, or
+<a class="reference internal" href="the-model-file.html#load_params_and_steady_state" title="load_params_and_steady_state"><code class="xref dynare dynare-comm docutils literal notranslate"><span class="pre">load_params_and_steady_state</span></code></a> for initialization of
+endogenous and exogenous variables.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="console">
+<span class="sig-name descname"><span class="pre">console</span></span><a class="headerlink" href="#console" title="Permalink to this definition">¶</a></dt>
+<dd><p>Activate console mode. In addition to the behavior of
+<code class="docutils literal notranslate"><span class="pre">nodisplay</span></code>, Dynare will not use graphical waitbars for long
+computations.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare">
+<span class="sig-name descname"><span class="pre">nograph</span></span></dt>
+<dd><blockquote>
+<div><p>Activate the <code class="docutils literal notranslate"><span class="pre">nograph</span></code> option (see <a class="reference internal" href="the-model-file.html#nograph" title="nograph"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">nograph</span></code></a>), so that
+Dynare will not produce any graph.</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="nointeractive">
+<span class="sig-name descname"><span class="pre">nointeractive</span></span><a class="headerlink" href="#nointeractive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Instructs Dynare to not request user input.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="nopathchange">
+<span class="sig-name descname"><span class="pre">nopathchange</span></span><a class="headerlink" href="#nopathchange" title="Permalink to this definition">¶</a></dt>
+<dd><p>By default Dynare will change MATLAB/Octave’s path if
+<code class="docutils literal notranslate"><span class="pre">dynare/matlab</span></code> directory is not on top and if Dynare’s
+routines are overriden by routines provided in other
+toolboxes. If one wishes to override Dynare’s routines, the
+<code class="docutils literal notranslate"><span class="pre">nopathchange</span></code> options can be used. Alternatively, the path
+can be temporarly modified by the user at the top of the
+<code class="docutils literal notranslate"><span class="pre">.mod</span></code> file (using MATLAB/Octave’s <code class="docutils literal notranslate"><span class="pre">addpath</span></code> command).</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="nopreprocessoroutput">
+<span class="sig-name descname"><span class="pre">nopreprocessoroutput</span></span><a class="headerlink" href="#nopreprocessoroutput" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prevent Dynare from printing the output of the steps leading up to the
+preprocessor as well as the preprocessor output itself.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="mexext=mex|mexw64|mexmaci64|mexmaca64|mexa64">
+<span class="sig-name descname"><span class="pre">mexext=mex|mexw64|mexmaci64|mexmaca64|mexa64</span></span><a class="headerlink" href="#mexext=mex|mexw64|mexmaci64|mexmaca64|mexa64" title="Permalink to this definition">¶</a></dt>
+<dd><p>The mex extension associated with your platform to be used
+when compiling output associated with <a class="reference internal" href="the-model-file.html#use_dll" title="use_dll"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">use_dll</span></code></a>.
+Dynare is able to set this automatically, so you should not
+need to set it yourself.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="matlabroot=&lt;&lt;path&gt;&gt;">
+<span class="sig-name descname"><span class="pre">matlabroot=&lt;&lt;path&gt;&gt;</span></span><a class="headerlink" href="#matlabroot=<<path>>" title="Permalink to this definition">¶</a></dt>
+<dd><p>The path to the MATLAB installation for use with <a class="reference internal" href="the-model-file.html#use_dll" title="use_dll"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">use_dll</span></code></a>. Dynare
+is able to set this automatically, so you should not need to set it
+yourself. See the <a class="reference internal" href="#quote-note"><span class="std std-ref">note on quotes</span></a> for info on
+passing a <code class="docutils literal notranslate"><span class="pre">&lt;&lt;path&gt;&gt;</span></code> argument containing spaces.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="parallel[=CLUSTER_NAME]">
+<span class="sig-name descname"><span class="pre">parallel[=CLUSTER_NAME]</span></span><a class="headerlink" href="#parallel[=CLUSTER_NAME]" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tells Dynare to perform computations in parallel. If
+CLUSTER_NAME is passed, Dynare will use the specified cluster
+to perform parallel computations. Otherwise, Dynare will use
+the first cluster specified in the configuration file. See
+<a class="reference internal" href="the-configuration-file.html#conf-file"><span class="std std-ref">The configuration file</span></a>, for more information about the configuration
+file.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="conffile=FILENAME">
+<span class="sig-name descname"><span class="pre">conffile=FILENAME</span></span><a class="headerlink" href="#conffile=FILENAME" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specifies the location of the configuration file if it differs from the
+default. See <a class="reference internal" href="the-configuration-file.html#conf-file"><span class="std std-ref">The configuration file</span></a>, for more information about the
+configuration file and its default location. See the <a class="reference internal" href="#quote-note"><span class="std std-ref">note on
+quotes</span></a> for info on passing a <code class="docutils literal notranslate"><span class="pre">FILENAME</span></code> argument
+containing spaces.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="parallel_follower_open_mode">
+<span class="sig-name descname"><span class="pre">parallel_follower_open_mode</span></span><a class="headerlink" href="#parallel_follower_open_mode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Instructs Dynare to leave the connection to the follower node
+open after computation is complete, closing this connection
+only when Dynare finishes processing.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="parallel_test">
+<span class="sig-name descname"><span class="pre">parallel_test</span></span><a class="headerlink" href="#parallel_test" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tests the parallel setup specified in the configuration file
+without executing the <code class="docutils literal notranslate"><span class="pre">.mod</span></code> file. See <a class="reference internal" href="the-configuration-file.html#conf-file"><span class="std std-ref">The configuration file</span></a>, for
+more information about the configuration file.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="parallel_use_psexec=true|false">
+<span class="sig-name descname"><span class="pre">parallel_use_psexec=true|false</span></span><a class="headerlink" href="#parallel_use_psexec=true|false" title="Permalink to this definition">¶</a></dt>
+<dd><p>For local execution under Windows operating system,
+set <code class="docutils literal notranslate"><span class="pre">parallel_use_psexec=false</span></code> to use <code class="docutils literal notranslate"><span class="pre">start</span></code>
+instead of <code class="docutils literal notranslate"><span class="pre">psexec</span></code>, to properly allocate affinity when there are
+more than 32 cores in the local machine. This option is also helpful if
+<code class="docutils literal notranslate"><span class="pre">psexec</span></code> cannot be executed due to missing admininstrator privileges. [default=true]</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="-DMACRO_VARIABLE[=MACRO_EXPRESSION]">
+<span class="sig-name descname"><span class="pre">-DMACRO_VARIABLE[=MACRO_EXPRESSION]</span></span><a class="headerlink" href="#-DMACRO_VARIABLE[=MACRO_EXPRESSION]" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines a macro-variable from the command line (the same effect as
+using the Macro directive <code class="docutils literal notranslate"><span class="pre">&#64;#define</span></code> in a model file, see
+<a class="reference internal" href="the-model-file.html#macro-proc-lang"><span class="std std-ref">Macro processing language</span></a>). See the <a class="reference internal" href="#quote-note"><span class="std std-ref">note on quotes</span></a> for
+info on passing a <code class="docutils literal notranslate"><span class="pre">MACRO_EXPRESSION</span></code> argument containing spaces. Note
+that an expression passed on the command line can reference variables
+defined before it. If <code class="docutils literal notranslate"><span class="pre">MACRO_EXPRESSION</span></code> is omitted, the variable is
+assigned the <code class="docutils literal notranslate"><span class="pre">true</span></code> logical value. Strings assigned to a macro variable
+need to be enclosed in double quoted strings. This also allows for passing
+single quotes within the strings.</p>
+<p><em>Example</em></p>
+<p>Call dynare with command line defines</p>
+<blockquote>
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">dynare</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="n">modfile</span><span class="p">.</span><span class="n">mod</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="o">-</span><span class="n">DA</span><span class="p">=</span><span class="nb">true</span><span class="w"> </span><span class="s">&#39;-DB=&quot;A string with space&quot;&#39;</span><span class="w"> </span><span class="o">-</span><span class="n">DC</span><span class="p">=[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="s">&#39;-DD=[ i in C when i &gt; 1 ]&#39;</span><span class="w"> </span><span class="o">-</span><span class="n">DE</span><span class="w"> </span><span class="o">-</span><span class="n">Ddatafile_name</span><span class="p">=</span><span class="s">&quot;&#39;my_data_file.mat&#39;&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="-I&lt;&lt;path&gt;&gt;">
+<span class="sig-name descname"><span class="pre">-I&lt;&lt;path&gt;&gt;</span></span><a class="headerlink" href="#-I<<path>>" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines a path to search for files to be included by the macro
+processor (using the <code class="docutils literal notranslate"><span class="pre">&#64;#include</span></code> command). Multiple <code class="docutils literal notranslate"><span class="pre">-I</span></code> flags can
+be passed on the command line. The paths will be searched in the order
+that the <code class="docutils literal notranslate"><span class="pre">-I</span></code> flags are passed and the first matching file will be
+used. The flags passed here take priority over those passed to
+<code class="docutils literal notranslate"><span class="pre">&#64;#includepath</span></code>. See the <a class="reference internal" href="#quote-note"><span class="std std-ref">note on quotes</span></a> for info
+on passing a <code class="docutils literal notranslate"><span class="pre">&lt;&lt;path&gt;&gt;</span></code> argument containing spaces.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="nostrict">
+<span class="sig-name descname"><span class="pre">nostrict</span></span><a class="headerlink" href="#nostrict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allows Dynare to issue a warning and continue processing when</p>
+<ol class="arabic simple">
+<li><p>there are more endogenous variables than equations.</p></li>
+<li><p>an undeclared symbol is assigned in <code class="docutils literal notranslate"><span class="pre">initval</span></code> or <code class="docutils literal notranslate"><span class="pre">endval</span></code>.</p></li>
+<li><p>an undeclared symbol is found in the <code class="docutils literal notranslate"><span class="pre">model</span></code> block in
+this case, it is automatically declared exogenous.</p></li>
+<li><p>exogenous variables were declared but not used in the
+<code class="docutils literal notranslate"><span class="pre">model</span></code> block.</p></li>
+</ol>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="fast">
+<span class="sig-name descname"><span class="pre">fast</span></span><a class="headerlink" href="#fast" title="Permalink to this definition">¶</a></dt>
+<dd><p>Don’t rewrite the output files otherwise written to the disk by the preprocessor
+when re-running the same model file while the lists of variables and the equations
+haven’t changed. Note that the whole model still needs to be preprocessed. This option
+is most useful with model option <a class="reference internal" href="the-model-file.html#use_dll" title="use_dll"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">use_dll</span></code></a>, because
+the time-consuming compilation of the MEX files will be skipped. We use a 32
+bit checksum, stored in <code class="docutils literal notranslate"><span class="pre">&lt;model</span> <span class="pre">filename&gt;/checksum</span></code>. There
+is a very small probability that the preprocessor misses a
+change in the model. In case of doubt, re-run without the fast
+option.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="minimal_workspace">
+<span class="sig-name descname"><span class="pre">minimal_workspace</span></span><a class="headerlink" href="#minimal_workspace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Instructs Dynare not to write parameter assignments to
+parameter names in the .m file produced by the
+preprocessor. This is potentially useful when running
+<code class="docutils literal notranslate"><span class="pre">dynare</span></code> on a large <code class="docutils literal notranslate"><span class="pre">.mod</span></code> file that runs into workspace
+size limitations imposed by MATLAB.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="compute_xrefs">
+<span class="sig-name descname"><span class="pre">compute_xrefs</span></span><a class="headerlink" href="#compute_xrefs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tells Dynare to compute the equation cross references, writing
+them to the output <code class="docutils literal notranslate"><span class="pre">.m</span></code> file.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="stochastic">
+<span class="sig-name descname"><span class="pre">stochastic</span></span><a class="headerlink" href="#stochastic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tells Dynare that the model to be solved is stochastic. If no
+Dynare commands related to stochastic models (<code class="docutils literal notranslate"><span class="pre">stoch_simul</span></code>,
+<code class="docutils literal notranslate"><span class="pre">estimation</span></code>, …) are present in the <code class="docutils literal notranslate"><span class="pre">.mod</span></code> file, Dynare
+understands by default that the model to be solved is
+deterministic.</p>
+</dd></dl>
+
+<span class="target" id="exclude-eqs"></span><dl class="dynare option">
+<dt class="sig sig-object dynare" id="exclude_eqs=&lt;&lt;equation_tags_to_exclude&gt;&gt;">
+<span class="sig-name descname"><span class="pre">exclude_eqs=&lt;&lt;equation_tags_to_exclude&gt;&gt;</span></span><a class="headerlink" href="#exclude_eqs=<<equation_tags_to_exclude>>" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tells Dynare to exclude all equations specified by the argument. As a
+<code class="docutils literal notranslate"><span class="pre">.mod</span></code> file must have the same number of endogenous variables as
+equations, when <cite>exclude_eqs</cite> is passed, certain rules are followed for
+excluding endogenous variables. If the <code class="docutils literal notranslate"><span class="pre">endogenous</span></code> tag has been set
+for the excluded equation, the variable it specifies is
+excluded. Otherwise, if the left hand side of the excluded equation is
+an expression that contains only one endogenous variable, that variable
+is excluded. If neither of these conditions hold, processing stops with
+an error. If an endogenous variable has been excluded by the
+<cite>exclude_eqs</cite> option and it exists in an equation that has not been
+excluded, it is transformed into an exogenous variable.</p>
+<p>To specify which equations to exclude, you must pass the argument
+<code class="docutils literal notranslate"><span class="pre">&lt;&lt;equation_tags_to_exclude&gt;&gt;</span></code>. This argument takes either a list of
+equation tags specifying the equations to be excluded or a filename that
+contains those tags.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">&lt;&lt;equation_tags_to_exclude&gt;&gt;</span></code> is a list of equation tags, it can
+take one of the following forms:</p>
+<ol class="arabic simple">
+<li><p>Given a single argument, e.g. <code class="docutils literal notranslate"><span class="pre">exclude_eqs=eq1</span></code>, the equation with
+the tag <code class="docutils literal notranslate"><span class="pre">[name='eq1']</span></code> will be excluded. Note that if there is a
+file called <code class="docutils literal notranslate"><span class="pre">eq1</span></code> in the current directory, Dynare will instead
+try to open this and read equations to exclude from it (see info on
+filename argument to <code class="docutils literal notranslate"><span class="pre">exclude_eqs</span></code> below). Further note that if the
+tag value contains a space, you must use the variant specified in 2
+below, i.e. <code class="docutils literal notranslate"><span class="pre">exclude_eqs=[eq</span> <span class="pre">1]</span></code>.</p></li>
+<li><p>Given two or more arguments, e.g. <code class="docutils literal notranslate"><span class="pre">exclude_eqs=[eq1,</span> <span class="pre">eq</span> <span class="pre">2]</span></code>, the
+equations with the tags <code class="docutils literal notranslate"><span class="pre">[name='eq1']</span></code> and <code class="docutils literal notranslate"><span class="pre">[name='eq</span> <span class="pre">2']</span></code> will
+be excluded.</p></li>
+<li><p>If you’d like to exclude equations based on another tag name (as
+opposed to the default <code class="docutils literal notranslate"><span class="pre">name</span></code>), you can pass the argument as either
+e.g. <code class="docutils literal notranslate"><span class="pre">exclude_eqs=[tagname=a</span> <span class="pre">tag]</span></code> if a single equation with tag
+<code class="docutils literal notranslate"><span class="pre">[tagname='a</span> <span class="pre">tag']</span></code> is to be excluded or as
+e.g. <code class="docutils literal notranslate"><span class="pre">exclude_eqs=[tagname=(a</span> <span class="pre">tag,</span> <span class="pre">'a</span> <span class="pre">tag</span> <span class="pre">with</span> <span class="pre">a,</span> <span class="pre">comma')]</span></code> if more
+than one equation with tags <code class="docutils literal notranslate"><span class="pre">[tagname='a</span> <span class="pre">tag']</span></code> and <code class="docutils literal notranslate"><span class="pre">[tagname='a</span>
+<span class="pre">tag</span> <span class="pre">with</span> <span class="pre">a,</span> <span class="pre">comma']</span></code> will be excluded (note the parenthesis, which
+are required when more than one equation is specified). Note that if
+the value of a tag contains a comma, it must be included inside
+single quotes.</p></li>
+</ol>
+<p>If <code class="docutils literal notranslate"><span class="pre">&lt;&lt;equation_tags_to_exclude&gt;&gt;</span></code> is a filename, the file can take one
+of the following forms:</p>
+<ol class="arabic">
+<li><p>One equation per line of the file, where every line represents the
+value passed to the <code class="docutils literal notranslate"><span class="pre">name</span></code> tag. e.g., a file such as:</p>
+<div class="highlight-dynare notranslate"><div class="highlight"><pre><span></span><span class="n">eq</span><span class="mi">1</span>
+<span class="n">eq </span><span class="mi">2</span>
+</pre></div>
+</div>
+<p>would exclude equations with tags <code class="docutils literal notranslate"><span class="pre">[name='eq1']</span></code> and <code class="docutils literal notranslate"><span class="pre">[name='eq</span>
+<span class="pre">2']</span></code>.</p>
+</li>
+<li><p>One equation per line of the file, where every line after the first
+line represents the value passed to the tag specified by the first
+line. e.g., a file such as:</p>
+<div class="highlight-dynare notranslate"><div class="highlight"><pre><span></span><span class="n">tagname</span><span class="p">=</span>
+<span class="n">a tag</span>
+<span class="n">a tag with a</span><span class="p">, </span><span class="n">comma</span>
+</pre></div>
+</div>
+<p>would exclude equations with tags <code class="docutils literal notranslate"><span class="pre">[tagname='a</span> <span class="pre">tag']</span></code> and
+<code class="docutils literal notranslate"><span class="pre">[tagname='a</span> <span class="pre">tag</span> <span class="pre">with</span> <span class="pre">a,</span> <span class="pre">comma']</span></code>. Here note that the first line
+must end in an equal sign.</p>
+</li>
+</ol>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="include_eqs=&lt;&lt;equation_tags_to_include&gt;&gt;">
+<span class="sig-name descname"><span class="pre">include_eqs=&lt;&lt;equation_tags_to_include&gt;&gt;</span></span><a class="headerlink" href="#include_eqs=<<equation_tags_to_include>>" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tells Dynare to run with only those equations specified by the
+argument; in other words, Dynare will exclude all equations not
+specified by the argument. The argument <code class="docutils literal notranslate"><span class="pre">&lt;&lt;equation_tags_to_include&gt;&gt;</span></code>
+is specified in the same way as the argument to <a class="reference internal" href="#exclude-eqs"><span class="std std-ref">exclude_eqs</span></a>. The functionality of <code class="docutils literal notranslate"><span class="pre">include_eqs</span></code> is to find which
+equations to exclude then take actions in accord with <a class="reference internal" href="#exclude-eqs"><span class="std std-ref">exclude_eqs</span></a>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare">
+<span class="sig-name descname"><span class="pre">use_dll</span></span></dt>
+<dd><p>Instructs the preprocessor to create dynamic loadable libraries (DLL)
+containing the model equations and derivatives, instead of writing
+those in M-files. This is equivalent to the <a class="reference internal" href="the-model-file.html#use_dll" title="use_dll"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">use_dll</span></code></a> option of
+the <code class="docutils literal notranslate"><span class="pre">model</span></code> block.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="nocommutativity">
+<span class="sig-name descname"><span class="pre">nocommutativity</span></span><a class="headerlink" href="#nocommutativity" title="Permalink to this definition">¶</a></dt>
+<dd><p>This option tells the preprocessor not to use the commutativity of
+addition and multiplication when looking for common subexpressions. As a
+consequence, when using this option, equations in various outputs
+(LaTeX, JSON…) will appear as the user entered them (without terms or
+factors swapped). Note that using this option may have a performance
+impact on the preprocessing stage, though it is likely to be small.</p>
+</dd></dl>
+
+<p>These options can be passed to the preprocessor by listing them
+after the name of the <code class="docutils literal notranslate"><span class="pre">.mod</span></code> file. They can alternatively be
+defined in the first line of the <code class="docutils literal notranslate"><span class="pre">.mod</span></code> file, this avoids typing
+them on the command line each time a <code class="docutils literal notranslate"><span class="pre">.mod</span></code> file is to be
+run. This line must be a Dynare one-line comment (i.e. must begin with <code class="docutils literal notranslate"><span class="pre">//</span></code>)
+and the options must be whitespace separated between <code class="docutils literal notranslate"><span class="pre">--+</span> <span class="pre">options:</span></code>
+and <code class="docutils literal notranslate"><span class="pre">+--</span></code>. Note that any text after the <code class="docutils literal notranslate"><span class="pre">+--</span></code> will be
+discarded. As in the command line, if an option admits a value the
+equal symbol must not be surrounded by spaces. For instance <code class="docutils literal notranslate"><span class="pre">json</span>
+<span class="pre">=</span> <span class="pre">compute</span></code> is not correct, and should be written
+<code class="docutils literal notranslate"><span class="pre">json=compute</span></code>. The <code class="docutils literal notranslate"><span class="pre">nopathchange</span></code> option cannot be specified in
+this way, it must be passed on the command-line.</p>
+<p><em>Output</em></p>
+<p>Depending on the computing tasks requested in the <code class="docutils literal notranslate"><span class="pre">.mod</span></code> file,
+executing the <code class="docutils literal notranslate"><span class="pre">dynare</span></code> command will leave variables containing
+results in the workspace available for further processing. More
+details are given under the relevant computing tasks. The
+<code class="docutils literal notranslate"><span class="pre">M_</span></code>, <code class="docutils literal notranslate"><span class="pre">oo_</span></code>, and <code class="docutils literal notranslate"><span class="pre">options_</span></code> structures are saved in a file
+called <code class="docutils literal notranslate"><span class="pre">FILENAME_results.mat</span></code> located in the <code class="docutils literal notranslate"><span class="pre">MODFILENAME/Output</span></code> folder.
+If they exist, <code class="docutils literal notranslate"><span class="pre">estim_params_</span></code>,
+<code class="docutils literal notranslate"><span class="pre">bayestopt_</span></code>, <code class="docutils literal notranslate"><span class="pre">dataset_</span></code>, <code class="docutils literal notranslate"><span class="pre">oo_recursive_</span></code> and
+<code class="docutils literal notranslate"><span class="pre">estimation_info</span></code> are saved in the same file. Note that MATLAB
+by default only allows <code class="docutils literal notranslate"><span class="pre">.mat</span></code> files up to 2GB. You can lift this
+restriction by enabling the <code class="docutils literal notranslate"><span class="pre">save</span> <span class="pre">-v7.3</span></code> option in
+<code class="docutils literal notranslate"><span class="pre">Preferences</span> <span class="pre">-&gt;</span> <span class="pre">General</span> <span class="pre">-&gt;</span> <span class="pre">MAT-Files</span></code>.</p>
+<dl class="dynare matvar">
+<dt class="sig sig-object dynare" id="M_">
+<em class="property"><span class="pre">MATLAB/Octave</span> <span class="pre">variable:</span> </em><span class="sig-name descname"><span class="pre">M_</span></span><a class="headerlink" href="#M_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Structure containing various information about the model.</p>
+</dd></dl>
+
+<dl class="dynare matvar">
+<dt class="sig sig-object dynare" id="options_">
+<em class="property"><span class="pre">MATLAB/Octave</span> <span class="pre">variable:</span> </em><span class="sig-name descname"><span class="pre">options_</span></span><a class="headerlink" href="#options_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Structure contains the values of the various options used by
+Dynare during the computation.</p>
+</dd></dl>
+
+<dl class="dynare matvar">
+<dt class="sig sig-object dynare" id="oo_">
+<em class="property"><span class="pre">MATLAB/Octave</span> <span class="pre">variable:</span> </em><span class="sig-name descname"><span class="pre">oo_</span></span><a class="headerlink" href="#oo_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Structure containing the various results of the computations.</p>
+</dd></dl>
+
+<dl class="dynare matvar">
+<dt class="sig sig-object dynare" id="dataset_">
+<em class="property"><span class="pre">MATLAB/Octave</span> <span class="pre">variable:</span> </em><span class="sig-name descname"><span class="pre">dataset_</span></span><a class="headerlink" href="#dataset_" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <code class="docutils literal notranslate"><span class="pre">dseries</span></code> object containing the data used for estimation.</p>
+</dd></dl>
+
+<dl class="dynare matvar">
+<dt class="sig sig-object dynare" id="oo_recursive_">
+<em class="property"><span class="pre">MATLAB/Octave</span> <span class="pre">variable:</span> </em><span class="sig-name descname"><span class="pre">oo_recursive_</span></span><a class="headerlink" href="#oo_recursive_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cell array containing the <code class="docutils literal notranslate"><span class="pre">oo_</span></code> structures obtained when
+estimating the model for the different samples when performing
+recursive estimation and forecasting. The <code class="docutils literal notranslate"><span class="pre">oo_</span></code> structure
+obtained for the sample ranging to the <cite>i</cite> -th observation is
+saved in the <cite>i</cite> -th field. The fields for non-estimated
+endpoints are empty.</p>
+</dd></dl>
+
+<dl class="dynare matvar">
+<dt class="sig sig-object dynare" id="oo_.time">
+<em class="property"><span class="pre">MATLAB/Octave</span> <span class="pre">variable:</span> </em><span class="sig-name descname"><span class="pre">oo_.time</span></span><a class="headerlink" href="#oo_.time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Total computing time of the Dynare run, in seconds. This field is not
+set if the <a class="reference internal" href="#notime" title="notime"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">notime</span></code></a> option has been used.</p>
+</dd></dl>
+
+<p><em>Example</em></p>
+<p>Call dynare from the MATLAB or Octave prompt, without or with options:</p>
+<blockquote>
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">dynare</span><span class="w"> </span><span class="n">ramst</span>
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">dynare</span><span class="w"> </span><span class="n">ramst</span><span class="p">.</span><span class="n">mod</span><span class="w"> </span><span class="n">savemacro</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Alternatively the options can be passed in the first line of
+<code class="docutils literal notranslate"><span class="pre">ramst.mod</span></code>:</p>
+<blockquote>
+<div><div class="highlight-dynare notranslate"><div class="highlight"><pre><span></span><span class="c1">// --+ options: savemacro, json=compute +--</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>and then dynare called without passing options on the command line:</p>
+<blockquote>
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">dynare</span><span class="w"> </span><span class="n">ramst</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div></blockquote>
+</section>
+<section id="dynare-hooks">
+<h2><span class="section-number">3.2. </span>Dynare hooks<a class="headerlink" href="#dynare-hooks" title="Permalink to this heading">¶</a></h2>
+<p>It is possible to call pre and post Dynare preprocessor hooks written
+as MATLAB scripts. The script <code class="docutils literal notranslate"><span class="pre">MODFILENAME/hooks/priorprocessing.m</span></code>
+is executed before the call to Dynare’s preprocessor, and can be used
+to programmatically transform the mod file that will be read by the
+preprocessor. The script <code class="docutils literal notranslate"><span class="pre">MODFILENAME/hooks/postprocessing.m</span></code> is
+gexecuted just after the call to Dynare’s preprocessor, and can be used
+to programmatically transform the files generated by Dynare’s
+preprocessor before actual computations start. The pre and/or post
+dynare preprocessor hooks are executed if and only if the
+aforementioned scripts are detected in the same folder as the the
+model file, <code class="docutils literal notranslate"><span class="pre">FILENAME.mod</span></code>.</p>
+</section>
+<section id="understanding-preprocessor-error-messages">
+<h2><span class="section-number">3.3. </span>Understanding Preprocessor Error Messages<a class="headerlink" href="#understanding-preprocessor-error-messages" title="Permalink to this heading">¶</a></h2>
+<p>If the preprocessor runs into an error while processing your <code class="docutils literal notranslate"><span class="pre">.mod</span></code>
+file, it will issue an error. Due to the way that a parser works,
+sometimes these errors can be misleading. Here, we aim to demystify
+these error messages.</p>
+<p>The preprocessor issues error messages of the form:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ERROR:</span> <span class="pre">&lt;&lt;file.mod&gt;&gt;:</span> <span class="pre">line</span> <span class="pre">A,</span> <span class="pre">col</span> <span class="pre">B:</span> <span class="pre">&lt;&lt;error</span> <span class="pre">message&gt;&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ERROR:</span> <span class="pre">&lt;&lt;file.mod&gt;&gt;:</span> <span class="pre">line</span> <span class="pre">A,</span> <span class="pre">cols</span> <span class="pre">B-C:</span> <span class="pre">&lt;&lt;error</span> <span class="pre">message&gt;&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ERROR:</span> <span class="pre">&lt;&lt;file.mod&gt;&gt;:</span> <span class="pre">line</span> <span class="pre">A,</span> <span class="pre">col</span> <span class="pre">B</span> <span class="pre">-</span> <span class="pre">line</span> <span class="pre">C,</span> <span class="pre">col</span> <span class="pre">D:</span> <span class="pre">&lt;&lt;error</span> <span class="pre">message&gt;&gt;</span></code></p></li>
+</ol>
+</div></blockquote>
+<p>The first two errors occur on a single line, with error two spanning
+multiple columns. Error three spans multiple rows.</p>
+<p>Often, the line and column numbers are precise, leading you directly
+to the offending syntax. Infrequently however, because of the way the
+parser works, this is not the case. The most common example of
+misleading line and column numbers (and error message for that matter)
+is the case of a missing semicolon, as seen in the following example:</p>
+<div class="highlight-dynare notranslate"><div class="highlight"><pre><span></span><span class="ni">varexo </span><span class="n">a</span><span class="p">, </span><span class="n">b</span>
+<span class="ni">parameters </span><span class="n">c</span><span class="p">, ...;</span>
+</pre></div>
+</div>
+<p>In this case, the parser doesn’t know a semicolon is missing at the
+end of the <code class="docutils literal notranslate"><span class="pre">varexo</span></code> command until it begins parsing the second line
+and bumps into the <code class="docutils literal notranslate"><span class="pre">parameters</span></code> command. This is because we allow
+commands to span multiple lines and, hence, the parser cannot know
+that the second line will not have a semicolon on it until it gets
+there. Once the parser begins parsing the second line, it realizes
+that it has encountered a keyword, <code class="docutils literal notranslate"><span class="pre">parameters</span></code>, which it did not
+expect. Hence, it throws an error of the form: <code class="docutils literal notranslate"><span class="pre">ERROR:</span> <span class="pre">&lt;&lt;file.mod&gt;&gt;:</span>
+<span class="pre">line</span> <span class="pre">2,</span> <span class="pre">cols</span> <span class="pre">0-9:</span> <span class="pre">syntax</span> <span class="pre">error,</span> <span class="pre">unexpected</span> <span class="pre">PARAMETERS</span></code>. In this case,
+you would simply place a semicolon at the end of line one and the
+parser would continue processing.</p>
+<p>It is also helpful to keep in mind that any piece of code that does not violate
+Dynare syntax, but at the same time is not recognized by the parser, is interpreted
+as native MATLAB code. This code will be directly passed to the driver script.
+Investigating the <code class="docutils literal notranslate"><span class="pre">driver.m</span></code> file then helps with debugging. Such problems most often
+occur when defined variable or parameter names have been misspelled so that Dynare’s
+parser is unable to recognize them.</p>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;1996–2025 Dynare Team.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/running-dynare.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,27 @@
+variables:
+  GIT_SUBMODULE_STRATEGY: normal
+  TERM: linux
+  MATLAB_VERSION: R2024b
+  OLD_MATLAB_VERSION: R2018b
+  # To ensure that "false && true" fails, see https://gitlab.com/gitlab-org/gitlab-runner/-/issues/25394#note_412609647
+  FF_ENABLE_BASH_EXIT_CODE_CHECK: 'true'
+
+before_script:
+  - git clone https://git.dynare.org/Dynare/m-unit-tests
+
+test_matlab:
+  stage: test
+  script:
+    - make check-matlab MATLAB=/opt/MATLAB/$MATLAB_VERSION/bin/matlab
+
+test_old_matlab:
+  stage: test
+  script:
+    - make check-matlab MATLAB=/opt/MATLAB/$OLD_MATLAB_VERSION/bin/matlab
+
+test_octave:
+  stage: test
+  variables:
+    OPENBLAS_NUM_THREADS: 1
+  script:
+    - make check-octave

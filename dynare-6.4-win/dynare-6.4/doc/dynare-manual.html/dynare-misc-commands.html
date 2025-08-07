@@ -1,0 +1,507 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>9. Dynare misc commands &#8212; Dynare 6.4 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script async="async" src="_static/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="10. Bibliography" href="bibliography.html" />
+    <link rel="prev" title="8. Examples" href="examples.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="index.html">
+    <img class="logo" src="_static/dlogo.svg" alt="Logo" width=143/>
+    
+  </a>
+</p>
+
+
+
+
+
+
+
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script><br style="line-height:16px">
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation-and-configuration.html">2. Installation and configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running-dynare.html">3. Running Dynare</a></li>
+<li class="toctree-l1"><a class="reference internal" href="the-model-file.html">4. The model file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="the-configuration-file.html">5. The configuration file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="time-series.html">6. Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reporting.html">7. Reporting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">8. Examples</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">9. Dynare misc commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">10. Bibliography</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    <li class="toctree-l1"><a href="genindex.html">Index</a></li>
+</ul>
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="dynare-misc-commands">
+<h1><span class="section-number">9. </span>Dynare misc commands<a class="headerlink" href="#dynare-misc-commands" title="Permalink to this heading">¶</a></h1>
+<dl class="dynare matcomm">
+<dt class="sig sig-object dynare" id="send_endogenous_variables_to_workspace">
+<em class="property"><span class="pre">MATLAB/Octave</span> <span class="pre">command:</span> </em><span class="sig-name descname"><span class="pre">send_endogenous_variables_to_workspace</span></span><span class="sig-prename descclassname"> <span class="pre">;</span></span><a class="headerlink" href="#send_endogenous_variables_to_workspace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Puts the simulation results for the endogenous variables stored in <code class="docutils literal notranslate"><span class="pre">oo_.endo_simul</span></code>
+into vectors with the same name as the respective variables into the base workspace.</p>
+</dd></dl>
+
+<dl class="dynare matcomm">
+<dt class="sig sig-object dynare" id="send_exogenous_variables_to_workspace">
+<em class="property"><span class="pre">MATLAB/Octave</span> <span class="pre">command:</span> </em><span class="sig-name descname"><span class="pre">send_exogenous_variables_to_workspace</span></span><span class="sig-prename descclassname"> <span class="pre">;</span></span><a class="headerlink" href="#send_exogenous_variables_to_workspace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Puts the simulation results for the exogenous variables stored in <code class="docutils literal notranslate"><span class="pre">oo_.exo_simul</span></code>
+into vectors with the same name as the respective variables into the base workspace.</p>
+</dd></dl>
+
+<dl class="dynare matcomm">
+<dt class="sig sig-object dynare" id="send_irfs_to_workspace">
+<em class="property"><span class="pre">MATLAB/Octave</span> <span class="pre">command:</span> </em><span class="sig-name descname"><span class="pre">send_irfs_to_workspace</span></span><span class="sig-prename descclassname"> <span class="pre">;</span></span><a class="headerlink" href="#send_irfs_to_workspace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Puts the IRFs stored in <code class="docutils literal notranslate"><span class="pre">oo_.irfs</span></code> into vectors with the same name into the base workspace.</p>
+</dd></dl>
+
+<dl class="dynare command">
+<dt class="sig sig-object dynare" id="prior_function">
+<em class="property"><span class="pre">Command:</span> </em><span class="sig-name descname"><span class="pre">prior_function</span></span><span class="sig-prename descclassname"><span class="pre">(OPTIONS);</span></span><a class="headerlink" href="#prior_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Executes a user-defined function on parameter draws from the prior
+distribution. Dynare returns the results of the computations for
+all draws in an <cite>ndraws</cite> by <span class="math notranslate nohighlight">\(n\)</span> cell array named
+<code class="docutils literal notranslate"><span class="pre">oo_.prior_function_results</span></code>.</p>
+<p><em>Options</em></p>
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="function = FUNCTION_NAME">
+<span class="sig-name descname"><span class="pre">function</span> <span class="pre">=</span> <span class="pre">FUNCTION_NAME</span></span><a class="headerlink" href="#function = FUNCTION_NAME" title="Permalink to this definition">¶</a></dt>
+<dd><p>The function must have the following header <code class="docutils literal notranslate"><span class="pre">output_cell</span> <span class="pre">=</span>
+<span class="pre">FILENAME(xparam1,M_,options_,oo_,estim_params_,bayestopt_,dataset_,dataset_info)</span></code>,
+providing read-only access to all Dynare structures. The only
+output argument allowed is a <span class="math notranslate nohighlight">\(1 \times n\)</span> cell array,
+which allows for storing any type of output/computations. This
+option is required.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="sampling_draws = INTEGER">
+<span class="sig-name descname"><span class="pre">sampling_draws</span> <span class="pre">=</span> <span class="pre">INTEGER</span></span><a class="headerlink" href="#sampling_draws = INTEGER" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of draws used for sampling. Default: 500.</p>
+</dd></dl>
+
+<p><br></p>
+</dd></dl>
+
+<dl class="dynare command">
+<dt class="sig sig-object dynare" id="posterior_function">
+<em class="property"><span class="pre">Command:</span> </em><span class="sig-name descname"><span class="pre">posterior_function</span></span><span class="sig-prename descclassname"><span class="pre">(OPTIONS);</span></span><a class="headerlink" href="#posterior_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Same as the <a class="reference internal" href="#prior_function" title="prior_function"><code class="xref dynare dynare-comm docutils literal notranslate"><span class="pre">prior_function</span></code></a> command but for the
+posterior distribution. Results returned in
+<code class="docutils literal notranslate"><span class="pre">oo_.posterior_function_results</span></code>.</p>
+<p><em>Options</em></p>
+<dl class="dynare option">
+<dt class="sig sig-object dynare">
+<span class="sig-name descname"><span class="pre">function</span> <span class="pre">=</span> <span class="pre">FUNCTION_NAME</span></span></dt>
+<dd><p>See <a class="reference internal" href="#function = FUNCTION_NAME" title="function = FUNCTION_NAME"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">prior_function_function</span></code></a>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare">
+<span class="sig-name descname"><span class="pre">sampling_draws</span> <span class="pre">=</span> <span class="pre">INTEGER</span></span></dt>
+<dd><p>See <a class="reference internal" href="#sampling_draws = INTEGER" title="sampling_draws = INTEGER"><code class="xref dynare dynare-opt docutils literal notranslate"><span class="pre">prior_function_sampling_draws</span></code></a>.</p>
+</dd></dl>
+
+<p><br></p>
+</dd></dl>
+
+<dl class="dynare command">
+<dt class="sig sig-object dynare" id="generate_trace_plots">
+<em class="property"><span class="pre">Command:</span> </em><span class="sig-name descname"><span class="pre">generate_trace_plots</span></span><span class="sig-prename descclassname"><span class="pre">(CHAIN_NUMBER);</span></span><a class="headerlink" href="#generate_trace_plots" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates trace plots of the MCMC draws for all estimated
+parameters and the posterior density for the specified Markov Chain(s)
+<code class="docutils literal notranslate"><span class="pre">CHAIN_NUMBER</span></code>. If <code class="docutils literal notranslate"><span class="pre">CHAIN_NUMBER</span></code> is a vector of integers, the trace plots
+will plot contains separate lines for each chain.</p>
+<p><br></p>
+</dd></dl>
+
+<dl class="dynare matcomm">
+<dt class="sig sig-object dynare" id="internals">
+<em class="property"><span class="pre">MATLAB/Octave</span> <span class="pre">command:</span> </em><span class="sig-name descname"><span class="pre">internals</span></span><span class="sig-prename descclassname"> <span class="pre">FLAG</span> <span class="pre">ROUTINENAME[.m]|MODFILENAME</span></span><a class="headerlink" href="#internals" title="Permalink to this definition">¶</a></dt>
+<dd><p>Depending on the value of <code class="docutils literal notranslate"><span class="pre">FLAG</span></code>, the <code class="docutils literal notranslate"><span class="pre">internals</span></code> command
+can be used to run unitary tests specific to a MATLAB/Octave
+routine (if available), to display documentation about a
+MATLAB/Octave routine, or to extract some informations about the
+state of Dynare.</p>
+<p><em>Flags</em></p>
+<p><code class="docutils literal notranslate"><span class="pre">--test</span></code></p>
+<blockquote>
+<div><p>Performs the unitary test associated to ROUTINENAME (if this
+routine exists and if the matlab/octave <code class="docutils literal notranslate"><span class="pre">.m</span></code> file has
+unitary test sections).</p>
+<p><em>Example</em></p>
+<blockquote>
+<div><div class="highlight-dynare notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt; </span><span class="n">internals </span><span class="o">--</span><span class="n">test ROUTINENAME</span>
+</pre></div>
+</div>
+<p>if <code class="docutils literal notranslate"><span class="pre">routine.m</span></code> is not in the current directory, the full
+path has to be given:</p>
+<div class="highlight-dynare notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt; </span><span class="n">internals </span><span class="o">--</span><span class="n">test </span><span class="p">..</span><span class="o">/</span><span class="n">matlab</span><span class="o">/</span><span class="n">fr</span><span class="o">/</span><span class="n">ROUTINENAME</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">--display-mh-history</span></code></p>
+<blockquote>
+<div><p>Displays information about the previously saved MCMC draws
+generated by a <code class="docutils literal notranslate"><span class="pre">.mod</span></code> file named MODFILENAME. This file must
+be in the current directory.</p>
+<p><em>Example</em></p>
+<blockquote>
+<div><div class="highlight-dynare notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt; </span><span class="n">internals </span><span class="o">--</span><span class="n">display</span><span class="o">-</span><span class="n">mh</span><span class="o">-</span><span class="n">history MODFILENAME</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">--load-mh-history</span></code></p>
+<blockquote>
+<div><p>Loads into the MATLAB/Octave’s workspace informations
+about the previously saved MCMC draws generated by a <code class="docutils literal notranslate"><span class="pre">.mod</span></code>
+file named MODFILENAME.</p>
+<p><em>Example</em></p>
+<blockquote>
+<div><div class="highlight-dynare notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt; </span><span class="n">internals </span><span class="o">--</span><span class="n">load</span><span class="o">-</span><span class="n">mh</span><span class="o">-</span><span class="n">history MODFILENAME</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>This will create a structure called <code class="docutils literal notranslate"><span class="pre">mcmc_informations</span></code>
+(in the workspace) with the following fields:</p>
+<p><code class="docutils literal notranslate"><span class="pre">Nblck</span></code></p>
+<blockquote>
+<div><p>The number of MCMC chains.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">InitialParameters</span></code></p>
+<blockquote>
+<div><p>A <code class="docutils literal notranslate"><span class="pre">Nblck*n</span></code>, where <code class="docutils literal notranslate"><span class="pre">n</span></code> is the number of estimated
+parameters, array of doubles. Initial state of
+the MCMC.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">LastParameters</span></code></p>
+<blockquote>
+<div><p>A <code class="docutils literal notranslate"><span class="pre">Nblck*n</span></code>, where <code class="docutils literal notranslate"><span class="pre">n</span></code> is the number of estimated
+parameters, array of doubles. Current state of
+the MCMC.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">InitialLogPost</span></code></p>
+<blockquote>
+<div><p>A <code class="docutils literal notranslate"><span class="pre">Nblck*1</span></code> array of doubles. Initial value of the
+posterior kernel.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">LastLogPost</span></code></p>
+<blockquote>
+<div><p>A <code class="docutils literal notranslate"><span class="pre">Nblck*1</span></code> array of doubles. Current value of the
+posterior kernel.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">InitialSeeds</span></code></p>
+<blockquote>
+<div><p>A <code class="docutils literal notranslate"><span class="pre">1*Nblck</span></code> structure array. Initial state of the random
+number generator.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">LastSeeds</span></code></p>
+<blockquote>
+<div><p>A <code class="docutils literal notranslate"><span class="pre">1*Nblck</span></code> structure array. Current state of the random
+number generator.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">AcceptanceRatio</span></code></p>
+<blockquote>
+<div><p>A <code class="docutils literal notranslate"><span class="pre">1*Nblck</span></code> array of doubles. Current acceptance ratios.</p>
+</div></blockquote>
+</div></blockquote>
+<p><br></p>
+</dd></dl>
+
+<dl class="dynare matcomm">
+<dt class="sig sig-object dynare" id="prior">
+<em class="property"><span class="pre">MATLAB/Octave</span> <span class="pre">command:</span> </em><span class="sig-name descname"><span class="pre">prior</span></span><span class="sig-prename descclassname"> <span class="pre">[OPTIONS[</span> <span class="pre">...]];</span></span><a class="headerlink" href="#prior" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints information about the prior distribution given the provided
+options. If no options are provided, the command returns the list of
+available options.</p>
+<p><em>Options</em></p>
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="table">
+<span class="sig-name descname"><span class="pre">table</span></span><a class="headerlink" href="#table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints a table describing the marginal prior distributions
+(mean, mode, std., lower and upper bounds, HPD interval).</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="moments">
+<span class="sig-name descname"><span class="pre">moments</span></span><a class="headerlink" href="#moments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes and displays first and second order moments of the
+endogenous variables at the prior mode (considering the
+linearized version of the model).</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="moments(distribution)">
+<span class="sig-name descname"><span class="pre">moments(distribution)</span></span><a class="headerlink" href="#moments(distribution)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes and displays the prior mean and prior standard
+deviation of the first and second moments of the endogenous
+variables (considering the linearized version of the model) by
+randomly sampling from the prior.  The results will also be
+stored in the <code class="docutils literal notranslate"><span class="pre">prior</span></code> subfolder in a
+<code class="docutils literal notranslate"><span class="pre">_endogenous_variables_prior_draws.mat</span></code> file.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="optimize">
+<span class="sig-name descname"><span class="pre">optimize</span></span><a class="headerlink" href="#optimize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optimizes the prior density (starting from a random initial
+guess). The parameters such that the steady state does not
+exist or does not satisfy the Blanchard and Kahn conditions
+are penalized, as they would be when maximizing the posterior
+density. If a significant proportion of the prior mass is
+defined over such regions, the optimization algorithm may fail
+to converge to the true solution (the prior mode).</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="simulate">
+<span class="sig-name descname"><span class="pre">simulate</span></span><a class="headerlink" href="#simulate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the effective prior mass using a Monte-Carlo. Ideally
+the effective prior mass should be equal to 1, otherwise
+problems may arise when maximising the posterior density and
+model comparison based on marginal densities may be
+unfair. When comparing models, say <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span>,
+the marginal densities, <span class="math notranslate nohighlight">\(m_A\)</span> and <span class="math notranslate nohighlight">\(m_B\)</span>, should be
+corrected for the estimated effective prior mass
+<span class="math notranslate nohighlight">\(p_A\neq p_B \leq 1\)</span> so that the prior mass of the
+compared models are identical.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="plot">
+<span class="sig-name descname"><span class="pre">plot</span></span><a class="headerlink" href="#plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the marginal prior density.</p>
+</dd></dl>
+
+<p><br></p>
+</dd></dl>
+
+<dl class="dynare matcomm">
+<dt class="sig sig-object dynare" id="search">
+<em class="property"><span class="pre">MATLAB/Octave</span> <span class="pre">command:</span> </em><span class="sig-name descname"><span class="pre">search</span></span><span class="sig-prename descclassname"> <span class="pre">VARIABLENAME[</span> <span class="pre">OPTION]</span></span><a class="headerlink" href="#search" title="Permalink to this definition">¶</a></dt>
+<dd><p>Searches all occurrences of a variable in a model, and prints the
+equations where the variable appear in the command line window. If OPTION is
+set to <cite>withparamvalues</cite>, the values of the parameters (if available) are
+displayed instead of the name of the parameters. Requires the <cite>json</cite> command
+line option to be set.</p>
+<p><em>Example</em></p>
+<blockquote>
+<div><p>Assuming that we already ran a <cite>.mod</cite> file and that the workspace has not
+been cleaned after, we can search for all the equations containing variable <cite>X</cite></p>
+<div class="highlight-dynare notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt; </span><span class="n">search X</span>
+
+<span class="n">Y </span><span class="p">= </span><span class="n">alpha</span><span class="o">*</span><span class="n">X</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">X</span><span class="p">)</span><span class="o">+</span><span class="n">e</span><span class="p">;</span>
+
+<span class="n">diff</span><span class="p">(</span><span class="n">X</span><span class="p">) = </span><span class="n">beta</span><span class="o">*</span><span class="p">(</span><span class="n">X</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="n">mX</span><span class="p">) </span><span class="o">+ </span><span class="n">gamma</span><span class="mi">1</span><span class="o">*</span><span class="n">Z </span><span class="o">+ </span><span class="n">gamma</span><span class="mi">2</span><span class="o">*</span><span class="n">R </span><span class="o">+ </span><span class="n">u</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>To replace the parameters with estimated or calibrated parameters:</p>
+<div class="highlight-dynare notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt; </span><span class="n">search X withparamvalues</span>
+
+<span class="n">Y </span><span class="p">= </span><span class="mf">1.254634</span><span class="o">*</span><span class="n">X</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">X</span><span class="p">)</span><span class="o">+</span><span class="n">e</span><span class="p">;</span>
+
+<span class="n">diff</span><span class="p">(</span><span class="n">X</span><span class="p">) = </span><span class="o">-</span><span class="mf">0.031459</span><span class="o">*</span><span class="p">(</span><span class="n">X</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="n">mX</span><span class="p">) </span><span class="o">+ </span><span class="mf">0.1</span><span class="o">*</span><span class="n">Z </span><span class="o">- </span><span class="mf">0.2</span><span class="o">*</span><span class="n">R </span><span class="o">+ </span><span class="n">u</span><span class="p">;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><br></p>
+</dd></dl>
+
+<dl class="dynare matcomm">
+<dt class="sig sig-object dynare" id="dplot">
+<em class="property"><span class="pre">MATLAB/Octave</span> <span class="pre">command:</span> </em><span class="sig-name descname"><span class="pre">dplot</span></span><span class="sig-prename descclassname"> <span class="pre">[OPTION</span> <span class="pre">VALUE[</span> <span class="pre">...]]</span></span><a class="headerlink" href="#dplot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot expressions extracting data from different dseries objects.</p>
+<p><em>Options</em></p>
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="--expression EXPRESSION">
+<span class="sig-name descname"><span class="pre">--expression</span> <span class="pre">EXPRESSION</span></span><a class="headerlink" href="#--expression EXPRESSION" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">EXPRESSION</span></code> is a mathematical expression involving variables
+available in the dseries objects, dseries methods, numbers or
+parameters. All the referenced objects are supposed to be
+available in the calling workspace.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="--dseries NAME">
+<span class="sig-name descname"><span class="pre">--dseries</span> <span class="pre">NAME</span></span><a class="headerlink" href="#--dseries NAME" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">NAME</span></code> is the name of a dseries object from which the
+variables involved in <code class="docutils literal notranslate"><span class="pre">EXPRESSION</span></code> will be extracted.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="--range DATE1:DATE2">
+<span class="sig-name descname"><span class="pre">--range</span> <span class="pre">DATE1:DATE2</span></span><a class="headerlink" href="#--range DATE1:DATE2" title="Permalink to this definition">¶</a></dt>
+<dd><p>This option is not mandatory and allows to plot the expressions
+only over a sub-range. <code class="docutils literal notranslate"><span class="pre">DATE1</span></code> and <code class="docutils literal notranslate"><span class="pre">DATE2</span></code> must be dates as
+defined in <a class="reference internal" href="time-series.html#dates-in-a-mod-file"><span class="std std-ref">Dates in a mod file</span></a>.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="--style MATLAB_SCRIPT_NAME">
+<span class="sig-name descname"><span class="pre">--style</span> <span class="pre">MATLAB_SCRIPT_NAME</span></span><a class="headerlink" href="#--style MATLAB_SCRIPT_NAME" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of a Matlab script (without extension) containing Matlab
+commands to customize the produced figure.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="--title MATLAB_STRING">
+<span class="sig-name descname"><span class="pre">--title</span> <span class="pre">MATLAB_STRING</span></span><a class="headerlink" href="#--title MATLAB_STRING" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a title to the figure.</p>
+</dd></dl>
+
+<dl class="dynare option">
+<dt class="sig sig-object dynare" id="--with-legend">
+<span class="sig-name descname"><span class="pre">--with-legend</span></span><a class="headerlink" href="#--with-legend" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints a legend below the produced plot.</p>
+</dd></dl>
+
+<p><em>Remarks</em></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>More than one –expression argument is allowed, and they must come first.</p></li>
+<li><p>For each dseries object we plot all the expressions. We use two
+nested loops, the outer loop is over the dseries objects and the
+inner loop over the expressions. This determines the ordering of
+the plotted lines.</p></li>
+<li><p>All dseries objects must be defined in the calling workspace, if a
+dseries object is missing the routine throws a warning (we only
+build the plots for the available dseries objects), if all dseries
+objects are missing the routine throws an error.</p></li>
+<li><p>If the range is not provided, the expressions cannot involve leads or lags.</p></li>
+</ul>
+</div></blockquote>
+<p><em>Example</em></p>
+<blockquote>
+<div><div class="highlight-dynare notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt; </span><span class="n">toto </span><span class="p">= </span><span class="n">dseries</span><span class="p">(</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">3</span><span class="p">), </span><span class="n">dates</span><span class="p">(</span><span class="s">&#39;2000Q1&#39;</span><span class="p">), {</span><span class="s">&#39;x&#39;</span><span class="p">,</span><span class="s">&#39;y&#39;</span><span class="p">,</span><span class="s">&#39;z&#39;</span><span class="p">});</span>
+<span class="o">&gt;&gt; </span><span class="n">noddy </span><span class="p">= </span><span class="n">dseries</span><span class="p">(</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">3</span><span class="p">), </span><span class="n">dates</span><span class="p">(</span><span class="s">&#39;2000Q1&#39;</span><span class="p">), {</span><span class="s">&#39;x&#39;</span><span class="p">,</span><span class="s">&#39;y&#39;</span><span class="p">,</span><span class="s">&#39;z&#39;</span><span class="p">});</span>
+<span class="o">&gt;&gt; </span><span class="n">b </span><span class="p">= </span><span class="mi">3</span><span class="p">;</span>
+<span class="o">&gt;&gt; </span><span class="n">dplot </span><span class="o">--</span><span class="n">expression </span><span class="mi">2</span><span class="o">/</span><span class="n">b</span><span class="o">*</span><span class="n">cumsum</span><span class="p">(</span><span class="n">x</span><span class="o">/</span><span class="n">y</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">) </span><span class="o">--</span><span class="n">dseries toto </span><span class="o">--</span><span class="n">dseries noddy </span><span class="o">--</span><span class="n">range </span><span class="mi">2001</span><span class="n">Q</span><span class="mi">1</span><span class="p">:</span><span class="mi">2024</span><span class="n">Q</span><span class="mi">1 </span><span class="o">--</span><span class="n">title </span><span class="s">&#39;This is my plot&#39;</span>
+</pre></div>
+</div>
+<p>will produce plots for <code class="docutils literal notranslate"><span class="pre">2/b*cumsum(x/y(-1)-1)</span></code>, where <code class="docutils literal notranslate"><span class="pre">x</span></code> and
+<code class="docutils literal notranslate"><span class="pre">y</span></code> are variables in dseries objects <code class="docutils literal notranslate"><span class="pre">toto</span></code> and <code class="docutils literal notranslate"><span class="pre">noddy</span></code>, in
+the same figure.</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="dynare command">
+<dt class="sig sig-object dynare" id="set_dynare_threads">
+<em class="property"><span class="pre">Command:</span> </em><span class="sig-name descname"><span class="pre">set_dynare_threads</span></span><span class="sig-prename descclassname"><span class="pre">(NAME_OF_MEX_FILE,INTEGER);</span></span><a class="headerlink" href="#set_dynare_threads" title="Permalink to this definition">¶</a></dt>
+<dd><p>A NAME_OF_MEX_FILE and INTEGER pair that can be used to set the number of
+parallel threads employed during the execution of .mex files. To get the number
+of logical cores <cite>n</cite> available, you can run <code class="docutils literal notranslate"><span class="pre">n=numprocs</span></code>.</p>
+<p>Available NAME_OF_MEX_FILE options are:</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">'sparse_hessian_times_B_kronecker_C'</span></code></p>
+<blockquote>
+<div><p>.mex file used during computation of second-order solutions and in
+<cite>identification</cite>. Default number of threads: number of logical cores.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">'local_state_space_iteration_2'</span></code></p>
+<blockquote>
+<div><p>.mex file used during nonlinear filtering at <cite>order=2</cite> without
+<cite>k_order_solver</cite> or with <cite>pruning</cite>. Default number of threads:
+number of logical cores.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">'local_state_space_iteration_3'</span></code></p>
+<blockquote>
+<div><p>.mex file used during nonlinear filtering at <cite>order=3</cite> without
+<cite>k_order_solver</cite> or with <cite>pruning</cite>. Default number of threads:
+number of logical cores.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">'local_state_space_iteration_k'</span></code></p>
+<blockquote>
+<div><p>.mex file used during nonlinear filtering at <cite>order&gt;3</cite> (without <cite>pruning</cite>)
+or at <cite>order=3</cite> with <cite>k_order_solver</cite> and without <cite>pruning</cite>. Default number of threads: 1.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">'perfect_foresight_problem'</span></code></p>
+<blockquote>
+<div><p>.mex file used during perfect foresight simulations. Default number of threads:
+number of logical cores.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">'k_order_perturbation'</span></code></p>
+<blockquote>
+<div><p>.mex file used for perturbation solutions with <cite>k_order_solver</cite>. Default number of threads:
+half the number of logical cores, but at least 1.</p>
+</div></blockquote>
+</div></blockquote>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;1996–2025 Dynare Team.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/dynare-misc-commands.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,68 @@
+block:
+ep:
+   accuracy:
+            stochastic:
+                       order
+
+   debug: 0
+   memory: 0
+   init: 0
+   check_stability: 0
+   lp: 5
+   fp: 2
+   innovation_distribution: 'gaussian'
+                            'calibrated'
+   maxit: 500
+   periods: 200
+   set_dynare_seed_to_default: 1
+
+   solve_algo:
+   stack_solve_algo: 4
+   step: 50
+   stochastic:
+              IntegrationAlgorithm: 'Tensor-Gaussian-Quadrature'
+                                    'Stroud-Cubature-3'
+                                    'Stroud-Cubature-5'
+                                    'Unscented'
+              method: ''
+              algo: 0
+              order: 1
+              hybrid_order: 0
+              homotopic_steps: 1
+              nodes: 3
+              quadrature:
+                         ortpol: 'hermite'
+                         nodes: 5
+                         pruned:
+                                ortpol: 'hermite'
+                                nodes: 5
+                                pruned: [1x1 struct]
+   verbosity: 0
+initial_period: NaN
+lmmcp:
+      lb:
+      ub:
+      status: 0 (?? status is not an option ??)
+mcppath:
+        lb:
+        ub:
+minimal_solving_period:
+order:
+ramsey_policy:
+simul:
+      maxit
+solve_algo:
+stack_solve_algo:
+ut: (unscented free parameter)
+
+pfm.stochastic_order = options_.ep.stochastic.order;
+pfm.periods = options_.ep.periods;
+pfm.verbose = options_.ep.verbosity;
+
+
+* in extended_path_core, one passes options.ep and individual options
+* there are no options to control extended_path_homotopy
+* extended_path_initialization sets ep and options
+* setup_integration_nodes: number of nodes is not handled in a symmetric way for all algorithms
+* why extended_path_initialization et setup_stochastic_extended_path ?
+* do we need solve_stochastic_perfect_foresight_model.m and solve_stochastic_perfect_foresight_model_1.m ?

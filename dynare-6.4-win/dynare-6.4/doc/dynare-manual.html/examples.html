@@ -1,0 +1,193 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>8. Examples &#8212; Dynare 6.4 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="9. Dynare misc commands" href="dynare-misc-commands.html" />
+    <link rel="prev" title="7. Reporting" href="reporting.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="index.html">
+    <img class="logo" src="_static/dlogo.svg" alt="Logo" width=143/>
+    
+  </a>
+</p>
+
+
+
+
+
+
+
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script><br style="line-height:16px">
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation-and-configuration.html">2. Installation and configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running-dynare.html">3. Running Dynare</a></li>
+<li class="toctree-l1"><a class="reference internal" href="the-model-file.html">4. The model file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="the-configuration-file.html">5. The configuration file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="time-series.html">6. Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reporting.html">7. Reporting</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">8. Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dynare-misc-commands.html">9. Dynare misc commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">10. Bibliography</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    <li class="toctree-l1"><a href="genindex.html">Index</a></li>
+</ul>
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="examples">
+<h1><span class="section-number">8. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">¶</a></h1>
+<p>Dynare comes with a database of example <code class="docutils literal notranslate"><span class="pre">.mod</span></code> files, which are
+designed to show a broad range of Dynare features, and are taken from
+academic papers for most of them. You should have these files in the
+<code class="docutils literal notranslate"><span class="pre">examples</span></code> subdirectory of your distribution.</p>
+<p>Here is a short list of the examples included. For a more complete
+description, please refer to the comments inside the files themselves.</p>
+<p><code class="docutils literal notranslate"><span class="pre">ramst.mod</span></code></p>
+<blockquote>
+<div><p>An elementary real business cycle (RBC) model, simulated in a
+deterministic setup.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">example1.mod</span></code>
+<code class="docutils literal notranslate"><span class="pre">example2.mod</span></code></p>
+<blockquote>
+<div><p>Two examples of a small RBC model in a stochastic setup, presented
+in <em>Collard (2001)</em> (see the file <code class="docutils literal notranslate"><span class="pre">guide.pdf</span></code> which comes with
+Dynare).</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">example3.mod</span></code></p>
+<blockquote>
+<div><p>A small RBC model in a stochastic setup, presented in <em>Collard
+(2001)</em>. The steady state is solved analytically using the
+<code class="docutils literal notranslate"><span class="pre">steady_state_model</span></code> block (see <a class="reference internal" href="the-model-file.html#steady_state_model" title="steady_state_model"><code class="xref dynare dynare-bck docutils literal notranslate"><span class="pre">steady_state_model</span></code></a>).</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">fs2000.mod</span></code></p>
+<blockquote>
+<div><p>A cash in advance model, estimated by <em>Schorfheide (2000)</em>. The
+file shows how to use Dynare for estimation.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">fs2000_nonstationary.mod</span></code></p>
+<blockquote>
+<div><p>The same model than <code class="docutils literal notranslate"><span class="pre">fs2000.mod</span></code>, but written in non-stationary
+form. Detrending of the equations is done by Dynare.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">bkk.mod</span></code></p>
+<blockquote>
+<div><p>Multi-country RBC model with time to build, presented in <em>Backus,
+Kehoe and Kydland (1992)</em>. The file shows how to use Dynare’s
+macro processor.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">agtrend.mod</span></code></p>
+<blockquote>
+<div><p>Small open economy RBC model with shocks to the growth trend,
+presented in <em>Aguiar and Gopinath (2004)</em>.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">Gali_2015.mod</span></code></p>
+<blockquote>
+<div><p>Basic New Keynesian model of <em>Galí (2015)</em>, Chapter 3 showing how to
+i) use “system prior”-type prior restrictions as in <em>Andrle and Plašil (2018)</em>
+and ii) run prior/posterior-functions.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">NK_baseline.mod</span></code></p>
+<blockquote>
+<div><p>Baseline New Keynesian Model estimated in <em>Fernández-Villaverde
+(2010)</em>. It demonstrates how to use an explicit steady state file
+to update parameters and call a numerical solver.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">Occbin_example.mod</span></code></p>
+<blockquote>
+<div><p>RBC model with two occasionally binding constraints. Demonstrates
+how to set up Occbin.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">Ramsey_Example.mod</span></code></p>
+<blockquote>
+<div><p>File demonstrating how to conduct optimal policy experiments in a
+simple New Keynesian model either under commitment (Ramsey) or using
+optimal simple rules (OSR)</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">Ramsey_steady_file.mod</span></code></p>
+<blockquote>
+<div><p>File demonstrating how to conduct optimal policy experiments in a
+simple New Keynesian model under commitment (Ramsey) with a user-defined
+conditional steady state file</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">rbc_irf_matching.mod</span></code></p>
+<blockquote>
+<div><p>Baseline RBC model with government spending shocks estimated via impulse response function (IRF) matching.
+Both Frequentist (Maximum Likelihood) and Bayesian (Slice Sampling) approaches are presented.
+Additionally, it is shown how to estimate an AR(2)-process
+by working with the roots of the autoregressive process instead of the coefficients</p>
+</div></blockquote>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;1996–2025 Dynare Team.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/examples.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

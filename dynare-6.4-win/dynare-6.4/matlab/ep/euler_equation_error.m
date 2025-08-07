@@ -1,0 +1,49 @@
+function e = euler_equation_error(y0,x,innovations,M_,options_,oo_,pfm,nodes,weights)
+% e = euler_equation_error(y0,x,innovations,M_,options_,oo_,pfm,nodes,weights)
+
+% Copyright © 2016-2023 Dynare Team
+%
+% This file is part of Dynare.
+%
+% Dynare is free software: you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+%
+% Dynare is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+%
+% You should have received a copy of the GNU General Public License
+% along with Dynare.  If not, see <https://www.gnu.org/licenses/>.
+
+dynamic_model = str2func([M_.fname '.dynamic']);
+ep = options_.ep;
+y1 = extended_path_core(ep.periods, ...
+                        M_.endo_nbr, M_.exo_nbr, ...
+                        innovations.positive_var_indx, ...
+                        x, ep.init, y0, oo_.steady_state, ...
+                        0, ...
+                        ep.stochastic.order, M_, ...
+                        pfm, ep.stochastic.algo, ...
+                        ep.solve_algo, ...
+                        ep.stack_solve_algo, ...
+                        options_.lmmcp, options_, oo_, ...
+                        []);
+i_pred = find(M_.lead_lag_incidence(1,:));
+i_fwrd = find(M_.lead_lag_incidence(3,:));
+x1 = [x(2:end,:); zeros(1,M_.exo_nbr)];
+for i=1:length(nodes)
+    x2 = x1;
+    x2(2,:) = x2(2,:) + nodes(i,:);
+    y2 = extended_path_core(ep.periods, M_.endo_nbr, M_.exo_nbr, ...
+                            innovations.positive_var_indx, x2, ep.init, ...
+                            y1, oo_.steady_state, 0, ...
+                            ep.stochastic.order, M_, pfm, ep.stochastic.algo, ...
+                            ep.solve_algo, ep.stack_solve_algo, options_.lmmcp, ...
+                            options_, oo_, []);
+    z = [y0(i_pred); y1; y2(i_fwrd)];
+    res(:,i) = dynamic_model(z,x,M_.params,oo_.steady_state,2);
+end
+e = res*weights;

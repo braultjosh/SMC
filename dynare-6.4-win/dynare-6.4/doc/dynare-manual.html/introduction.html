@@ -1,0 +1,218 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>1. Introduction &#8212; Dynare 6.4 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="2. Installation and configuration" href="installation-and-configuration.html" />
+    <link rel="prev" title="The Dynare Reference Manual, version 6.4" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="index.html">
+    <img class="logo" src="_static/dlogo.svg" alt="Logo" width=143/>
+    
+  </a>
+</p>
+
+
+
+
+
+
+
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script><br style="line-height:16px">
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#what-is-dynare">1.1. What is Dynare?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#documentation-sources">1.2. Documentation sources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#citing-dynare-in-your-research">1.3. Citing Dynare in your research</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="installation-and-configuration.html">2. Installation and configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running-dynare.html">3. Running Dynare</a></li>
+<li class="toctree-l1"><a class="reference internal" href="the-model-file.html">4. The model file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="the-configuration-file.html">5. The configuration file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="time-series.html">6. Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reporting.html">7. Reporting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">8. Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dynare-misc-commands.html">9. Dynare misc commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">10. Bibliography</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    <li class="toctree-l1"><a href="genindex.html">Index</a></li>
+</ul>
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="introduction">
+<h1><span class="section-number">1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a></h1>
+<section id="what-is-dynare">
+<h2><span class="section-number">1.1. </span>What is Dynare?<a class="headerlink" href="#what-is-dynare" title="Permalink to this heading">¶</a></h2>
+<p>Dynare is a software platform for handling a wide class of economic
+models, in particular dynamic stochastic general equilibrium (DSGE)
+and overlapping generations (OLG) models. The models solved by Dynare
+include those relying on the <em>rational expectations</em> hypothesis,
+wherein agents form their expectations about the future in a way
+consistent with the model. But Dynare is also able to handle models
+where expectations are formed differently: on one extreme, models
+where agents perfectly anticipate the future; on the other extreme,
+models where agents have limited rationality or imperfect knowledge of
+the state of the economy and, hence, form their expectations through a
+learning process. In terms of types of agents, models solved by Dynare
+can incorporate consumers, productive firms, governments, monetary
+authorities, investors and financial intermediaries. Some degree of
+heterogeneity can be achieved by including several distinct classes of
+agents in each of the aforementioned agent categories.</p>
+<p>Dynare offers a user-friendly and intuitive way of describing these
+models. It is able to perform simulations of the model given a
+calibration of the model parameters and is also able to estimate these
+parameters given a dataset. In practice, the user will write a text
+file containing the list of model variables, the dynamic equations
+linking these variables together, the computing tasks to be performed
+and the desired graphical or numerical outputs.</p>
+<p>A large panel of applied mathematics and computer science techniques
+are internally employed by Dynare: multivariate nonlinear solving and
+optimization, matrix factorizations, local functional approximation,
+Kalman filters and smoothers, MCMC techniques for Bayesian estimation,
+graph algorithms, optimal control, …</p>
+<p>Various public bodies (central banks, ministries of economy and
+finance, international organisations) and some private financial
+institutions use Dynare for performing policy analysis exercises and
+as a support tool for forecasting exercises. In the academic world,
+Dynare is used for research and teaching purposes in postgraduate
+macroeconomics courses.</p>
+<p>Dynare is a free software, which means that it can be downloaded free
+of charge, that its source code is freely available, and that it can
+be used for both non-profit and for-profit purposes. Most of the
+source files are covered by the GNU General Public Licence (GPL)
+version 3 or later (there are some exceptions to this, see the file
+license.txt in Dynare distribution). It is available for the Windows,
+macOS, and Linux platforms and is fully documented through a reference
+manual. Part of Dynare is programmed in C++, while the rest is written
+using the <a class="reference external" href="https://www.mathworks.com/products/matlab/">MATLAB</a> programming language. The latter implies that
+commercially-available MATLAB software is required in order to run
+Dynare. However, as an alternative to MATLAB, Dynare is also able to
+run on top of <a class="reference external" href="https://www.octave.org/">GNU Octave</a> (basically a free clone of MATLAB): this
+possibility is particularly interesting for students or institutions
+who cannot afford, or do not want to pay for, MATLAB and are willing
+to bear the concomitant performance loss.</p>
+<p>The development of Dynare is mainly done at <a class="reference external" href="https://www.cepremap.fr/">CEPREMAP</a> by a core team
+of researchers who devote part of their time to software
+development. Increasingly, the developer base is expanding, as
+tools developed by researchers outside of CEPREMAP are integrated into
+Dynare. Financial support is provided by CEPREMAP, Banque de France
+and DSGE-net (an international research network for DSGE modeling).</p>
+<p>Interaction between developers and users of Dynare is central to the
+project. A <a class="reference external" href="https://forum.dynare.org/">web forum</a> is available for users who have questions
+about the usage of Dynare or who want to report bugs. Current known
+and fixed bugs are listed on the <a class="reference external" href="https://git.dynare.org/Dynare/dynare/wikis">Dynare wiki</a>. Issues or whishes can
+be reported on our <a class="reference external" href="https://git.dynare.org/Dynare/dynare">Git repository</a>. Training sessions are given
+through the Dynare Summer School, which is organized every year and is
+attended by about 40 people. Finally, priorities in terms of future
+developments and features to be added are decided in cooperation with
+the institutions providing financial support.</p>
+</section>
+<section id="documentation-sources">
+<h2><span class="section-number">1.2. </span>Documentation sources<a class="headerlink" href="#documentation-sources" title="Permalink to this heading">¶</a></h2>
+<p>The present document is the reference manual for Dynare. It documents
+all commands and features in a systematic fashion.</p>
+<p>Other useful sources of information include the <a class="reference external" href="https://git.dynare.org/Dynare/dynare/wikis">Dynare wiki</a> and the
+<a class="reference external" href="https://forum.dynare.org/">Dynare forums</a>.</p>
+</section>
+<section id="citing-dynare-in-your-research">
+<h2><span class="section-number">1.3. </span>Citing Dynare in your research<a class="headerlink" href="#citing-dynare-in-your-research" title="Permalink to this heading">¶</a></h2>
+<p>You should cite Dynare if you use it in your research. The
+recommended way todo this is to cite the present manual, as:</p>
+<blockquote>
+<div><p>Stéphane Adjemian, Michel Juillard, Frédéric Karamé, Willi Mutschler,
+Johannes Pfeifer, Marco Ratto, Normann Rion and Sébastien Villemot (2024),
+“Dynare: Reference Manual, Version 6,” <em>Dynare Working Papers</em>, 80, CEPREMAP</p>
+</div></blockquote>
+<p>For convenience, you can copy and paste the following into your BibTeX file:</p>
+<blockquote>
+<div><div class="highlight-bibtex notranslate"><div class="highlight"><pre><span></span><span class="nc">@TechReport</span><span class="p">{</span><span class="nl">Adjemianetal2024</span><span class="p">,</span>
+<span class="w">  </span><span class="na">author</span><span class="w">      </span><span class="p">=</span><span class="w"> </span><span class="s">{Adjemian, St\&#39;ephane and Juillard, Michel and</span>
+<span class="s">                 Karam\&#39;e, Fr\&#39;ederic and Mutschler, Willi and</span>
+<span class="s">                 Pfeifer, Johannes and Ratto, Marco and</span>
+<span class="s">                 Rion, Normann and Villemot, S\&#39;ebastien}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">title</span><span class="w">       </span><span class="p">=</span><span class="w"> </span><span class="s">{Dynare: Reference Manual, Version 6}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">year</span><span class="w">        </span><span class="p">=</span><span class="w"> </span><span class="s">{2024}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">institution</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{CEPREMAP}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">type</span><span class="w">        </span><span class="p">=</span><span class="w"> </span><span class="s">{Dynare Working Papers}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">number</span><span class="w">      </span><span class="p">=</span><span class="w"> </span><span class="s">{80}</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>If you want to give a URL, use the address of the Dynare website:
+<a class="reference external" href="https://www.dynare.org">https://www.dynare.org</a>.</p>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;1996–2025 Dynare Team.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/introduction.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
